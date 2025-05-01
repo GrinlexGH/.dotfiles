@@ -1,7 +1,7 @@
 return {
-    "rebelot/kanagawa.nvim",
+    "EdenEast/nightfox.nvim",
     priority = 1000,
     config = function()
-        vim.cmd("colorscheme kanagawa")
+        vim.cmd("colorscheme carbonfox")
     end,
 }
