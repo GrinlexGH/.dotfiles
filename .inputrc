@@ -1,5 +1,16 @@
 $include /etc/inputrc
-set show-all-if-ambiguous on
-set completion-ignore-case on
-TAB: menu-complete
 
+# Disable bell
+set bell-style none
+
+# Ignore case in tab completion
+set completion-ignore-case on
+
+# Don't show list of files if file name is ambiguous
+set show-all-if-ambiguous off
+
+# Don't stop before pressing tab for the first time
+set menu-complete-display-prefix off
+
+# Cycle through choices during tab-completion
+TAB: menu-complete
