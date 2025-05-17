@@ -1,4 +1,4 @@
-# <p style="text-align: center;">🌟 Grinlex's Dotfiles</p>
+# <p align="center">🌟 Grinlex's Dotfiles</p>
 
 Welcome to my **dotfiles** repository - collection of the most convenient configurations for me, as far as I could make, for programs and Unix-like environments.
 
