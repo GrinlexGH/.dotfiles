@@ -15,11 +15,11 @@ Welcome to my **dotfiles** repository - collection of the most convenient config
 
 ### 📸 Neovim preview
 <p align="center">
-  <img src="images/nvim-welcome.png" />
+  <img src="https://i.imgur.com/uWQk2Gw.png" />
 </p>
 
 <p align="center">
-  <img src="images/nvim-workspace.png" />
+  <img src="https://i.imgur.com/X3061ra.png" />
 </p>
 
 ## 🛠️ Installation
