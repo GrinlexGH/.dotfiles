@@ -125,7 +125,14 @@ return {
             ["clangd"] = function()
                 lspconfig["clangd"].setup({
                     capabilities = capabilities,
-                    cmd = { "clangd", "--clang-tidy", "--header-insertion", "never" },
+                    cmd = {
+                        "clangd",
+                        "--background-index",
+                        "--clang-tidy",
+                        "-j=12",
+                        "--header-insertion=never",
+                        "--compile-commands-dir=./build"
+                    },
                 })
             end,
         })

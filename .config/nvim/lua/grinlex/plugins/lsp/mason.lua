@@ -27,7 +27,7 @@ return {
                 "cssls",
                 "lua_ls",
                 "prismals",
-                "pyright",
+                "ruff",
                 "clangd",
             },
         })
@@ -39,7 +39,7 @@ return {
                 "isort",
                 "black",
                 "clang-format",
-                "pylint",
+                "ruff",
                 "eslint_d",
             },
         })
