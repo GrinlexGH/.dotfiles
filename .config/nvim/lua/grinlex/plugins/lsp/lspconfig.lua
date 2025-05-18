@@ -20,26 +20,26 @@ return {
             callback = function(ev)
                 local opts = { buffer = ev.buf, silent = true }
 
-                opts.desc = "Show LSP references"
-                keymap.set("n", "gR", "<cmd>Telescope lsp_references<CR>", opts)
+                opts.desc = "Show references"
+                keymap.set("n", "<leader>gR", "<cmd>Telescope lsp_references<CR>", opts)
 
                 opts.desc = "Go to declaration"
-                keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
+                keymap.set("n", "<leader>gD", vim.lsp.buf.declaration, opts)
 
-                opts.desc = "Show LSP definitions"
-                keymap.set("n", "gd", "<cmd>Telescope lsp_definitions<CR>", opts)
+                opts.desc = "Show definitions"
+                keymap.set("n", "<leader>gd", "<cmd>Telescope lsp_definitions<CR>", opts)
 
                 opts.desc = "Show LSP implementations"
-                keymap.set("n", "gi", "<cmd>Telescope lsp_implementations<CR>", opts)
+                keymap.set("n", "<leader>gi", "<cmd>Telescope lsp_implementations<CR>", opts)
 
-                opts.desc = "Show LSP type definitions"
-                keymap.set("n", "gt", "<cmd>Telescope lsp_type_definitions<CR>", opts)
+                opts.desc = "Show type definitions"
+                keymap.set("n", "<leader>gt", "<cmd>Telescope lsp_type_definitions<CR>", opts)
 
                 opts.desc = "See available code actions"
-                keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, opts)
+                keymap.set({ "n", "v" }, "<leader>ga", vim.lsp.buf.code_action, opts)
 
                 opts.desc = "Smart rename"
-                keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
+                keymap.set("n", "<leader>gr", vim.lsp.buf.rename, opts)
 
                 opts.desc = "Show buffer diagnostics"
                 keymap.set("n", "<leader>D", "<cmd>Telescope diagnostics bufnr=0<CR>", opts)
@@ -73,38 +73,6 @@ return {
             function(server_name)
                 lspconfig[server_name].setup({
                     capabilities = capabilities,
-                })
-            end,
-            ["svelte"] = function()
-                lspconfig["svelte"].setup({
-                    capabilities = capabilities,
-                    on_attach = function(client, bufnr)
-                        vim.api.nvim_create_autocmd("BufWritePost", {
-                            pattern = { "*.js", "*.ts" },
-                            callback = function(ctx) client.notify("$/onDidChangeTsOrJsFile", { uri = ctx.match }) end,
-                        })
-                    end,
-                })
-            end,
-            ["graphql"] = function()
-                lspconfig["graphql"].setup({
-                    capabilities = capabilities,
-                    filetypes = { "graphql", "gql", "svelte", "typescriptreact", "javascriptreact" },
-                })
-            end,
-            ["emmet_ls"] = function()
-                lspconfig["emmet_ls"].setup({
-                    capabilities = capabilities,
-                    filetypes = {
-                        "html",
-                        "typescriptreact",
-                        "javascriptreact",
-                        "css",
-                        "sass",
-                        "scss",
-                        "less",
-                        "svelte",
-                    },
                 })
             end,
             ["lua_ls"] = function()

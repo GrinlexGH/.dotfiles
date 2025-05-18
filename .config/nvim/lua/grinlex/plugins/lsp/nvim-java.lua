@@ -6,15 +6,11 @@ return {
             "neovim/nvim-lspconfig",
             opts = {
                 servers = {
-                    jdtls = {
-                        -- Your custom jdtls settings goes here
-                    },
+                    jdtls = { },
                 },
                 setup = {
                     jdtls = function()
-                        require("java").setup({
-                            -- Your custom nvim-java configuration goes here
-                        })
+                        require("java").setup({ })
                     end,
                 },
             },

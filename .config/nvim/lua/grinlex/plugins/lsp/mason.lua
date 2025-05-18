@@ -22,11 +22,9 @@ return {
         })
 
         mason_lspconfig.setup({
+            automatic_installation = true,
             ensure_installed = {
-                "html",
-                "cssls",
                 "lua_ls",
-                "prismals",
                 "ruff",
                 "clangd",
             },
@@ -36,11 +34,8 @@ return {
             ensure_installed = {
                 "prettier",
                 "stylua",
-                "isort",
-                "black",
                 "clang-format",
                 "ruff",
-                "eslint_d",
             },
         })
     end,
