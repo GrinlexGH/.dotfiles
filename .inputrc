@@ -14,3 +14,6 @@ set menu-complete-display-prefix off
 
 # Cycle through choices during tab-completion
 TAB: menu-complete
+
+# Cycle backward on Shitf-Tab
+"\e[Z": menu-complete-backward
