@@ -45,6 +45,7 @@ A modern Neovim configuration with powerful language tooling and visual polish:
 | <kbd>K</kbd>           | Show hover docs                        |
 | <kbd>Ctrl + j/k</kbd>  | Navigate LSP autocomplete              |
 | <kbd>Ctrl + b/f</kbd>  | Scroll LSP autocomplete docs           |
+| <kbd>Ctrl + e</kbd>    | Cancel LSP autocomplete                |
 | <kbd>Space + rs</kbd>  | Restart LSP                            |
 | <kbd>Space + mp</kbd>  | Format file / range                    |
 | <kbd>Space + h..</kbd> | Git hunk navigation                    |
