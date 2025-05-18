@@ -66,6 +66,15 @@ A modern Neovim configuration with powerful language tooling and visual polish:
 
 ## 🚀 Installation
 
+### 📦 Requirements:
+Before installation, ensure the following tools are installed:
+
+```bash
+sudo apt install zoxide bash-completion
+```
+
+---
+
 Using [Arch Wiki's dotfile method](https://wiki.archlinux.org/title/Dotfiles#Tracking_dotfiles_directly_with_Git):
 
 ```bash
