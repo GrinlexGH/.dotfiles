@@ -3,71 +3,55 @@ return {
     event = { "BufReadPre", "BufNewFile" },
     dependencies = {
         "hrsh7th/cmp-nvim-lsp",
-        { "antosha417/nvim-lsp-file-operations", config = true },
-        { "folke/neodev.nvim", opts = {} },
+        { "antosha417/nvim-lsp-file-operations", opts = {}, },
+        { "folke/lazydev.nvim", ft = "lua", opts = {}, },
     },
     config = function()
-        local lspconfig = require("lspconfig")
-
-        local mason_lspconfig = require("mason-lspconfig")
-
-        local cmp_nvim_lsp = require("cmp_nvim_lsp")
-
-        local keymap = vim.keymap
-
         vim.api.nvim_create_autocmd("LspAttach", {
             group = vim.api.nvim_create_augroup("UserLspConfig", {}),
             callback = function(ev)
-                local opts = { buffer = ev.buf, silent = true }
+                local base_opts = { buffer = ev.buf, silent = true }
+                local map = function(mode, lhs, rhs, desc)
+                    local opts = vim.tbl_extend("force", base_opts, { desc = desc })
+                    vim.keymap.set(mode, lhs, rhs, opts)
+                end
 
-                opts.desc = "Show references"
-                keymap.set("n", "<leader>gR", "<cmd>Telescope lsp_references<CR>", opts)
-
-                opts.desc = "Go to declaration"
-                keymap.set("n", "<leader>gD", vim.lsp.buf.declaration, opts)
-
-                opts.desc = "Show definitions"
-                keymap.set("n", "<leader>gd", "<cmd>Telescope lsp_definitions<CR>", opts)
-
-                opts.desc = "Show LSP implementations"
-                keymap.set("n", "<leader>gi", "<cmd>Telescope lsp_implementations<CR>", opts)
-
-                opts.desc = "Show type definitions"
-                keymap.set("n", "<leader>gt", "<cmd>Telescope lsp_type_definitions<CR>", opts)
-
-                opts.desc = "See available code actions"
-                keymap.set({ "n", "v" }, "<leader>ga", vim.lsp.buf.code_action, opts)
-
-                opts.desc = "Smart rename"
-                keymap.set("n", "<leader>gr", vim.lsp.buf.rename, opts)
-
-                opts.desc = "Show buffer diagnostics"
-                keymap.set("n", "<leader>D", "<cmd>Telescope diagnostics bufnr=0<CR>", opts)
-
-                opts.desc = "Show line diagnostics"
-                keymap.set("n", "<leader>d", vim.diagnostic.open_float, opts)
-
-                opts.desc = "Go to previous diagnostic"
-                keymap.set("n", "[d", function() vim.diagnostic.jump({ count = -1, float = true }) end, opts)
-
-                opts.desc = "Go to next diagnostic"
-                keymap.set("n", "]d", function() vim.diagnostic.jump({ count = 1, float = true }) end, opts)
-
-                opts.desc = "Show documentation for what is under cursor"
-                keymap.set("n", "K", vim.lsp.buf.hover, opts)
-
-                opts.desc = "Restart LSP"
-                keymap.set("n", "<leader>rs", ":LspRestart<CR>", opts)
+                map("n", "<leader>gR", "<cmd>Telescope lsp_references<CR>", "Show references")
+                map("n", "<leader>gD", vim.lsp.buf.declaration, "Go to declaration")
+                map("n", "<leader>gd", "<cmd>Telescope lsp_definitions<CR>", "Show definitions")
+                map("n", "<leader>gi", "<cmd>Telescope lsp_implementations<CR>", "Show implementations")
+                map("n", "<leader>gt", "<cmd>Telescope lsp_type_definitions<CR>", "Show type definitions")
+                map({ "n", "v" }, "<leader>ga", vim.lsp.buf.code_action, "Code actions")
+                map("n", "<leader>gr", vim.lsp.buf.rename, "Smart rename")
+                map("n", "<leader>D", "<cmd>Telescope diagnostics bufnr=0<CR>", "Buffer diagnostics")
+                map("n", "<leader>d", vim.diagnostic.open_float, "Line diagnostics")
+                map("n", "[d", function() vim.diagnostic.jump({ count = -1, float = true }) end, "Prev diagnostic")
+                map("n", "]d", function() vim.diagnostic.jump({ count = 1, float = true }) end, "Next diagnostic")
+                map("n", "K", vim.lsp.buf.hover, "Hover documentation")
+                map("n", "<leader>rs", ":LspRestart<CR>", "Restart LSP")
             end,
         })
 
-        local capabilities = cmp_nvim_lsp.default_capabilities()
+        vim.diagnostic.config({
+            signs = {
+                text = {
+                    [vim.diagnostic.severity.ERROR] = " ",
+                    [vim.diagnostic.severity.WARN] = " ",
+                    [vim.diagnostic.severity.HINT] = "󰠠 ",
+                    [vim.diagnostic.severity.INFO] = " ",
+                },
+                numhl = {
+                    [vim.diagnostic.severity.ERROR] = "",
+                    [vim.diagnostic.severity.WARN] = "",
+                    [vim.diagnostic.severity.HINT] = "",
+                    [vim.diagnostic.severity.INFO] = "",
+                },
+            },
+        })
 
-        local signs = { Error = " ", Warn = " ", Hint = "󰠠 ", Info = " " }
-        for type, icon in pairs(signs) do
-            local hl = "DiagnosticSign" .. type
-            vim.diagnostic.config({ signs = { text = icon, texthl = hl, numhl = "" } })
-        end
+        local lspconfig = require("lspconfig")
+        local mason_lspconfig = require("mason-lspconfig")
+        local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
         mason_lspconfig.setup_handlers({
             function(server_name)
@@ -82,6 +66,10 @@ return {
                         Lua = {
                             diagnostics = {
                                 globals = { "vim" },
+                                disable = {
+                                    "missing-fields",
+                                    "undefined-global",
+                                },
                             },
                             completion = {
                                 callSnippet = "Replace",
