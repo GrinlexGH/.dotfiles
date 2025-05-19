@@ -7,7 +7,7 @@
 </p>
 
 <p align="center">
-  A carefully curated set of configuration files for a Unix-like environment (primarily <strong>Ubuntu</strong>), designed for <strong>convenience</strong> and <strong>productivity</strong>.
+  This is my dotfiles repository - collection of <strong>the most convenient</strong> configurations <strong>for me</strong>, as far as I could make, for programs and Unix-like environments (primarily for <strong>Ubuntu</strong>).
 </p>
 
 ## ✨ Features
