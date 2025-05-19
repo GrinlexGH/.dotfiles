@@ -62,18 +62,14 @@ A modern Neovim configuration with powerful language tooling and visual polish:
   <img src="https://i.imgur.com/MXZtiff.png" alt="Neovim Preview 2" />
 </p>
 
----
-
-## 🚀 Installation
-
-### 📦 Requirements:
+## 📦 Requirements
 Before installation, ensure the following tools are installed:
 
 ```bash
 sudo apt install zoxide bash-completion
 ```
 
----
+## 🚀 Installation
 
 Using [Arch Wiki's dotfile method](https://wiki.archlinux.org/title/Dotfiles#Tracking_dotfiles_directly_with_Git):
 
@@ -86,20 +82,31 @@ dotfiles checkout
 dotfiles config --local status.showUntrackedFiles no
 ```
 
-To update your dotfiles:
+If you get error like:
 
 ```bash
-dotfiles checkout -f
+error: The following untracked working tree files would be overwritten by checkout:
+    .bashrc
+    .gitignore
+Please move or remove them before you can switch branches.
+Aborting
 ```
 
-For a safer update (with backup):
+You can backup these files and try again:
 
 ```bash
 mkdir -p .dotfiles-backup && \
-dotfiles checkout 2>&1 | grep "\s\+\." | awk '{print $1}' | \
+dotfiles checkout 2>&1 | egrep "\s+\." | awk {'print $1'} | \
 xargs -I{} mv {} .dotfiles-backup/{}
 
-dotfiles checkout -f
+dotfiles checkout
+dotfiles config --local status.showUntrackedFiles no
+```
+
+To update the dotfiles later:
+
+```bash
+dotfiles pull
 ```
 
 ## 🤝 Contributing
