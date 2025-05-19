@@ -117,7 +117,7 @@ if ! shopt -oq posix; then
 fi
 
 # zoxide
-test zoxide && eval "$(zoxide init bash)"
+type zoxide &>/dev/null && eval "$(zoxide init bash)"
 
 # gpg
 export GPG_TTY="$(tty)"
