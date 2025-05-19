@@ -16,16 +16,17 @@
 Custom `.initrc` configuration for intuitive file navigation:
 - <kbd>Tab</kbd>: Cycle forward through directory entries.
 - <kbd>Shift + Tab</kbd>: Cycle backward.
-- No annoying beeps—just smooth tabbing like in Windows `cmd`.
+- No annoying beeps - just smooth tabbing like in Windows `cmd`.
 
 ### 📝 Neovim Setup
 
 A modern Neovim configuration with powerful language tooling and visual polish:
 
 - 🧠 **LSP support** for:
-  - C++ → [`clangd`](https://clangd.llvm.org/)
-  - Python → [`Ruff`](https://github.com/astral-sh/ruff)
-  - Lua → [`lua-language-server`](https://github.com/LuaLS/lua-language-server)
+  - C++ → [`mason.nvim`](https://github.com/mason-org/mason.nvim) | [`clangd`](https://clangd.llvm.org/)
+  - Python → [`mason.nvim`](https://github.com/mason-org/mason.nvim) | [`ruff`](https://github.com/astral-sh/ruff)
+  - Lua → [`mason.nvim`](https://github.com/mason-org/mason.nvim) | [`lua_ls`](https://github.com/LuaLS/lua-language-server)
+  - Java → [`nvim-java`](https://github.com/nvim-java/nvim-java) | [`jdtls`](https://github.com/eclipse-jdtls/eclipse.jdt.ls)
 - 📁 File explorer via [`nvim-tree`](https://github.com/nvim-tree/nvim-tree.lua)
 - 🎨 Beautiful theme: [`Carbonfox`](https://github.com/EdenEast/nightfox.nvim#carbonfox)
 - ⚙️ Plugin manager: [`lazy.nvim`](https://github.com/folke/lazy.nvim)
@@ -43,11 +44,13 @@ A modern Neovim configuration with powerful language tooling and visual polish:
 | <kbd>Space + d/D</kbd> | Show diagnostics (line / buffer)       |
 | <kbd>Space + x..</kbd> | Open diagnostics window (trouble.nvim) |
 | <kbd>K</kbd>           | Show hover docs                        |
-| <kbd>Ctrl + j/k</kbd>  | Navigate LSP autocomplete              |
-| <kbd>Ctrl + b/f</kbd>  | Scroll LSP autocomplete docs           |
-| <kbd>Ctrl + e</kbd>    | Cancel LSP autocomplete                |
+| <kbd>Ctrl + j/k</kbd>  | Navigate autocomplete                  |
+| <kbd>Ctrl + b/f</kbd>  | Scroll autocomplete docs               |
+| <kbd>Ctrl + e</kbd>    | Cancel autocomplete                    |
 | <kbd>Space + rs</kbd>  | Restart LSP                            |
 | <kbd>Space + mp</kbd>  | Format file / range                    |
+| <kbd>gc..</kbd>        | Linewise comment                       |
+| <kbd>gb..</kbd>        | Blockwise comment                      |
 | <kbd>Space + h..</kbd> | Git hunk navigation                    |
 | <kbd>Space + lg</kbd>  | Launch LazyGit                         |
 
@@ -63,9 +66,25 @@ A modern Neovim configuration with powerful language tooling and visual polish:
 </p>
 
 ## 📦 Requirements
-Before installation, ensure the following tools are installed:
+
+Install with:
 
 ```bash
+# neovim >= 0.11.0
+sudo snap install nvim --classic
+sudo apt install make clang-tidy g++ unzip python3-venv fzf ripgrep xclip
+
+## lazy git for Ubuntu 25.10 and later
+sudo apt install lazygit
+
+## lazy git for Ubuntu 25.04 and earlier
+LAZYGIT_VERSION=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | \grep -Po '"tag_name": *"v\K[^"]*')
+curl -Lo lazygit.tar.gz "https://github.com/jesseduffield/lazygit/releases/download/v${LAZYGIT_VERSION}/lazygit_${LAZYGIT_VERSION}_Linux_x86_64.tar.gz"
+tar xf lazygit.tar.gz lazygit
+sudo install lazygit -D -t /usr/local/bin/
+rm -rf ./lazygit ./lazygit.tar.gz
+
+# unnecessary features
 sudo apt install zoxide bash-completion
 ```
 
