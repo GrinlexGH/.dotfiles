@@ -120,10 +120,13 @@ fi
 type zoxide &>/dev/null && eval "$(zoxide init bash)"
 
 # gpg
-export GPG_TTY="$(tty)"
+export GPG_TTY=$(tty)
 
 # dotfiles autocomplete
 if [ -f /usr/share/bash-completion/completions/git ]; then
     source /usr/share/bash-completion/completions/git
     __git_complete dotfiles __git_main
 fi
+
+# spicetify
+export PATH=$PATH:/home/grinlex/.spicetify
