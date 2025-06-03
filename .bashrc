@@ -129,4 +129,12 @@ if [ -f /usr/share/bash-completion/completions/git ]; then
 fi
 
 # spicetify
-export PATH=$PATH:/home/grinlex/.spicetify
+SPICETIFY_PATH="$HOME/.spicetify"
+if [ -d "$SPICETIFY_PATH" ]; then
+    export PATH="$PATH:$SPICETIFY_PATH"
+fi
+
+CARGO_ENV="$HOME/.cargo/env"
+if [ -f "$CARGO_ENV" ]; then
+    . "$CARGO_ENV"
+fi
