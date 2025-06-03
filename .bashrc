@@ -142,6 +142,6 @@ fi
 # gdm monitor hz
 MONITORS_XML="$HOME/.config/monitors.xml"
 GDM_CONFIG_DIR="/var/lib/gdm/.config"
-if [ -f "$MONITORs_XML" ] && [ -d "$GDM_CONFIG_DIR" ]; then
+if [ -f "$MONITORS_XML" ] && [ -d "$GDM_CONFIG_DIR" ]; then
     cp "$MONITORS_XML" "$GDM_CONFIG_DIR/monitors.xml"
 fi
