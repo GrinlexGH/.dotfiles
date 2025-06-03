@@ -138,3 +138,10 @@ CARGO_ENV="$HOME/.cargo/env"
 if [ -f "$CARGO_ENV" ]; then
     . "$CARGO_ENV"
 fi
+
+# gdm monitor hz
+MONITORS_XML="$HOME/.config/monitors.xml"
+GDM_CONFIG_DIR="/var/lib/gdm/.config"
+if [ -f "$MONITORs_XML" ] && [ -d "$GDM_CONFIG_DIR" ]; then
+    cp "$MONITORS_XML" "$GDM_CONFIG_DIR/monitors.xml"
+fi
