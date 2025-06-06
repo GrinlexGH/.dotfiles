@@ -17,3 +17,6 @@ TAB: menu-complete
 
 # Cycle backward on Shitf-Tab
 "\e[Z": menu-complete-backward
+
+# Delete word
+"\C-H":"\C-W"
