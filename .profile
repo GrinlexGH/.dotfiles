@@ -26,3 +26,6 @@ if [ -n "$BASH_VERSION" ]; then
     fi
 fi
 
+if [ -x "$HOME/.local/bin/env" ] ; then
+    . "$HOME/.local/bin/env"
+fi

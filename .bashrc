@@ -138,3 +138,9 @@ CARGO_ENV="$HOME/.cargo/env"
 if [ -f "$CARGO_ENV" ]; then
     . "$CARGO_ENV"
 fi
+
+if [ -x "$HOME/.local/bin/env" ] ; then
+    . "$HOME/.local/bin/env"
+fi
+
+type uv &>/dev/null && eval "$(uv generate-shell-completion bash)"
