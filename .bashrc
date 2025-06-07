@@ -143,4 +143,19 @@ if [ -x "$HOME/.local/bin/env" ] ; then
     . "$HOME/.local/bin/env"
 fi
 
+# uv
 type uv &>/dev/null && eval "$(uv generate-shell-completion bash)"
+type uvx &>/dev/null && eval "$(uvx --generate-shell-completion bash)"
+
+# vulkan sdk
+VULKAN_BASE="$HOME/progs/VulkanSDK"
+
+if [ -d "$VULKAN_BASE" ]; then
+    LATEST_VULKAN_DIR=$(find "$VULKAN_BASE" -maxdepth 1 -type d -regex '.*/[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+' \
+        | sort -V | tail -n 1)
+
+    if [ -n "$LATEST_VULKAN_DIR" ] && [ -f "$LATEST_VULKAN_DIR/setup-env.sh" ]; then
+        # shellcheck disable=SC1090
+        source "$LATEST_VULKAN_DIR/setup-env.sh"
+    fi
+fi
