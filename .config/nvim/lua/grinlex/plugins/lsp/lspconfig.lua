@@ -7,6 +7,9 @@ return {
         { "folke/lazydev.nvim", ft = "lua", opts = {}, },
     },
     config = function()
+        vim.keymap.set("n", "<leader>D", "<cmd>Telescope diagnostics bufnr=0<CR>", { desc = "Buffer diagnostics" })
+        vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, { desc = "Line diagnostics" })
+
         vim.api.nvim_create_autocmd("LspAttach", {
             group = vim.api.nvim_create_augroup("UserLspConfig", {}),
             callback = function(ev)
@@ -23,8 +26,6 @@ return {
                 map("n", "<leader>gt", "<cmd>Telescope lsp_type_definitions<CR>", "Show type definitions")
                 map({ "n", "v" }, "<leader>ga", vim.lsp.buf.code_action, "Code actions")
                 map("n", "<leader>gr", vim.lsp.buf.rename, "Smart rename")
-                map("n", "<leader>D", "<cmd>Telescope diagnostics bufnr=0<CR>", "Buffer diagnostics")
-                map("n", "<leader>d", vim.diagnostic.open_float, "Line diagnostics")
                 map("n", "[d", function() vim.diagnostic.jump({ count = -1, float = true }) end, "Prev diagnostic")
                 map("n", "]d", function() vim.diagnostic.jump({ count = 1, float = true }) end, "Next diagnostic")
                 map("n", "K", vim.lsp.buf.hover, "Hover documentation")
