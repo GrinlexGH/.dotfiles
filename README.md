@@ -72,10 +72,7 @@ Install with:
 ```bash
 # neovim >= 0.11.0
 sudo snap install nvim --classic
-sudo apt install make clang-tidy g++ unzip python3-venv fzf ripgrep xclip
-
-## lazy git for Ubuntu 25.10 and later
-sudo apt install lazygit
+sudo apt install make clang-tidy g++ unzip python3-venv fzf ripgrep xclip zoxide bash-completion npm
 
 ## lazy git for Ubuntu 25.04 and earlier
 LAZYGIT_VERSION=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | \grep -Po '"tag_name": *"v\K[^"]*')
@@ -84,8 +81,8 @@ tar xf lazygit.tar.gz lazygit
 sudo install lazygit -D -t /usr/local/bin/
 rm -rf ./lazygit ./lazygit.tar.gz
 
-# unnecessary features
-sudo apt install zoxide bash-completion
+## lazy git for Ubuntu 25.10 and later
+sudo apt install lazygit
 ```
 
 ## 🚀 Installation
