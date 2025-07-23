@@ -29,3 +29,6 @@ fi
 if [ -x "$HOME/.local/bin/env" ] ; then
     . "$HOME/.local/bin/env"
 fi
+
+clear
+type neofetch &>/dev/null && neofetch

@@ -51,47 +51,41 @@ return {
         })
 
         local lspconfig = require("lspconfig")
-        local mason_lspconfig = require("mason-lspconfig")
         local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
-        mason_lspconfig.setup_handlers({
-            function(server_name)
-                lspconfig[server_name].setup({
-                    capabilities = capabilities,
-                })
-            end,
-            ["lua_ls"] = function()
-                lspconfig["lua_ls"].setup({
-                    capabilities = capabilities,
-                    settings = {
-                        Lua = {
-                            diagnostics = {
-                                globals = { "vim" },
-                                disable = {
-                                    "missing-fields",
-                                    "undefined-global",
-                                },
-                            },
-                            completion = {
-                                callSnippet = "Replace",
-                            },
+        lspconfig.clangd.setup({
+            compatibilities = compatibilities,
+            cmd = {
+                "clangd",
+                "--background-index",
+                "--clang-tidy",
+                "-j=5",
+                "--header-insertion=never",
+                "--compile-commands-dir=./build"
+            },
+        })
+
+        lspconfig.lua_ls.setup({
+            compatibilities = compatibilities,
+            settings = {
+                Lua = {
+                    diagnostics = {
+                        globals = { "vim" },
+                        disable = {
+                            "missing-fields",
+                            "undefined-global",
                         },
                     },
-                })
-            end,
-            ["clangd"] = function()
-                lspconfig["clangd"].setup({
-                    capabilities = capabilities,
-                    cmd = {
-                        "clangd",
-                        "--background-index",
-                        "--clang-tidy",
-                        "-j=12",
-                        "--header-insertion=never",
-                        "--compile-commands-dir=./build"
+                    completion = {
+                        callSnippet = "Replace",
                     },
-                })
-            end,
+                },
+            },
+        })
+
+        lspconfig.jdtls.setup({
+            compatibilities = compatibilities,
+            cmd = { "jdtls" },
         })
     end,
 }

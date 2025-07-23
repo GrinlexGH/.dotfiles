@@ -159,3 +159,19 @@ if [ -d "$VULKAN_BASE" ]; then
         source "$LATEST_VULKAN_DIR/setup-env.sh"
     fi
 fi
+
+# java lsp
+if [ -d "$HOME/.java-lsp" ] ; then
+    export JDTLS="$HOME/.java-lsp"
+    export PATH=$JDTLS/bin:$PATH
+fi
+
+# android sdk
+if [ -d "$HOME/Android/Sdk" ] ; then
+    export ANDROID_HOME="$HOME/Android/Sdk"
+fi
+
+if [ -d "$ANDROID_HOME/cmdline-tools/latest/bin" ] ; then
+    PATH="$ANDROID_HOME/platform-tools:$ANDROID_HOME/cmdline-tools/latest:$ANDROID_HOME/cmdline-tools/latest/bin:$PATH"
+fi
+
