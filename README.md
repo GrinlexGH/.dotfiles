@@ -33,26 +33,37 @@ A modern Neovim configuration with powerful language tooling and visual polish:
 
 #### 🔑 Keybindings (Leader: <kbd>Space</kbd>)
 
-| Keybind                | Action                                 |
-|------------------------|----------------------------------------|
-| <kbd>Space + s..</kbd> | Window split management                |
-| <kbd>Space + t..</kbd> | Tab management                         |
-| <kbd>Space + w..</kbd> | Session management                     |
-| <kbd>Space + e..</kbd> | File explorer (nvim-tree)              |
-| <kbd>Space + nh</kbd>  | Clear search highlights                |
-| <kbd>Space + g..</kbd> | LSP actions                            |
-| <kbd>Space + d/D</kbd> | Show diagnostics (line / buffer)       |
-| <kbd>Space + x..</kbd> | Open diagnostics window (trouble.nvim) |
-| <kbd>K</kbd>           | Show hover docs                        |
-| <kbd>Ctrl + j/k</kbd>  | Navigate autocomplete                  |
-| <kbd>Ctrl + b/f</kbd>  | Scroll autocomplete docs               |
-| <kbd>Ctrl + e</kbd>    | Cancel autocomplete                    |
-| <kbd>Space + rs</kbd>  | Restart LSP                            |
-| <kbd>Space + mp</kbd>  | Format file / range                    |
-| <kbd>gc..</kbd>        | Linewise comment                       |
-| <kbd>gb..</kbd>        | Blockwise comment                      |
-| <kbd>Space + h..</kbd> | Git hunk navigation                    |
-| <kbd>Space + lg</kbd>  | Launch LazyGit                         |
+| Keybind                   | Action                                     |
+|---------------------------|--------------------------------------------|
+| <kbd>Space + s..</kbd>    | Window split management                    |
+| <kbd>Space + t..</kbd>    | Tab management                             |
+| <kbd>Space + e..</kbd>    | File explorer                              |
+| <kbd>Space + nh</kbd>     | Clear search highlights                    |
+| <kbd>Space + g..</kbd>    | LSP actions                                |
+| <kbd>Space + rs</kbd>     | Restart LSP                                |
+| <kbd>Space + d/D</kbd>    | Show diagnostics (line / buffer)           |
+| <kbd>Space + x..</kbd>    | Open diagnostics window                    |
+| <kbd>P</kbd>              | Toggle diagnostics preview                 |
+| <kbd>Space + f..</kbd>    | Open search                                |
+| <kbd>Ctrl + h/j/k/l</kbd> | Navigate search results                    |
+| <kbd>Alt + h/j/k/l</kbd>  | Navigate search preview                    |
+| <kbd>Ctrl + i</kbd>       | Add dir rule for search (-g)               |
+| <kbd>Ctrl + e</kbd>       | Exact match. No regexpr for search (-F)    |
+| <kbd>K</kbd>              | Show hover docs                            |
+| <kbd>Ctrl + j/k</kbd>     | Navigate autocomplete                      |
+| <kbd>Alt + j/k</kbd>      | Scroll autocomplete docs                   |
+| <kbd>Ctrl + e</kbd>       | Cancel autocomplete                        |
+| <kbd>gc..</kbd>           | Linewise comment                           |
+| <kbd>gb..</kbd>           | Blockwise comment                          |
+| <kbd>Space + h..</kbd>    | Git hunk navigation                        |
+| <kbd>Space + lg</kbd>     | Launch LazyGit                             |
+| <kbd>]/[ + t</kbd>        | Next / previous todo comment               |
+| <kbd>zA</kbd>             | Toggle region comment fold under cursor    |
+| <kbd>zR</kbd>             | Open all region comment folds              |
+| <kbd>zM</kbd>             | Close all region comment folds             |
+| <kbd>Alt + h/j/k/l</kbd>  | Move selection / current line              |
+| <kbd>c/d + s</kbd>      | Surround manipulations                     |
+| <kbd>S</kbd>              | Surround in visual mode                    |
 
 ---
 
@@ -128,3 +139,22 @@ dotfiles pull
 ## 🤝 Contributing
 
 These dotfiles are tailored for my workflow, but feel free to fork, adapt, or suggest improvements. PRs and feedback are always welcome!
+
+## 🌐 Useful links
+
+Android SDK for termux:  
+Place in `~/Android/Sdk`  
+https://github.com/lzhiyong/termux-ndk
+https://github.com/lzhiyong/android-sdk-tools
+
+Nerd font:  
+Rename to `font.ttf` and place in `~/.termux`  
+https://github.com/ryanoasis/nerd-fonts/releases/latest/download/DejaVuSansMono.zip
+
+Java LSP:  
+Unzip into `~/.jdtls`  
+https://download.eclipse.org/jdtls/milestones/
+
+Zsh plugins:  
+https://github.com/zsh-users/zsh-autosuggestions
+
