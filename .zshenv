@@ -34,7 +34,7 @@ fi
 # Kotlin LSP
 if [[ -x "$HOME/.kotlin-lsp/kotlin-lsp.sh" ]]; then
     export KOTLIN_LSP_DIR="$HOME/.kotlin-lsp"
-    [[ ! -L "$KOTLIN_LSP_DIR/kotlin-lsp" ]] && ln -s "$KOTLIN_LSP_DIR/kotlin-lsp.sh" "$HOME/.local/bin/kotlin-lsp"
+    [[ ! -L "$HOME/.local/bin/kotlin-lsp" ]] && ln -s "$KOTLIN_LSP_DIR/kotlin-lsp.sh" "$HOME/.local/bin/kotlin-lsp"
 fi
 
 # Android SDK
