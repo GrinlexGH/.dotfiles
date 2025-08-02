@@ -79,6 +79,8 @@ return {
 
         lspconfig.glsl_analyzer.setup({})
 
+        lspconfig.cmake.setup({})
+
         vim.lsp.enable('kotlin_lsp')
     end,
 }

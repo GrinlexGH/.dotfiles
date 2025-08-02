@@ -1,6 +1,7 @@
 return {
     "lewis6991/gitsigns.nvim",
     event = { "BufReadPre", "BufNewFile" },
+    dependencies = { "petertriho/nvim-scrollbar", },
     opts = {
         on_attach = function(bufnr)
             local gs = package.loaded.gitsigns
@@ -29,6 +30,8 @@ return {
             map("n", "<leader>hD", function() gs.diffthis("~") end, "Diff this ~")
 
             map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>", "Gitsigns select hunk")
+
+            require("scrollbar.handlers.gitsigns").setup()
         end,
     },
 }
