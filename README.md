@@ -62,7 +62,7 @@ A modern Neovim configuration with powerful language tooling and visual polish:
 | <kbd>zR</kbd>             | Open all region comment folds              |
 | <kbd>zM</kbd>             | Close all region comment folds             |
 | <kbd>Alt + h/j/k/l</kbd>  | Move selection / current line              |
-| <kbd>c/d + s</kbd>      | Surround manipulations                     |
+| <kbd>c/d + s</kbd>        | Surround manipulations                     |
 | <kbd>S</kbd>              | Surround in visual mode                    |
 
 ---

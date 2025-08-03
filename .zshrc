@@ -89,6 +89,10 @@ unsetopt completealiases
 # Show files with dot
 setopt globdots
 
+# Ctrl + backspace / delete koll word
+bindkey '^H' backward-kill-word
+bindkey '^[[3;5~' kill-word
+
 # User configuration
 
 # gpg
@@ -186,6 +190,8 @@ if type systemctl &>/dev/null && service_exists minecraft-server; then
     if [[ -x "$_minecraft_server_path/rcon.sh" ]]; then
         alias mc-rcon="'$_minecraft_server_path/rcon.sh'"
     fi
+
+    unset _minecraft_server_path
 fi
 
 # Done

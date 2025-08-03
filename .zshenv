@@ -51,7 +51,7 @@ if [[ -z $VULKAN_SDK && -d $HOME/VulkanSDK ]]; then
     setopt localoptions NULL_GLOB
 
     # Chooses latest SDK
-    local -a _sdks
+    typeset -a _sdks
     _sdks=($HOME/VulkanSDK/<->.<->.<->.<->(N/))
 
     if (( ${#_sdks} > 0 )); then
@@ -60,6 +60,7 @@ if [[ -z $VULKAN_SDK && -d $HOME/VulkanSDK ]]; then
         [[ -f $VULKAN_SDK/setup-env.sh ]] && source $VULKAN_SDK/setup-env.sh
     fi
 
+    unset _sdks
     unsetopt localoptions NULL_GLOB
 fi
 
