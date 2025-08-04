@@ -41,8 +41,7 @@ return {
                     auto_quoting = true,
                     mappings = {
                         i = {
-                            ["<C-e>"] = lga_actions.quote_prompt({ postfix = " -F" }),
-                            ["<C-i>"] = lga_actions.quote_prompt({ postfix = " -g " })
+                            ["<C-e>"] = lga_actions.quote_prompt(),
                         },
                     },
                 },

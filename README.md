@@ -47,8 +47,7 @@ A modern Neovim configuration with powerful language tooling and visual polish:
 | <kbd>Space + f..</kbd>    | Open search                                |
 | <kbd>Ctrl + h/j/k/l</kbd> | Navigate search results                    |
 | <kbd>Alt + h/j/k/l</kbd>  | Navigate search preview                    |
-| <kbd>Ctrl + i</kbd>       | Add dir rule for search (-g)               |
-| <kbd>Ctrl + e</kbd>       | Exact match. No regexpr for search (-F)    |
+| <kbd>Ctrl + e</kbd>       | Quote text (exact)                         |
 | <kbd>K</kbd>              | Show hover docs                            |
 | <kbd>Ctrl + j/k</kbd>     | Navigate autocomplete                      |
 | <kbd>Alt + j/k</kbd>      | Scroll autocomplete docs                   |
