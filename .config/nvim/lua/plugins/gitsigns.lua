@@ -1,7 +1,8 @@
 return {
     "lewis6991/gitsigns.nvim",
-    event = { "BufReadPre", "BufNewFile" },
     dependencies = { "petertriho/nvim-scrollbar", },
+    ---@module "gitsigns"
+    ---@type Gitsigns.Config
     opts = {
         on_attach = function(bufnr)
             local gs = package.loaded.gitsigns

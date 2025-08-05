@@ -1,5 +1,8 @@
 return {
     "rmagatti/auto-session",
+    dependencies = { "nvim-tree/nvim-tree.lua" },
+    ---@module "auto-session"
+    ---@type AutoSession.Config
     opts = {
         suppressed_dirs = { "~/", "~/Downloads", "/" },
         args_allow_files_auto_save = function()

@@ -36,6 +36,8 @@ A modern Neovim configuration with powerful language tooling and visual polish:
 | Keybind                   | Action                                     |
 |---------------------------|--------------------------------------------|
 | <kbd>Space + s..</kbd>    | Window split management                    |
+| <kbd>Ctrl + arrows</kbd>  | Change split size (mini.basics)            |
+| <kbd>Ctrl + h/j/k/l</kbd> | Split navigation (mini.basics)             |
 | <kbd>Space + t..</kbd>    | Tab management                             |
 | <kbd>Space + e..</kbd>    | File explorer                              |
 | <kbd>Space + nh</kbd>     | Clear search highlights                    |
@@ -61,8 +63,7 @@ A modern Neovim configuration with powerful language tooling and visual polish:
 | <kbd>zR</kbd>             | Open all region comment folds              |
 | <kbd>zM</kbd>             | Close all region comment folds             |
 | <kbd>Alt + h/j/k/l</kbd>  | Move selection / current line              |
-| <kbd>c/d + s</kbd>        | Surround manipulations                     |
-| <kbd>S</kbd>              | Surround in visual mode                    |
+| <kbd>s + a/r/d</kbd>      | Surround manipulations (mini.surround)     |
 
 ---
 
