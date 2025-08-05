@@ -10,7 +10,6 @@ return {
     opts = {
         servers = {
             lua_ls = {
-                mason = false,
                 settings = {
                     Lua = {
                         completion = {
@@ -23,7 +22,6 @@ return {
                 },
             },
             clangd = {
-                mason = false,
                 cmd = {
                     "clangd",
                     "--background-index",
@@ -33,30 +31,32 @@ return {
                     "--compile-commands-dir=build"
                 },
             },
-            jdtls = {
-                mason = false,
-            },
-            glsl_analyzer = {
-                mason = false,
-            },
-            cmake = {
-                mason = false,
-            },
+            jdtls = { },
+            glsl_analyzer = { },
+            cmake = { },
+
+            kotlin_lsp = { not_mason_skip = true, },
         },
     },
     config = function(_, opts)
         local lspconfig = require("lspconfig")
 
+        local use_mason = false
+
         for server, config in pairs(opts.servers) do
             config.capabilities = require("blink.cmp").get_lsp_capabilities(config.capabilities)
-            if config.mason == false then
-                lspconfig[server].setup(config)
+            if use_mason == false then
+                if not config.not_mason_skip then
+                    lspconfig[server].setup(config)
+                end
             else
                 vim.lsp.config(server, config)
             end
         end
 
-        vim.lsp.enable("kotlin_lsp")
+        if not use_mason then
+            vim.lsp.enable("kotlin_lsp")
+        end
 
         vim.diagnostic.config({
             signs = {
