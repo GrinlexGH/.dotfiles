@@ -15,7 +15,7 @@
 
 ### 🔁 Enhanced Zsh Config
 - Delete word on <kbd>Ctrl + delete / backspace</kbd>
-- Convenient `bira` theme
+- Convenient and beautiful `bira` theme
 - Command completion via `zsh-autosuggestions`
 - Alias completion
 - `GPG_TTY` variable, zoxide & uv setup
