@@ -161,8 +161,11 @@ These dotfiles are tailored for my workflow, but feel free to fork, adapt, or su
 
 Android SDK for termux:  
 Place in `~/Android/Sdk`  
-https://github.com/lzhiyong/termux-ndk
-https://github.com/lzhiyong/android-sdk-tools
+https://github.com/lzhiyong/termux-ndk  
+https://github.com/lzhiyong/android-sdk-tools  
+or  
+https://github.com/HomuHomu833/android-sdk-custom  
+https://github.com/HomuHomu833/android-ndk-custom  
 
 Nerd font:  
 Rename to `font.ttf` and place in `~/.termux`  
