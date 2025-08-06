@@ -19,3 +19,6 @@ keymap.set("n", "<leader>tf", "<cmd>tabnew %<CR>", { desc = "Open current buffer
 keymap.set("n", "<leader>ttt", "<cmd>terminal<CR>", { desc = "Open terminal in current buffer (grinlex)" })
 
 keymap.set("n", "U", "<cmd>redo<CR>", { desc = "Redo (grinlex)" })
+
+keymap.set("i", "<C-H>", "<C-W>", { desc = "Delete previous word (grinlex)" })
+keymap.set("i", "<C-Del>", "<C-o>dw", { desc = "Delete to next word (grinlex)" })

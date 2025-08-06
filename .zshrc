@@ -163,6 +163,7 @@ alias dotfiles='git --git-dir="$HOME/.dotfiles/" --work-tree="$HOME"'
 type pd &>/dev/null && alias pdall='pd login --user grinlex archlinux'
 
 # Minecraft server aliases
+# Checks for service 'minecraft-server'
 service_exists() {
     local n=$1
     if [[ $(systemctl list-units --all -t service --full --no-legend "$n.service" | sed 's/^\s*//g' | cut -f1 -d' ') == $n.service ]]; then

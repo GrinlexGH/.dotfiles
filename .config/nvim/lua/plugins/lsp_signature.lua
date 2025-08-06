@@ -3,6 +3,6 @@ return {
     event = "InsertEnter",
     opts = { },
     keys = {
-        { "<C-k>", function() require("lsp_signature").toggle_float_win() end, desc = "toggle signature", mode = { "n", "i" }, }
+        { "<C-k>", function() require("lsp_signature").toggle_float_win() end, desc = "toggle signature (lsp_signature)", mode = { "n", "i" }, }
     },
 }

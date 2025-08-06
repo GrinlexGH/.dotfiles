@@ -15,7 +15,23 @@
 ### 🔁 Enhanced Zsh Config
 - Delete word on <kbd>Ctrl + del/BS</kbd>
 - Convenient `bira` theme
+- Command completion via `zsh-autosuggestions`
 - Alias completion
+- `GPG_TTY` variable, zoxide & uv setup
+
+### 🔗 Shell aliases
+- `dotfiles` - `git --git-dir="$HOME/.dotfiles/" --work-tree="$HOME"`
+- `pdall` - `pd login --user grinlex archlinux`
+- `alert` - `notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"`
+- `mc-start` - `'$_minecraft_server_path/start.sh'` (change `$_minecraft_server_path` in `.zshrc`)
+- `mc-stop` - `'$_minecraft_server_path/stop.sh'` (change `$_minecraft_server_path` in `.zshrc`)
+- `mc-log` - `'$_minecraft_server_path/log.sh'` (change `$_minecraft_server_path` in `.zshrc`)
+- `mc-rcon` - `'$_minecraft_server_path/rcon.sh'` (change `$_minecraft_server_path` in `.zshrc`)
+
+### 🧬 .zshenv Setup
+Adds `$HOME/bin` & `$HOME/.local/bin` to $PATH if exist.  
+Setup spicetify, jdtls, kotlin-lsp, Android SDK & Vulkan SDK if they exist.  
+See [.zshenv](./.zshenv)
 
 ### 📝 Neovim Setup
 
@@ -31,8 +47,8 @@ A modern Neovim configuration with powerful language tooling and visual polish:
 
 #### 🔑 Keybindings (Leader: <kbd>Space</kbd>)
 
-| Keybind                   | Action                                                    |
-|---------------------------|-----------------------------------------------------------|
+| Keybind                   | Action                                                     |
+|---------------------------|------------------------------------------------------------|
 | <kbd>Space + s..</kbd>    | Window split management                                    |
 | <kbd>Ctrl + arrows</kbd>  | Change split size (mini.basics)                            |
 | <kbd>Ctrl + h/j/k/l</kbd> | Split navigation (mini.basics)                             |
