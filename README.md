@@ -12,11 +12,10 @@
 
 ## ✨ Features
 
-### 🔁 Enhanced Bash Tab Completion
-Custom `.initrc` configuration for intuitive file navigation:
-- <kbd>Tab</kbd>: Cycle forward through directory entries.
-- <kbd>Shift + Tab</kbd>: Cycle backward.
-- No annoying beeps - just smooth tabbing like in Windows `cmd`.
+### 🔁 Enhanced Zsh Config
+- Delete word on <kbd>Ctrl + del/BS</kbd>
+- Convenient `bira` theme
+- Alias completion
 
 ### 📝 Neovim Setup
 
@@ -26,44 +25,44 @@ A modern Neovim configuration with powerful language tooling and visual polish:
   - C++ → [`mason.nvim`](https://github.com/mason-org/mason.nvim) | [`clangd`](https://clangd.llvm.org/)
   - Python → [`mason.nvim`](https://github.com/mason-org/mason.nvim) | [`ruff`](https://github.com/astral-sh/ruff)
   - Lua → [`mason.nvim`](https://github.com/mason-org/mason.nvim) | [`lua_ls`](https://github.com/LuaLS/lua-language-server)
-  - Java → [`nvim-java`](https://github.com/nvim-java/nvim-java) | [`jdtls`](https://github.com/eclipse-jdtls/eclipse.jdt.ls)
 - 📁 File explorer via [`nvim-tree`](https://github.com/nvim-tree/nvim-tree.lua)
 - 🎨 Beautiful theme: [`Carbonfox`](https://github.com/EdenEast/nightfox.nvim#carbonfox)
 - ⚙️ Plugin manager: [`lazy.nvim`](https://github.com/folke/lazy.nvim)
 
 #### 🔑 Keybindings (Leader: <kbd>Space</kbd>)
 
-| Keybind                   | Action                                     |
-|---------------------------|--------------------------------------------|
-| <kbd>Space + s..</kbd>    | Window split management                    |
-| <kbd>Ctrl + arrows</kbd>  | Change split size (mini.basics)            |
-| <kbd>Ctrl + h/j/k/l</kbd> | Split navigation (mini.basics)             |
-| <kbd>Space + t..</kbd>    | Tab management                             |
-| <kbd>Space + e..</kbd>    | File explorer                              |
-| <kbd>Space + nh</kbd>     | Clear search highlights                    |
-| <kbd>Space + g..</kbd>    | LSP actions                                |
-| <kbd>Space + rs</kbd>     | Restart LSP                                |
-| <kbd>Space + d/D</kbd>    | Show diagnostics (line / buffer)           |
-| <kbd>Space + x..</kbd>    | Open diagnostics window                    |
-| <kbd>P</kbd>              | Toggle diagnostics preview                 |
-| <kbd>Space + f..</kbd>    | Open search                                |
-| <kbd>Ctrl + h/j/k/l</kbd> | Navigate search results                    |
-| <kbd>Alt + h/j/k/l</kbd>  | Navigate search preview                    |
-| <kbd>Ctrl + e</kbd>       | Quote text (exact)                         |
-| <kbd>K</kbd>              | Show hover docs                            |
-| <kbd>Ctrl + j/k</kbd>     | Navigate autocomplete                      |
-| <kbd>Alt + j/k</kbd>      | Scroll autocomplete docs                   |
-| <kbd>Ctrl + e</kbd>       | Cancel autocomplete                        |
-| <kbd>gc..</kbd>           | Linewise comment                           |
-| <kbd>gb..</kbd>           | Blockwise comment                          |
-| <kbd>Space + h..</kbd>    | Git hunk navigation                        |
-| <kbd>Space + lg</kbd>     | Launch LazyGit                             |
-| <kbd>]/[ + t</kbd>        | Next / previous todo comment               |
-| <kbd>zA</kbd>             | Toggle region comment fold under cursor    |
-| <kbd>zR</kbd>             | Open all region comment folds              |
-| <kbd>zM</kbd>             | Close all region comment folds             |
-| <kbd>Alt + h/j/k/l</kbd>  | Move selection / current line              |
-| <kbd>s + a/r/d</kbd>      | Surround manipulations (mini.surround)     |
+| Keybind                   | Action                                                    |
+|---------------------------|-----------------------------------------------------------|
+| <kbd>Space + s..</kbd>    | Window split management                                    |
+| <kbd>Ctrl + arrows</kbd>  | Change split size (mini.basics)                            |
+| <kbd>Ctrl + h/j/k/l</kbd> | Split navigation (mini.basics)                             |
+| <kbd>Space + t..</kbd>    | Tab management                                             |
+| <kbd>Space + e..</kbd>    | File explorer (nvim-tree)                                  |
+| <kbd>Space + nh</kbd>     | Clear search highlights                                    |
+| <kbd>Space + g..</kbd>    | LSP actions                                                |
+| <kbd>Space + rs</kbd>     | Restart LSP                                                |
+| <kbd>Space + d/D</kbd>    | Show diagnostics (line / buffer)                           |
+| <kbd>Space + x..</kbd>    | Open diagnostics window (trouble)                          |
+| <kbd>P</kbd>              | Toggle diagnostics window preview (trouble)                |
+| <kbd>Space + f..</kbd>    | Open search (telescope)                                    |
+| <kbd>Ctrl + h/j/k/l</kbd> | Navigate search results (telescope)                        |
+| <kbd>Alt + h/j/k/l</kbd>  | Navigate search preview (telescope)                        |
+| <kbd>Ctrl + e</kbd>       | Quote text (exact) (telescope)                             |
+| <kbd>K</kbd>              | Show hover docs                                            |
+| <kbd>Ctrl + Space</kbd>   | Show autocomplete (blink.cmp)                              |
+| <kbd>Ctrl + j/k</kbd>     | Navigate autocomplete (blink.cmp)                          |
+| <kbd>Alt + j/k</kbd>      | Scroll autocomplete docs (blink.cmp)                       |
+| <kbd>Ctrl + e</kbd>       | Cancel autocomplete (blink.cmp)                            |
+| <kbd>gc..</kbd>           | Linewise comment (Comment)                                 |
+| <kbd>gb..</kbd>           | Blockwise comment (Comment)                                |
+| <kbd>Space + h..</kbd>    | Git hunk navigation (gitsigns)                             |
+| <kbd>Space + lg</kbd>     | Launch LazyGit (lazygit)                                   |
+| <kbd>]/[ + t</kbd>        | Next / previous todo comment (todo-comments)               |
+| <kbd>zA</kbd>             | Toggle region comment fold under cursor (region-folding)   |
+| <kbd>zR</kbd>             | Open all region comment folds (region-folding)             |
+| <kbd>zM</kbd>             | Close all region comment folds (region-folding)            |
+| <kbd>Alt + h/j/k/l</kbd>  | Move selection / current line (mini.move)                  |
+| <kbd>s + a/r/d</kbd>      | Surround manipulations (mini.surround)                     |
 
 ---
 

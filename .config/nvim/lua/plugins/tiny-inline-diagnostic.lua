@@ -1,8 +1,10 @@
 return {
     "rachartier/tiny-inline-diagnostic.nvim",
-    event = "LspAttach",
+    lazy = false,
     priority = 1000,
     opts = {
+        transparent_bg = true,
+        transparent_cursorline = true,
         options = {
             throttle = 0,
             multilines = {

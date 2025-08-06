@@ -1,17 +1,18 @@
 return {
     "nvim-telescope/telescope.nvim",
     dependencies = {
+        "nvim-lua/plenary.nvim",
+        "nvim-tree/nvim-web-devicons",
+        "nvim-treesitter/nvim-treesitter",
+        "sharkdp/fd",
         {
             "nvim-telescope/telescope-fzf-native.nvim",
-            build = vim.fn.has("win32") == 1 and "mingw32-make" or "make",
+            build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release"
         },
         "nvim-telescope/telescope-project.nvim",
         "nvim-telescope/telescope-live-grep-args.nvim",
-        "nvim-lua/plenary.nvim",
-        "nvim-tree/nvim-web-devicons",
-        "folke/todo-comments.nvim",
-        "stevearc/resession.nvim",
     },
+    cmd = "Telescope",
     config = function()
         local telescope = require("telescope")
         local actions = require("telescope.actions")

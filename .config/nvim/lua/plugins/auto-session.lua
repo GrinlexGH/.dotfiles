@@ -1,6 +1,6 @@
 return {
     "rmagatti/auto-session",
-    dependencies = { "nvim-tree/nvim-tree.lua" },
+    lazy = false,
     ---@module "auto-session"
     ---@type AutoSession.Config
     opts = {

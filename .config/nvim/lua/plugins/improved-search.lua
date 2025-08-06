@@ -10,6 +10,6 @@ return {
         { "*", function() require("improved-search").forward() end, mode = "x", desc = "Search selection forward (improved-search)" },
         { "#", function() require("improved-search").backward() end, mode = "x", desc = "Search selection backward (improved-search)" },
 
-        { "|", function() require("improved-search").in_place() end, desc = "Search by motion in place(improved-search)" },
+        { "|", function() require("improved-search").in_place() end, desc = "Search by motion in place (improved-search)" },
     },
 }

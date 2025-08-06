@@ -1,6 +1,6 @@
 return {
     "nicolas-martin/region-folding.nvim",
-    event = { "BufReadPost", "BufNewFile" },
+    event = { "BufReadPre", "BufNewFile" },
     opts = { region_text = { start = "region", ending = "endregion" }, },
     init = function()
         vim.opt.foldmethod = "expr"

@@ -1,8 +1,7 @@
 return {
     "neovim/nvim-lspconfig",
-    lazy = false,
     dependencies = {
-        { "antosha417/nvim-lsp-file-operations", opts = { }, },
+        { "antosha417/nvim-lsp-file-operations", lazy = true, opts = { }, },
         "saghen/blink.cmp",
     },
     ---@module "lspconfig"
@@ -32,30 +31,15 @@ return {
                 },
             },
             jdtls = { },
-            glsl_analyzer = { },
             cmake = { },
-
-            kotlin_lsp = { not_mason_skip = true, },
+            kotlin_lsp = { },
         },
     },
     config = function(_, opts)
-        local lspconfig = require("lspconfig")
-
-        local use_mason = false
-
         for server, config in pairs(opts.servers) do
             config.capabilities = require("blink.cmp").get_lsp_capabilities(config.capabilities)
-            if use_mason == false then
-                if not config.not_mason_skip then
-                    lspconfig[server].setup(config)
-                end
-            else
-                vim.lsp.config(server, config)
-            end
-        end
-
-        if not use_mason then
-            vim.lsp.enable("kotlin_lsp")
+            vim.lsp.config(server, config)
+            vim.lsp.enable(server)
         end
 
         vim.diagnostic.config({
