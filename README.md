@@ -38,13 +38,9 @@ See [.zshenv](./.zshenv)
 
 A modern Neovim configuration with powerful language tooling and visual polish:
 
-- 🧠 **LSP support** for:
-  - C++ → [`mason.nvim`](https://github.com/mason-org/mason.nvim) | [`clangd`](https://clangd.llvm.org/)
-  - Python → [`mason.nvim`](https://github.com/mason-org/mason.nvim) | [`ruff`](https://github.com/astral-sh/ruff)
-  - Lua → [`mason.nvim`](https://github.com/mason-org/mason.nvim) | [`lua_ls`](https://github.com/LuaLS/lua-language-server)
-- 📁 File explorer via [`nvim-tree`](https://github.com/nvim-tree/nvim-tree.lua)
 - 🎨 Beautiful theme: [`Carbonfox`](https://github.com/EdenEast/nightfox.nvim#carbonfox)
 - ⚙️ Plugin manager: [`lazy.nvim`](https://github.com/folke/lazy.nvim)
+- 🔴 Inline showing errors: [`tiny-inline-diagnostic.nvim`](https://github.com/rachartier/tiny-inline-diagnostic.nvim)
 
 #### 🔑 Keybindings (Leader: <kbd>Space</kbd>)
 
@@ -98,19 +94,7 @@ A modern Neovim configuration with powerful language tooling and visual polish:
 Install with:
 
 ```bash
-# neovim >= 0.11.0
-sudo snap install nvim --classic
-sudo apt install make clang-tidy g++ unzip python3-venv fzf ripgrep xclip zoxide bash-completion npm
-
-## lazy git for Ubuntu 25.04 and earlier
-LAZYGIT_VERSION=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | \grep -Po '"tag_name": *"v\K[^"]*')
-curl -Lo lazygit.tar.gz "https://github.com/jesseduffield/lazygit/releases/download/v${LAZYGIT_VERSION}/lazygit_${LAZYGIT_VERSION}_Linux_x86_64.tar.gz"
-tar xf lazygit.tar.gz lazygit
-sudo install lazygit -D -t /usr/local/bin/
-rm -rf ./lazygit ./lazygit.tar.gz
-
-## lazy git for Ubuntu 25.10 and later
-sudo apt install lazygit
+pkg upd && pkg upg -y && pkg i make clang unzip python3 fzf ripgrep termux-api zsh zoxide lazygit
 ```
 
 ## 🚀 Installation
