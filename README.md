@@ -178,3 +178,10 @@ https://download.eclipse.org/jdtls/milestones/
 Zsh plugins:  
 https://github.com/zsh-users/zsh-autosuggestions
 
+```
+      |\      _,,,---,,_
+ZZZzz /,`.-'`'    -.  ;-;;,_
+     |,4-  ) )-,_. ,\ (  `'-'
+    '---''(_/--'  `-'\_)
+```
+
