@@ -14,7 +14,7 @@
 ## ✨ Features
 
 ### 🔁 Enhanced Zsh Config
-- Delete word on <kbd>Ctrl + del/BS</kbd>
+- Delete word on <kbd>Ctrl + delete / backspace</kbd>
 - Convenient `bira` theme
 - Command completion via `zsh-autosuggestions`
 - Alias completion
