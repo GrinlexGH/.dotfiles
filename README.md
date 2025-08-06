@@ -18,7 +18,7 @@
 - Convenient and beautiful `bira` theme
 - Command completion via `zsh-autosuggestions`
 - Alias completion
-- `GPG_TTY` variable, zoxide & uv setup
+- Zoxide & uv setup
 
 ### 🔗 Shell aliases
 - `dotfiles` = `git --git-dir="$HOME/.dotfiles/" --work-tree="$HOME"`
