@@ -7,7 +7,8 @@
 </p>
 
 <p align="center">
-  This is my dotfiles repository - collection of <strong>the most convenient</strong> configurations <strong>for me</strong>, as far as I could make, for programs and Unix-like environments (primarily for <strong>Ubuntu</strong>).
+  This is my dotfiles repository - collection of <strong>the most convenient</strong> configurations <strong>for me</strong>, as far as I could make, for programs and Unix-like environments (primarily for <strong>Termux</strong>).
+  <img src="https://i.imgur.com/x8lkjcv.jpeg" alt="Zsh Preview" />
 </p>
 
 ## ✨ Features
@@ -55,6 +56,7 @@ A modern Neovim configuration with powerful language tooling and visual polish:
 | <kbd>Space + t..</kbd>    | Tab management                                             |
 | <kbd>Space + e..</kbd>    | File explorer (nvim-tree)                                  |
 | <kbd>Space + nh</kbd>     | Clear search highlights                                    |
+| <kbd>Space + n</kbd>      | Notifications (snacks)                                     |
 | <kbd>Space + g..</kbd>    | LSP actions                                                |
 | <kbd>Space + rs</kbd>     | Restart LSP                                                |
 | <kbd>Space + d/D</kbd>    | Show diagnostics (line / buffer)                           |
@@ -85,10 +87,10 @@ A modern Neovim configuration with powerful language tooling and visual polish:
 ### 📸 Neovim Preview
 
 <p align="center">
-  <img src="https://i.imgur.com/QVYQ09O.png" alt="Neovim Preview 1" />
+  <img src="https://i.imgur.com/2MsHPG0.jpeg" alt="Neovim Preview 1" />
 </p>
 <p align="center">
-  <img src="https://i.imgur.com/MXZtiff.png" alt="Neovim Preview 2" />
+  <img src="https://i.imgur.com/nI7EzWr.jpeg" alt="Neovim Preview 2" />
 </p>
 
 ## 📦 Requirements
