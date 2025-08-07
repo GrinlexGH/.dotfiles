@@ -1,7 +1,6 @@
 return {
     "lewis6991/gitsigns.nvim",
     dependencies = { "petertriho/nvim-scrollbar", },
-    event = { "BufReadPost", "BufNewFile" },
     ---@module "gitsigns"
     ---@type Gitsigns.Config
     opts = {
