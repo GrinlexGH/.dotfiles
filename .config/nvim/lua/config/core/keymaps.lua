@@ -21,4 +21,4 @@ keymap.set("n", "<leader>ttt", "<cmd>terminal<CR>", { desc = "Open terminal in c
 keymap.set("n", "U", "<cmd>redo<CR>", { desc = "Redo (grinlex)" })
 
 keymap.set("i", "<C-H>", "<C-W>", { desc = "Delete previous word (grinlex)" })
-keymap.set("i", "<C-Del>", "<C-o>dw", { desc = "Delete to next word (grinlex)" })
+keymap.set("i", "<C-Del>", "<C-o>de", { desc = "Delete word (grinlex)" })
