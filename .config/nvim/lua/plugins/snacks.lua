@@ -16,7 +16,6 @@ return {
             enabled = true,
             animate = {
                 duration = { total = 100 },
-                easing = "outQuint",
             },
         },
     },
