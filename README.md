@@ -151,9 +151,8 @@ or
 https://github.com/HomuHomu833/android-sdk-custom  
 https://github.com/HomuHomu833/android-ndk-custom  
 
-Nerd font:  
-Rename to `font.ttf` and place in `~/.termux`  
-https://github.com/ryanoasis/nerd-fonts/releases/latest/download/DejaVuSansMono.zip
+Nerd fonts:  
+https://www.nerdfonts.com/font-downloads  
 
 Java LSP:  
 Unzip into `~/.jdtls`  
