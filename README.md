@@ -94,7 +94,7 @@ A modern Neovim configuration with powerful language tooling and visual polish:
 Install with:
 
 ```bash
-pkg upd && pkg upg -y && pkg i make clang unzip python3 fzf ripgrep termux-api zsh zoxide lazygit uv proot-distro neofetch
+pkg upd && pkg upg -y && pkg i make clang unzip python3 fzf ripgrep termux-api zsh zoxide lazygit uv proot-distro neofetch neovim
 ```
 
 ## 🚀 Installation
