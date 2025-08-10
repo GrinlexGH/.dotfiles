@@ -124,7 +124,7 @@ You can backup these files and try again:
 
 ```bash
 mkdir -p .dotfiles-backup && \
-dotfiles checkout 2>&1 | egrep "\s+\." | awk '{print $1}' | \
+dotfiles checkout 2>&1 | grep -E "^\s" | awk '{print $1}' | \
 while read file; do
     mkdir -p ".dotfiles-backup/$(dirname "$file")"
     mv "$file" ".dotfiles-backup/$file"
@@ -132,6 +132,7 @@ done
 
 dotfiles checkout
 dotfiles config --local status.showUntrackedFiles no
+
 ```
 
 To update the dotfiles later:
