@@ -1,2 +1,2 @@
-require("grinlex.core")
-require("grinlex.lazy")
+require("config.core")
+require("config.lazy")
