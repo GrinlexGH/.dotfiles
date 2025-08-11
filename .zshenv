@@ -18,7 +18,7 @@ add_to_path "$HOME/bin" "$HOME/.local/bin"
 
 # Rust cargo
 [[ -f "$HOME/.cargo/env" ]] && source "$HOME/.cargo/env"
-add_to_path "$HOME/.cargo/bin/"
+add_to_path "$HOME/.cargo/bin"
 
 # Spicetify
 if [[ -d "$HOME/.spicetify" ]]; then
