@@ -174,22 +174,22 @@ service_exists() {
 }
 
 if type systemctl &>/dev/null && service_exists minecraft-server; then
-    _minecraft_server_path="/mnt/hdd/minecraft server"
+    _minecraft_server_path="/run/media/shared/HDD/minecraft-server"
 
-    if [[ -x "$_minecraft_server_path/start.sh" ]]; then
-        alias mc-start="'$_minecraft_server_path/start.sh'"
+    if [[ -f "$_minecraft_server_path/start.sh" ]]; then
+        alias mc-start="zsh '$_minecraft_server_path/start.sh'"
     fi
 
-    if [[ -x "$_minecraft_server_path/stop.sh" ]]; then
-        alias mc-stop="'$_minecraft_server_path/stop.sh'"
+    if [[ -f "$_minecraft_server_path/stop.sh" ]]; then
+        alias mc-stop="zsh '$_minecraft_server_path/stop.sh'"
     fi
 
-    if [[ -x "$_minecraft_server_path/log.sh" ]]; then
-        alias mc-log="'$_minecraft_server_path/log.sh'"
+    if [[ -f "$_minecraft_server_path/log.sh" ]]; then
+        alias mc-log="zsh '$_minecraft_server_path/log.sh'"
     fi
 
-    if [[ -x "$_minecraft_server_path/rcon.sh" ]]; then
-        alias mc-rcon="'$_minecraft_server_path/rcon.sh'"
+    if [[ -f "$_minecraft_server_path/rcon.sh" ]]; then
+        alias mc-rcon="zsh '$_minecraft_server_path/rcon.sh'"
     fi
 
     unset _minecraft_server_path
@@ -197,4 +197,3 @@ fi
 
 # Done
 type neofetch &>/dev/null && neofetch
-
