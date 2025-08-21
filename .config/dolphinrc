@@ -1,0 +1,22 @@
+MenuBar=Disabled
+
+[DetailsMode]
+ExpandableFolders=false
+PreviewSize=16
+
+[General]
+RememberOpenedTabs=false
+ShowSelectionToggle=false
+SortingChoice=CaseSensitiveSorting
+Version=202
+ViewPropsTimestamp=2025,8,11,12,26,48.727
+
+[KFileDialog Settings]
+Places Icons Auto-resize=false
+Places Icons Static Size=22
+
+[MainWindow]
+MenuBar=Disabled
+
+[PreviewSettings]
+Plugins=appimagethumbnail,gdk-pixbuf-thumbnailer,opendocumentthumbnail,kraorathumbnail,audiothumbnail,jxl,librsvg,imagethumbnail,exrthumbnail,jpegthumbnail,windowsimagethumbnail,svgthumbnail,windowsexethumbnail,comicbookthumbnail,directorythumbnail,djvuthumbnail,cursorthumbnail,fontthumbnail,ebookthumbnail
