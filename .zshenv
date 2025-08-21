@@ -69,3 +69,6 @@ fi
 if [[ -z "$SSH_AUTH_SOCK" ]] || ! ps -p "$SSH_AGENT_PID" &>/dev/null; then
     type ssh-agent &>/dev/null && eval "$(ssh-agent -s)" >/dev/null
 fi
+
+# Minecraft server
+export MINECRAFT_SERVER_DIR="/run/media/shared/NVMe-NTFS/minecraft-server"
