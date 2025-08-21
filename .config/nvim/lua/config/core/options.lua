@@ -4,48 +4,37 @@ vim.cmd("let g:netrw_liststyle = 3")
 
 local opt = vim.opt
 
--- Line numbering:
 opt.relativenumber = true -- Show relative line numbers (distance to cursor)
 opt.number = true         -- Show absolute number for current line
 
--- Tab and indentation settings:
 opt.tabstop = 4       -- Visual width of a tab character
 opt.shiftwidth = 4    -- Size of auto-indent operations
 opt.expandtab = true  -- Convert tabs to spaces
 opt.autoindent = true -- Maintain current indent level on new lines
 
--- Line wrapping:
 opt.wrap = false -- Disable line wrapping (long lines extend beyond screen)
 
--- Search behavior:
 opt.ignorecase = true -- Case-insensitive searching
 opt.smartcase = true  -- Case-sensitive if search contains uppercase
 
--- Visual enhancements:
 opt.cursorline = true -- Highlight current line
 
--- Color settings:
 opt.termguicolors = true -- Enable true-color support
 opt.background = "dark"  -- Use dark color schemes
 
--- Interface elements:
 opt.signcolumn = "yes" -- Always show sign column (for diagnostics, git, etc)
 
--- Backspace behavior:
 opt.backspace = "indent,eol,start"
 -- Allows deleting:
 --   indent = indentation
 --   eol    = line breaks (merge lines)
 --   start  = characters before insertion point
 
--- Clipboard integration:
 opt.clipboard:append("unnamedplus") -- Use system clipboard
 
--- Window splitting behavior:
 opt.splitright = true -- Vertical splits open to the right
 opt.splitbelow = true -- Horizontal splits open below
 
--- Invisible characters visualization:
 opt.list = true -- Show invisible characters
 opt.listchars = {
     space = "·",    -- Spaces (except trailing)

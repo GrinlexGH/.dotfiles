@@ -159,7 +159,7 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 # Dotfiles
 alias dotfiles='git --git-dir="$HOME/.dotfiles/" --work-tree="$HOME"'
 
-# proot distro arch linux login
+# Proot distro arch linux login
 type pd &>/dev/null && alias pdall='pd login --user grinlex archlinux'
 
 # Minecraft server aliases
