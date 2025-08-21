@@ -7,7 +7,7 @@
   "blink.cmp": { "branch": "main", "commit": "bae4bae0eedd1fa55f34b685862e94a222d5c6f8" },
   "bufferline.nvim": { "branch": "main", "commit": "655133c3b4c3e5e05ec549b9f8cc2894ac6f51b3" },
   "conform.nvim": { "branch": "master", "commit": "9ddab4e14c44196d393a72b958b4da6dab99ecef" },
-  "cord.nvim": { "branch": "master", "commit": "2c55044816a76e78ade4479bdcb97b3b7293d846" },
+  "cord.nvim": { "branch": "master", "commit": "2899c7beb7a7cd034e1725ffd9a5205368a3ef6f" },
   "fd": { "branch": "master", "commit": "fd06e69ed2ab12007e960e539c12b28b0792d3e0" },
   "gitsigns.nvim": { "branch": "main", "commit": "6e3c66548035e50db7bd8e360a29aec6620c3641" },
   "improved-search.nvim": { "branch": "main", "commit": "9480bfb0e05f990a1658464c1d349dd2acfb9c34" },

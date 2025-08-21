@@ -7,62 +7,85 @@
 </p>
 
 <p align="center">
-  This is my dotfiles repository - collection of <strong>the most convenient</strong> configurations <strong>for me</strong>, as far as I could make, for programs and Unix-like environments (primarily for <strong>Ubuntu</strong>).
+  This is my dotfiles repository - collection of <strong>the most convenient</strong> configurations <strong>for me</strong>, as far as I could make, for programs and Unix-like environments.
+  <img src="https://i.imgur.com/1r3XDdr.png" alt="Zsh Preview" />
 </p>
 
 ## ✨ Features
 
-### 🔁 Enhanced Bash Tab Completion
-Custom `.initrc` configuration for intuitive file navigation:
-- <kbd>Tab</kbd>: Cycle forward through directory entries.
-- <kbd>Shift + Tab</kbd>: Cycle backward.
-- No annoying beeps - just smooth tabbing like in Windows `cmd`.
+### 🔁 Enhanced Zsh Config
+- Delete word on <kbd>Ctrl + delete / backspace</kbd>
+- Convenient and beautiful `bira` theme
+- Command completion via `zsh-autosuggestions`
+- Alias completion
+- Zoxide & uv setup
+
+### 🔗 Shell aliases
+- `dotfiles` = `git --git-dir="$HOME/.dotfiles/" --work-tree="$HOME"`
+- `pdall` = `pd login --user grinlex archlinux`
+- `mc-start` = `'$MINECRAFT_SERVER_DIR/start.sh'` (change `$MINECRAFT_SERVER_DIR` in [`.zshenv`](./.zshenv) )
+- `mc-stop` = `'$MINECRAFT_SERVER_DIR/stop.sh'`
+- `mc-log` = `'$MINECRAFT_SERVER_DIR/log.sh'`
+- `mc-rcon` = `'$MINECRAFT_SERVER_DIR/rcon.sh'`
+
+### 🧬 .zshenv Setup
+Adds `$HOME/bin` & `$HOME/.local/bin` to `$PATH` if exist.  
+Setup spicetify, jdtls, kotlin-lsp, Android SDK, Vulkan SDK and many other programs if they exist.  
+See [.zshenv](./.zshenv)
 
 ### 📝 Neovim Setup
 
 A modern Neovim configuration with powerful language tooling and visual polish:
 
-- 🧠 **LSP support** for:
-  - C++ → [`mason.nvim`](https://github.com/mason-org/mason.nvim) | [`clangd`](https://clangd.llvm.org/)
-  - Python → [`mason.nvim`](https://github.com/mason-org/mason.nvim) | [`ruff`](https://github.com/astral-sh/ruff)
-  - Lua → [`mason.nvim`](https://github.com/mason-org/mason.nvim) | [`lua_ls`](https://github.com/LuaLS/lua-language-server)
-  - Java → [`nvim-java`](https://github.com/nvim-java/nvim-java) | [`jdtls`](https://github.com/eclipse-jdtls/eclipse.jdt.ls)
-- 📁 File explorer via [`nvim-tree`](https://github.com/nvim-tree/nvim-tree.lua)
 - 🎨 Beautiful theme: [`Carbonfox`](https://github.com/EdenEast/nightfox.nvim#carbonfox)
 - ⚙️ Plugin manager: [`lazy.nvim`](https://github.com/folke/lazy.nvim)
 
 #### 🔑 Keybindings (Leader: <kbd>Space</kbd>)
 
-| Keybind                | Action                                 |
-|------------------------|----------------------------------------|
-| <kbd>Space + s..</kbd> | Window split management                |
-| <kbd>Space + t..</kbd> | Tab management                         |
-| <kbd>Space + w..</kbd> | Session management                     |
-| <kbd>Space + e..</kbd> | File explorer (nvim-tree)              |
-| <kbd>Space + nh</kbd>  | Clear search highlights                |
-| <kbd>Space + g..</kbd> | LSP actions                            |
-| <kbd>Space + d/D</kbd> | Show diagnostics (line / buffer)       |
-| <kbd>Space + x..</kbd> | Open diagnostics window (trouble.nvim) |
-| <kbd>K</kbd>           | Show hover docs                        |
-| <kbd>Ctrl + j/k</kbd>  | Navigate autocomplete                  |
-| <kbd>Ctrl + b/f</kbd>  | Scroll autocomplete docs               |
-| <kbd>Ctrl + e</kbd>    | Cancel autocomplete                    |
-| <kbd>Space + rs</kbd>  | Restart LSP                            |
-| <kbd>Space + mp</kbd>  | Format file / range                    |
-| <kbd>gc..</kbd>        | Linewise comment                       |
-| <kbd>gb..</kbd>        | Blockwise comment                      |
-| <kbd>Space + h..</kbd> | Git hunk navigation                    |
-| <kbd>Space + lg</kbd>  | Launch LazyGit                         |
+| Keybind                    | Action                                                     |
+|----------------------------|------------------------------------------------------------|
+| <kbd>leader + s..</kbd>    | Window split management                                    |
+| <kbd>Ctrl + arrows</kbd>   | Change split size (mini.basics)                            |
+| <kbd>Ctrl + h/j/k/l</kbd>  | Split navigation (mini.basics)                             |
+| <kbd>leader + t..</kbd>    | Tab management                                             |
+| <kbd>leader + e..</kbd>    | File explorer (nvim-tree)                                  |
+| <kbd>leader + nh</kbd>     | Clear search highlights                                    |
+| <kbd>leader + n</kbd>      | Notifications (snacks)                                     |
+| <kbd>leader + g..</kbd>    | Code actions (native + mini.surround)                      |
+| <kbd>leader + rs</kbd>     | Restart LSP                                                |
+| <kbd>leader + d/D</kbd>    | Show diagnostics (line / buffer)                           |
+| <kbd>leader + x..</kbd>    | Open diagnostics window (trouble)                          |
+| <kbd>P</kbd>               | Toggle diagnostics window preview (trouble)                |
+| <kbd>leader + f..</kbd>    | Open search (telescope)                                    |
+| <kbd>Ctrl + h/j/k/l</kbd>  | Navigate search results (telescope)                        |
+| <kbd>Alt + h/j/k/l</kbd>   | Navigate search preview (telescope)                        |
+| <kbd>Ctrl + e</kbd>        | Quote text (exact) (telescope)                             |
+| <kbd>K</kbd>               | Show hover docs                                            |
+| <kbd>Ctrl + Space</kbd>    | Show autocomplete (blink.cmp)                              |
+| <kbd>Ctrl + j/k</kbd>      | Navigate autocomplete (blink.cmp)                          |
+| <kbd>Alt + j/k</kbd>       | Scroll autocomplete docs (blink.cmp)                       |
+| <kbd>Ctrl + e</kbd>        | Cancel autocomplete (blink.cmp)                            |
+| <kbd>gc..</kbd>            | Linewise comment (Comment)                                 |
+| <kbd>gb..</kbd>            | Blockwise comment (Comment)                                |
+| <kbd>leader + h..</kbd>    | Git hunk navigation (gitsigns)                             |
+| <kbd>leader + lg</kbd>     | Launch LazyGit (lazygit)                                   |
+| <kbd>]/[ + t</kbd>         | Next / previous todo comment (todo-comments)               |
+| <kbd>zA</kbd>              | Toggle region comment fold under cursor (region-folding)   |
+| <kbd>zR</kbd>              | Open all region comment folds (region-folding)             |
+| <kbd>zM</kbd>              | Close all region comment folds (region-folding)            |
+| <kbd>Alt + h/j/k/l</kbd>   | Move selection / current line (mini.move)                  |
+| <kbd>s [+..]</kbd>         | Substitute (substitute)                                    |
+| <kbd>Alt + i</kbd>         | Toggle terminal (FTerm)                                    |
 
 ---
 
 ### 📸 Neovim Preview
 
 <p align="center">
-  <img src="https://i.imgur.com/QVYQ09O.png" alt="Neovim Preview 1" />
+  <img src="https://i.imgur.com/aoflPRr.png" alt="Neovim Preview 1" />
 </p>
 <p align="center">
-  <img src="https://i.imgur.com/MXZtiff.png" alt="Neovim Preview 2" />
+  <img src="https://i.imgur.com/3BHb0hE.png" alt="Neovim Preview 2" />
 </p>
 
 ## 📦 Requirements
@@ -70,9 +93,13 @@ A modern Neovim configuration with powerful language tooling and visual polish:
 Install with:
 
 ```bash
-# neovim >= 0.11.0
+sudo pacman -S cmake make clang unzip python3 fzf ripgrep zsh zoxide lazygit uv neofetch neovim
+```
+
+```bash
+# For the latest version of nvim
 sudo snap install nvim --classic
-sudo apt install make clang-tidy g++ unzip python3-venv fzf ripgrep xclip zoxide bash-completion npm
+sudo apt install cmake make clang-tidy g++ unzip python3-venv fzf ripgrep xclip zoxide bash-completion npm
 
 ## lazy git for Ubuntu 25.04 and earlier
 LAZYGIT_VERSION=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | \grep -Po '"tag_name": *"v\K[^"]*')
@@ -90,7 +117,7 @@ sudo apt install lazygit
 Using [Arch Wiki's dotfile method](https://wiki.archlinux.org/title/Dotfiles#Tracking_dotfiles_directly_with_Git):
 
 ```bash
-git clone --bare https://github.com/GrinlexGH/.dotfiles.git $HOME/.dotfiles
+git clone --bare https://github.com/GrinlexGH/.dotfiles.git -b termux $HOME/.dotfiles
 
 alias dotfiles='/usr/bin/git --git-dir="$HOME/.dotfiles/" --work-tree="$HOME"'
 
@@ -112,8 +139,11 @@ You can backup these files and try again:
 
 ```bash
 mkdir -p .dotfiles-backup && \
-dotfiles checkout 2>&1 | egrep "\s+\." | awk {'print $1'} | \
-xargs -I{} mv {} .dotfiles-backup/{}
+dotfiles checkout 2>&1 | grep -E "^\s" | awk '{print $1}' | \
+while read file; do
+    mkdir -p ".dotfiles-backup/$(dirname "$file")"
+    mv "$file" ".dotfiles-backup/$file"
+done
 
 dotfiles checkout
 dotfiles config --local status.showUntrackedFiles no
@@ -128,3 +158,21 @@ dotfiles pull
 ## 🤝 Contributing
 
 These dotfiles are tailored for my workflow, but feel free to fork, adapt, or suggest improvements. PRs and feedback are always welcome!
+
+## 🌐 Useful links
+
+Cool KDE theme:  
+https://github.com/PapirusDevelopmentTeam/materia-kde  
+
+Nerd fonts:  
+https://www.nerdfonts.com/font-downloads  
+
+Zsh plugins:  
+https://github.com/zsh-users/zsh-autosuggestions
+
+```
+      \    /\
+       )  ( ')
+      (  /  )
+       \(__)|
+```
