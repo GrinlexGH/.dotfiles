@@ -6,6 +6,7 @@ PreviewSize=16
 
 [General]
 RememberOpenedTabs=false
+ShowFullPathInTitlebar=true
 ShowSelectionToggle=false
 SortingChoice=CaseSensitiveSorting
 Version=202
