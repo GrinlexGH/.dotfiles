@@ -188,4 +188,4 @@ if type systemctl &>/dev/null && service_exists minecraft-server; then
 fi
 
 # Done
-type neofetch &>/dev/null && neofetch
+type fastfetch &>/dev/null && fastfetch
