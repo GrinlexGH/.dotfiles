@@ -25,7 +25,7 @@ return {
                     "clangd",
                     "--background-index",
                     "--clang-tidy",
-                    "-j=5",
+                    "-j=12",
                     "--header-insertion=never",
                     "--compile-commands-dir=build"
                 },
