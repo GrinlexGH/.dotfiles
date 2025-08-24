@@ -22,5 +22,5 @@ KeyBindings=default
 HistoryMode=2
 
 [Terminal Features]
-BellMode=0
+BellMode=1
 BidiTableDirOverride=true
