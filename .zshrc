@@ -187,5 +187,8 @@ if type systemctl &>/dev/null && service_exists minecraft-server; then
     fi
 fi
 
+# Fixing ssh on kitty terminal
+[[ "$TERM" = "xterm-kitty" ]] && alias ssh="kitty +kitten ssh"
+
 # Done
 type fastfetch &>/dev/null && fastfetch
