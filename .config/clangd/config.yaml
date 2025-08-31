@@ -1,0 +1,6 @@
+Diagnostics:
+  ClangTidy:
+    FastCheckFilter: None
+  UnusedIncludes: None
+Completion:
+  HeaderInsertion: Never
