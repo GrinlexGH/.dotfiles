@@ -1,3 +1,5 @@
+Index:
+  Background: Skip
 Diagnostics:
   ClangTidy:
     FastCheckFilter: None
