@@ -2,7 +2,7 @@ MenuBar=Disabled
 
 [DetailsMode]
 ExpandableFolders=false
-PreviewSize=16
+PreviewSize=22
 
 [General]
 RememberOpenedTabs=false
