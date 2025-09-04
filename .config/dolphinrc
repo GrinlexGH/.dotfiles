@@ -7,7 +7,7 @@ MenuBar=Disabled
 [DetailsMode]
 ExpandableFolders=false
 LeftPadding=0
-PreviewSize=22
+PreviewSize=32
 RightPadding=0
 
 [General]
