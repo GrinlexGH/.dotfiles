@@ -6,11 +6,11 @@ MenuBar=Disabled
 
 [DetailsMode]
 ExpandableFolders=false
+LeftPadding=0
 PreviewSize=22
-RightPadding=875
+RightPadding=0
 
 [General]
-EditableUrl=true
 RememberOpenedTabs=false
 ShowFullPathInTitlebar=true
 ShowSelectionToggle=false
