@@ -1,16 +1,26 @@
 MenuBar=Disabled
 
+[Baloo KEditCommentDialog]
+1920x1080 screen: Height=252
+1920x1080 screen: Width=276
+
 [DetailsMode]
 ExpandableFolders=false
 PreviewSize=22
+RightPadding=875
 
 [General]
+EditableUrl=true
 RememberOpenedTabs=false
 ShowFullPathInTitlebar=true
 ShowSelectionToggle=false
+ShowStatusBar=FullWidth
 SortingChoice=CaseSensitiveSorting
 Version=202
 ViewPropsTimestamp=2025,8,11,12,26,48.727
+
+[InformationPanel]
+dateFormat=ShortFormat
 
 [KFileDialog Settings]
 Places Icons Auto-resize=false
