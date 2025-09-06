@@ -11,7 +11,7 @@ add_to_path() {
 }
 
 # Set PATH so it includes user's private bin if it exists
-add_to_path "$HOME/bin" "$HOME/.local/bin"
+add_to_path "$HOME/bin" "$HOME/.local/bin" "$HOME/go/bin"
 
 # Local env
 [[ -f "$HOME/.local/bin/env" ]] && source "$HOME/.local/bin/env"
