@@ -94,12 +94,14 @@ Install with:
 
 ```bash
 sudo pacman -S cmake make clang unzip python3 fzf ripgrep zsh zoxide lazygit uv neofetch neovim
+cargo install --locked tree-sitter-cli
 ```
 
 ```bash
 # For the latest version of nvim
 sudo snap install nvim --classic
 sudo apt install cmake make clang-tidy g++ unzip python3-venv fzf ripgrep xclip zoxide bash-completion npm
+cargo install --locked tree-sitter-cli
 
 ## lazy git for Ubuntu 25.04 and earlier
 LAZYGIT_VERSION=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | \grep -Po '"tag_name": *"v\K[^"]*')
