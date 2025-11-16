@@ -22,7 +22,6 @@
 
 ### 🔗 Shell aliases
 - `dotfiles` = `git --git-dir="$HOME/.dotfiles/" --work-tree="$HOME"`
-- `pdall` = `pd login --user grinlex archlinux`
 - `mc-start` = `'$MINECRAFT_SERVER_DIR/start.sh'` (change `$MINECRAFT_SERVER_DIR` in [`.zshenv`](./.zshenv) )
 - `mc-stop` = `'$MINECRAFT_SERVER_DIR/stop.sh'`
 - `mc-log` = `'$MINECRAFT_SERVER_DIR/log.sh'`
