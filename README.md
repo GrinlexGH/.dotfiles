@@ -77,6 +77,7 @@ A modern Neovim configuration with powerful language tooling and visual polish:
 | <kbd>zM</kbd>             | Close all region comment folds (region-folding)            |
 | <kbd>Alt + h/j/k/l</kbd>  | Move selection / current line (mini.move)                  |
 | <kbd>s + a/r/d</kbd>      | Surround manipulations (mini.surround)                     |
+| <kbd>Alt + i</kbd>        | Toggle terminal (FTerm)                                    |
 
 ---
 
@@ -94,7 +95,7 @@ A modern Neovim configuration with powerful language tooling and visual polish:
 Install with:
 
 ```bash
-pkg upd && pkg upg -y && pkg i cmake make clang unzip python3 fzf ripgrep termux-api zsh zoxide lazygit uv proot-distro neofetch neovim
+pkg upd && pkg upg -y && pkg i cmake make clang unzip python3 fzf ripgrep termux-api zsh zoxide lazygit uv proot-distro fastfetch neovim
 ```
 
 ## 🚀 Installation
