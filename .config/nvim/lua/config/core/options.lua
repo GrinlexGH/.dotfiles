@@ -54,3 +54,15 @@ opt.listchars = {
     extends = "↪",  -- Line continuation marker (right)
     precedes = "↩", -- Line continuation marker (left)
 }
+
+-- Close all terminals before exit
+vim.api.nvim_create_autocmd("ExitPre", {
+    pattern = "*",
+    callback = function(_)
+        for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+            if vim.api.nvim_get_option_value("buftype", { buf = buf }) == "terminal" then
+                vim.api.nvim_buf_delete(buf, { force = true })
+            end
+        end
+    end,
+})

@@ -136,16 +136,13 @@ export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quo
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 # Enable color support of ls and also add handy aliases
-if [ -x /usr/bin/dircolors ]; then
-    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-    alias ls='ls --color=auto'
-    alias dir='dir --color=auto'
-    alias vdir='vdir --color=auto'
+alias ls='LC_COLLATE=C ls --color=auto --group-directories-first'
+alias dir='dir --color=auto'
+alias vdir='vdir --color=auto'
 
-    alias grep='grep --color=auto'
-    alias fgrep='fgrep --color=auto'
-    alias egrep='egrep --color=auto'
-fi
+alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
 
 # Some more ls aliases
 alias ll='ls -alF'
@@ -162,39 +159,6 @@ alias dotfiles='git --git-dir="$HOME/.dotfiles/" --work-tree="$HOME"'
 # proot distro arch linux login
 type pd &>/dev/null && alias pdall='pd login --user grinlex archlinux'
 
-# Minecraft server aliases
-# Checks for service 'minecraft-server'
-service_exists() {
-    local n=$1
-    if [[ $(systemctl list-units --all -t service --full --no-legend "$n.service" | sed 's/^\s*//g' | cut -f1 -d' ') == $n.service ]]; then
-        return 0
-    else
-        return 1
-    fi
-}
-
-if type systemctl &>/dev/null && service_exists minecraft-server; then
-    _minecraft_server_path="/mnt/hdd/minecraft server"
-
-    if [[ -x "$_minecraft_server_path/start.sh" ]]; then
-        alias mc-start="'$_minecraft_server_path/start.sh'"
-    fi
-
-    if [[ -x "$_minecraft_server_path/stop.sh" ]]; then
-        alias mc-stop="'$_minecraft_server_path/stop.sh'"
-    fi
-
-    if [[ -x "$_minecraft_server_path/log.sh" ]]; then
-        alias mc-log="'$_minecraft_server_path/log.sh'"
-    fi
-
-    if [[ -x "$_minecraft_server_path/rcon.sh" ]]; then
-        alias mc-rcon="'$_minecraft_server_path/rcon.sh'"
-    fi
-
-    unset _minecraft_server_path
-fi
-
 # Done
-type neofetch &>/dev/null && neofetch
+type fastfetch &>/dev/null && fastfetch
 
