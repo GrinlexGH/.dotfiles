@@ -155,9 +155,6 @@ alias l='ls -CF'
 # Dotfiles
 alias dotfiles='git --git-dir="$HOME/.dotfiles/" --work-tree="$HOME"'
 
-# Proot distro arch linux login
-type pd &>/dev/null && alias pdall='pd login --user grinlex archlinux'
-
 # Minecraft server aliases
 # Checks for service 'minecraft-server'
 service_exists() {
