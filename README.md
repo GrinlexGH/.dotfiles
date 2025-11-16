@@ -92,14 +92,14 @@ A modern Neovim configuration with powerful language tooling and visual polish:
 Install with:
 
 ```bash
-sudo pacman -S cmake make clang unzip python3 fzf ripgrep zsh zoxide lazygit uv neofetch neovim
+sudo pacman -S cmake make clang unzip python3 fzf ripgrep zsh zoxide lazygit uv fastfetch neovim
 cargo install --locked tree-sitter-cli
 ```
 
 ```bash
 # For the latest version of nvim
 sudo snap install nvim --classic
-sudo apt install cmake make clang-tidy g++ unzip python3-venv fzf ripgrep xclip zoxide bash-completion npm
+sudo apt install cmake make clang-tidy g++ unzip python3-venv fzf ripgrep xclip zoxide bash-completion npm fastfetch
 cargo install --locked tree-sitter-cli
 
 ## lazy git for Ubuntu 25.04 and earlier
