@@ -4,5 +4,7 @@ Diagnostics:
   ClangTidy:
     FastCheckFilter: None
   UnusedIncludes: None
+CompileFlags:
+  Add: [ "-std=c++23" ]
 # Completion:
   # HeaderInsertion: Never
