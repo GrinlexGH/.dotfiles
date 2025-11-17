@@ -9,3 +9,5 @@ function sli { New-Item -ItemType SymbolicLink -Path $args[1] -Target $args[0] }
     Remove-Variable p
 }
 Remove-Variable _MINECRAFT_SERVER_DIR
+
+
