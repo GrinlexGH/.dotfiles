@@ -5,6 +5,12 @@ Diagnostics:
     FastCheckFilter: None
   UnusedIncludes: None
 CompileFlags:
-  Add: [ "-std=c++23", "-Wno-unknown-warning-option" ]
+  Add:
+    - -std=c++23
+  Remove:
+    - -fno-keep-inline-dllexport
+    - -fmodules-ts
+    - -fmodule-mapper=*
+    - -fdeps-format=*
 # Completion:
   # HeaderInsertion: Never
