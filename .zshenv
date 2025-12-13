@@ -72,3 +72,6 @@ fi
 
 # Minecraft server
 export MINECRAFT_SERVER_DIR="/run/media/shared/NVMe-NTFS/minecraft-server"
+
+# Doom wad directory
+export DOOMWADDIR="~/Documents/Doom/"
