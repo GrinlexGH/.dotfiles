@@ -118,7 +118,7 @@ sudo apt install lazygit
 Using [Arch Wiki's dotfile method](https://wiki.archlinux.org/title/Dotfiles#Tracking_dotfiles_directly_with_Git):
 
 ```bash
-git clone --bare https://github.com/GrinlexGH/.dotfiles.git -b termux $HOME/.dotfiles
+git clone --bare https://github.com/GrinlexGH/.dotfiles.git $HOME/.dotfiles
 
 alias dotfiles='/usr/bin/git --git-dir="$HOME/.dotfiles/" --work-tree="$HOME"'
 
