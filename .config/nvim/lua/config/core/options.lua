@@ -55,3 +55,12 @@ vim.api.nvim_create_autocmd("ExitPre", {
         end
     end,
 })
+
+-- Use powershell 7 on windows
+if vim.loop.os_uname().sysname == "Windows_NT" then
+    vim.opt.shell = "pwsh"
+    vim.opt.shellcmdflag =
+        "-NoLogo -NoProfile -ExecutionPolicy RemoteSigned -Command"
+    vim.opt.shellquote = ""
+    vim.opt.shellxquote = ""
+end
