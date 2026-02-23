@@ -195,7 +195,7 @@ case "$ACTION" in
             ip route add $LAN_NET dev $INTERFACE scope link table $TABLE_ID 2>/dev/null
             ip route add default via $GATEWAY dev $INTERFACE table $TABLE_ID 2>/dev/null
             ip rule del from $LAN_IP table $TABLE_ID 2>/dev/null
-            ip rule add from $LAN_IP table direct_lan priority 1000 2>/dev/null
+            ip rule add from $LAN_IP table $TABLE_ID priority 200 2>/dev/null
         fi
         ;;
     down)
