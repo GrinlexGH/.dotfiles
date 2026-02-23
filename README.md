@@ -176,21 +176,32 @@ fi
 sudo tee /etc/NetworkManager/dispatcher.d/99-nginx-routing << 'EOF'
 #!/bin/bash
 
-INTERFACE=$(ip route | grep default | grep -v utun | head -n1 | awk '{print $5}')
-IP_ADDR=$(ip addr show "$INTERFACE" | grep "inet " | awk '{print $2}' | cut -d/ -f1)
-GATEWAY=$(ip route show dev "$INTERFACE" | grep default | awk '{print $3}')
-TABLE_NAME="direct_lan"
+INTERFACE=$1
+ACTION=$2
 
-if [ "$1" = "$INTERFACE" ] && [ "$2" = "up" ]; then
-    ip route flush table $TABLE_NAME
-
-    ip route add $(ip route show dev "$INTERFACE" | grep -v default) table $TABLE_NAME 2>/dev/null
-    ip route add default via $GATEWAY dev $INTERFACE table $TABLE_NAME 2>/dev/null
-    ip rule add from $IP_ADDR table $TABLE_NAME 2>/dev/null
-
-    sysctl -w net.ipv4.conf.all.rp_filter=2
-    sysctl -w net.ipv4.conf.$INTERFACE.rp_filter=2
+if [[ "$INTERFACE" =~ ^(tun|wg|utun|ppp) ]]; then
+    exit 0
 fi
+
+case "$ACTION" in
+    up)
+        LAN_IP=$(ip -4 addr show "$INTERFACE" | awk '/inet / {print $2}' | cut -d/ -f1)
+        LAN_NET=$(ip route show dev "$INTERFACE" | grep -v default | grep "scope link" | awk '{print $1}' | head -n1)
+        GATEWAY=$(ip route show dev "$INTERFACE" | awk '/default via/ {print $3}' | head -n1)
+        
+        TABLE_ID="200"
+
+        if [ -n "$LAN_IP" ] && [ -n "$LAN_NET" ] && [ -n "$GATEWAY" ]; then
+            ip route add $LAN_NET dev $INTERFACE scope link table $TABLE_ID 2>/dev/null
+            ip route add default via $GATEWAY dev $INTERFACE table $TABLE_ID 2>/dev/null
+            ip rule add from $LAN_IP table $TABLE_ID 2>/dev/null
+        fi
+        ;;
+    down)
+        ip rule del table 200 2>/dev/null
+        ip route flush table 200 2>/dev/null
+        ;;
+esac
 EOF
 
 sudo chmod +x /etc/NetworkManager/dispatcher.d/99-nginx-routing
