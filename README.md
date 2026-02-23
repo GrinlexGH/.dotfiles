@@ -156,11 +156,7 @@ To update the dotfiles later:
 dotfiles pull
 ```
 
-## 🤝 Contributing
-
-These dotfiles are tailored for my workflow, but feel free to fork, adapt, or suggest improvements. PRs and feedback are always welcome!
-
-## 🌐 Useful links
+## 🌐 Useful stuff
 
 Cool KDE theme:  
 https://github.com/PapirusDevelopmentTeam/materia-kde  
@@ -171,9 +167,31 @@ https://www.nerdfonts.com/font-downloads
 Zsh plugins:  
 https://github.com/zsh-users/zsh-autosuggestions
 
-```
-      \    /\
-       )  ( ')
-      (  /  )
-       \(__)|
+Fix self-hosted servers when VPN is on:
+```bash
+if ! grep -q "direct_lan" /etc/iproute2/rt_tables; then
+  echo "200 direct_lan" | sudo tee -a /etc/iproute2/rt_tables
+fi
+
+sudo tee /etc/NetworkManager/dispatcher.d/99-nginx-routing << 'EOF'
+#!/bin/bash
+
+INTERFACE=$(ip route | grep default | grep -v utun | head -n1 | awk '{print $5}')
+IP_ADDR=$(ip addr show "$INTERFACE" | grep "inet " | awk '{print $2}' | cut -d/ -f1)
+GATEWAY=$(ip route show dev "$INTERFACE" | grep default | awk '{print $3}')
+TABLE_NAME="direct_lan"
+
+if [ "$1" = "$INTERFACE" ] && [ "$2" = "up" ]; then
+    ip route flush table $TABLE_NAME
+
+    ip route add $(ip route show dev "$INTERFACE" | grep -v default) table $TABLE_NAME 2>/dev/null
+    ip route add default via $GATEWAY dev $INTERFACE table $TABLE_NAME 2>/dev/null
+    ip rule add from $IP_ADDR table $TABLE_NAME 2>/dev/null
+
+    sysctl -w net.ipv4.conf.all.rp_filter=2
+    sysctl -w net.ipv4.conf.$INTERFACE.rp_filter=2
+fi
+EOF
+
+sudo chmod +x /etc/NetworkManager/dispatcher.d/99-nginx-routing
 ```
