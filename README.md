@@ -188,14 +188,14 @@ case "$ACTION" in
         LAN_IP=$(ip -4 addr show "$INTERFACE" | awk '/inet / {print $2}' | cut -d/ -f1)
         LAN_NET=$(ip route show dev "$INTERFACE" | grep -v default | grep "scope link" | awk '{print $1}' | head -n1)
         GATEWAY=$(ip route show dev "$INTERFACE" | awk '/default via/ {print $3}' | head -n1)
-        
+
         TABLE_ID="200"
 
         if [ -n "$LAN_IP" ] && [ -n "$LAN_NET" ] && [ -n "$GATEWAY" ]; then
             ip route add $LAN_NET dev $INTERFACE scope link table $TABLE_ID 2>/dev/null
             ip route add default via $GATEWAY dev $INTERFACE table $TABLE_ID 2>/dev/null
             ip rule del from $LAN_IP table $TABLE_ID 2>/dev/null
-            ip rule add from $LAN_IP table $TABLE_ID priority 200 2>/dev/null
+            ip rule add from $LAN_IP table $TABLE_ID priority 0 2>/dev/null
         fi
         ;;
     down)
