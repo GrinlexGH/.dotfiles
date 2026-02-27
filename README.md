@@ -158,9 +158,6 @@ dotfiles pull
 
 ## 🌐 Useful stuff
 
-Cool KDE theme:  
-https://github.com/PapirusDevelopmentTeam/materia-kde  
-
 Nerd fonts:  
 https://www.nerdfonts.com/font-downloads  
 
