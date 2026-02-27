@@ -22,10 +22,7 @@
 
 ### 🔗 Shell aliases
 - `dotfiles` = `git --git-dir="$HOME/.dotfiles/" --work-tree="$HOME"`
-- `mc-start` = `'$MINECRAFT_SERVER_DIR/start.sh'` (change `$MINECRAFT_SERVER_DIR` in [`.zshenv`](./.zshenv) )
-- `mc-stop` = `'$MINECRAFT_SERVER_DIR/stop.sh'`
-- `mc-log` = `'$MINECRAFT_SERVER_DIR/log.sh'`
-- `mc-rcon` = `'$MINECRAFT_SERVER_DIR/rcon.sh'`
+- `mc-{start,stop,log,rcon}` = `$MINECRAFT_SERVER_DIR/{start,stop,log,rcon}.sh`
 
 ### 🧬 .zshenv Setup
 Adds `$HOME/bin` & `$HOME/.local/bin` to `$PATH` if exist.  
