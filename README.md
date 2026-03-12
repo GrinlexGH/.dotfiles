@@ -163,41 +163,12 @@ https://github.com/zsh-users/zsh-autosuggestions
 
 Fix self-hosted servers when VPN is on:
 ```bash
-if ! grep -q "direct_lan" /etc/iproute2/rt_tables; then
-  echo "200 direct_lan" | sudo tee -a /etc/iproute2/rt_tables
-fi
-
-sudo tee /etc/NetworkManager/dispatcher.d/99-nginx-routing << 'EOF'
+sudo tee /etc/NetworkManager/dispatcher.d/99-vpn-fix << 'EOF'
 #!/bin/bash
-
-INTERFACE=$1
-ACTION=$2
-
-if [[ "$INTERFACE" =~ ^(tun|wg|utun|ppp) ]]; then
-    exit 0
+if [ "$2" = "up" ]; then
+    ip route add 5.142.251.237 via 192.168.1.1
 fi
-
-case "$ACTION" in
-    up)
-        LAN_IP=$(ip -4 addr show "$INTERFACE" | awk '/inet / {print $2}' | cut -d/ -f1)
-        LAN_NET=$(ip route show dev "$INTERFACE" | grep -v default | grep "scope link" | awk '{print $1}' | head -n1)
-        GATEWAY=$(ip route show dev "$INTERFACE" | awk '/default via/ {print $3}' | head -n1)
-
-        TABLE_ID="200"
-
-        if [ -n "$LAN_IP" ] && [ -n "$LAN_NET" ] && [ -n "$GATEWAY" ]; then
-            ip route add $LAN_NET dev $INTERFACE scope link table $TABLE_ID 2>/dev/null
-            ip route add default via $GATEWAY dev $INTERFACE table $TABLE_ID 2>/dev/null
-            ip rule del from $LAN_IP table $TABLE_ID 2>/dev/null
-            ip rule add from $LAN_IP table $TABLE_ID priority 0 2>/dev/null
-        fi
-        ;;
-    down)
-        ip rule del table 200 2>/dev/null
-        ip route flush table 200 2>/dev/null
-        ;;
-esac
 EOF
 
-sudo chmod +x /etc/NetworkManager/dispatcher.d/99-nginx-routing
+sudo chmod +x /etc/NetworkManager/dispatcher.d/99-vpn-fix
 ```
