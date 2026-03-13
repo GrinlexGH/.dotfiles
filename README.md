@@ -161,14 +161,5 @@ https://www.nerdfonts.com/font-downloads
 Zsh plugins:  
 https://github.com/zsh-users/zsh-autosuggestions
 
-Fix self-hosted servers when VPN is on:
-```bash
-sudo tee /etc/NetworkManager/dispatcher.d/99-vpn-fix << 'EOF'
-#!/bin/bash
-if [ "$2" = "up" ]; then
-    ip route add 5.142.251.237 via 192.168.1.1
-fi
-EOF
-
 sudo chmod +x /etc/NetworkManager/dispatcher.d/99-vpn-fix
 ```
