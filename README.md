@@ -163,7 +163,7 @@ https://github.com/zsh-users/zsh-autosuggestions
 
 Fix self-hosted servers when Windscribe VPN is on:
 
-```
+```bash
 if ! grep -q "direct_lan" /etc/iproute2/rt_tables; then
   echo "200 direct_lan" | sudo tee -a /etc/iproute2/rt_tables
 fi
