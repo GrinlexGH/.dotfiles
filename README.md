@@ -161,5 +161,69 @@ https://www.nerdfonts.com/font-downloads
 Zsh plugins:  
 https://github.com/zsh-users/zsh-autosuggestions
 
-sudo chmod +x /etc/NetworkManager/dispatcher.d/99-vpn-fix
+Fix self-hosted servers when Windscribe VPN is on:
+
+```
+if ! grep -q "direct_lan" /etc/iproute2/rt_tables; then
+  echo "200 direct_lan" | sudo tee -a /etc/iproute2/rt_tables
+fi
+
+sudo tee /etc/NetworkManager/dispatcher.d/99-windscribe-fix << 'EOF'
+#!/bin/bash
+
+INTERFACE=$1
+ACTION=$2
+TABLE_ID="200"
+
+if [[ "$INTERFACE" =~ ^(tun|wg|utun|ppp) ]]; then
+    IS_VPN=true
+else
+    IS_VPN=false
+fi
+
+case "$ACTION" in
+    up)
+        if [ "$IS_VPN" = true ]; then
+            MAX_RETRIES=15
+            for ((i=1; i<=MAX_RETRIES; i++)); do
+                if ip rule list | grep -qE "32764|16383"; then
+                    VPN_READY=true
+                    break
+                fi
+                sleep 1
+            done
+
+            if [ "$VPN_READY" != true ]; then
+                exit 0
+            fi
+
+            PHYS_INT=$( ip -4 route show default | grep -vE 'tun|wg|utun|ppp|docker|br-|veth' | awk '{print $5}' | head -n1)
+
+            if [ -n "$PHYS_INT" ]; then
+                LAN_IP=$(ip -4 addr show "$PHYS_INT" | awk '/inet / {print $2}' | cut -d/ -f1)
+                LAN_NET=$(ip route show dev "$PHYS_INT" | grep -v default | grep "scope link" | awk '{print $1}' | head -n1)
+                GATEWAY=$(ip route show dev "$PHYS_INT" | awk '/default via/ {print $3}' | head -n1)
+
+                if [ -n "$LAN_IP" ] && [ -n "$GATEWAY" ]; then
+                    ip rule del table $TABLE_ID 2>/dev/null
+                    ip route flush table $TABLE_ID 2>/dev/null
+
+                    ip route add $LAN_NET dev $PHYS_INT scope link table $TABLE_ID 2>/dev/null
+                    ip route add default via $GATEWAY dev $PHYS_INT table $TABLE_ID 2>/dev/null
+
+                    ip rule add from $LAN_IP table $TABLE_ID priority 16000 2>/dev/null
+                fi
+            fi
+        fi
+        ;;
+    down)
+        if [ "$IS_VPN" = true ]; then
+            ip rule del table $TABLE_ID 2>/dev/null
+            ip route flush table $TABLE_ID 2>/dev/null
+        fi
+        ;;
+esac
+EOF
+
+sudo chmod +x /etc/NetworkManager/dispatcher.d/99-windscribe-fix
 ```
