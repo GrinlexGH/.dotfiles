@@ -72,7 +72,7 @@ ZSH_THEME="bira"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
     git
-    zsh-autosuggestions #https://github.com/zsh-users/zsh-autosuggestions
+    zsh-autosuggestions # https://github.com/zsh-users/zsh-autosuggestions
 )
 
 # Don't make my already dirty HOME even dirtier 😭🙏
@@ -149,15 +149,11 @@ alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
 
-# Add an "alert" alias for long running commands.  Use like so:
-#   sleep 10; alert
-alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
-
 # Dotfiles
 alias dotfiles='git --git-dir="$HOME/.dotfiles/" --work-tree="$HOME"'
 
-# proot distro arch linux login
-type pd &>/dev/null && alias pdall='pd login --user grinlex archlinux'
+# proot distro archlinux login
+type pd &>/dev/null && alias pdall='pd --login grinlex archlinux'
 
 # Done
 type fastfetch &>/dev/null && fastfetch

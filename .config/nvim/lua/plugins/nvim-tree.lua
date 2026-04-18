@@ -9,7 +9,7 @@ return {
         respect_buf_cwd = true,
         modified = { enable = true, },
         view = {
-            width = "25%",
+            width = "20%",
             number = true,
             relativenumber = true,
         },

@@ -27,7 +27,8 @@ return {
                     "--clang-tidy",
                     "-j=5",
                     "--header-insertion=never",
-                    "--compile-commands-dir=build"
+                    "--compile-commands-dir=build",
+                    "--enable-config",
                 },
             },
             jdtls = { },

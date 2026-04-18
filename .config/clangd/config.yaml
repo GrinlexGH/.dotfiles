@@ -1,0 +1,12 @@
+Diagnostics:
+  ClangTidy:
+    FastCheckFilter: None
+  UnusedIncludes: None
+CompileFlags:
+  Remove:
+    - -fno-keep-inline-dllexport
+    - -fmodules-ts
+    - -fmodule-mapper=*
+    - -fdeps-format=*
+# Completion:
+  # HeaderInsertion: Never

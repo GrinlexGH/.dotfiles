@@ -89,7 +89,7 @@ A modern Neovim configuration with powerful language tooling and visual polish:
 Install with:
 
 ```bash
-pkg upd && pkg upg -y && pkg i cmake make clang unzip python3 fzf ripgrep termux-api zsh zoxide lazygit uv proot-distro fastfetch neovim
+pkg upd && pkg upg -y && pkg i cmake make ninja clang unzip python3 fzf ripgrep termux-api zsh zoxide lazygit uv proot-distro fastfetch neovim
 ```
 
 ## 🚀 Installation
@@ -160,9 +160,3 @@ https://download.eclipse.org/jdtls/milestones/
 Zsh plugins:  
 https://github.com/zsh-users/zsh-autosuggestions
 
-```
-      \    /\
-       )  ( ')
-      (  /  )
-       \(__)|
-```
