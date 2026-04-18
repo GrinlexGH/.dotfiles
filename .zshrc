@@ -72,7 +72,7 @@ ZSH_THEME="bira"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
     git
-    zsh-autosuggestions #https://github.com/zsh-users/zsh-autosuggestions
+    zsh-autosuggestions # https://github.com/zsh-users/zsh-autosuggestions
 )
 
 # Don't make my already dirty HOME even dirtier 😭🙏
