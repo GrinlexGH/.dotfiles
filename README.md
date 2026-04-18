@@ -7,82 +7,15 @@
 </p>
 
 <p align="center">
-  This is my dotfiles repository - collection of <strong>the most convenient</strong> configurations <strong>for me</strong>, as far as I could make, for programs and Unix-like environments (primarily for <strong>Termux</strong>).
+  This is my dotfiles repository - collection of <strong>the most convenient</strong> configurations <strong>for me</strong>, as far as I could make, for programs in <strong>Termux</strong>.
   <img src="https://i.imgur.com/x8lkjcv.jpeg" alt="Zsh Preview" />
 </p>
 
-## ✨ Features
+## ✨️ Differences between main branch
 
-### 🔁 Enhanced Zsh Config
-- Delete word on <kbd>Ctrl + delete / backspace</kbd>
-- Convenient and beautiful `bira` theme
-- Command completion via `zsh-autosuggestions`
-- Alias completion
-- Zoxide & uv setup
-
-### 🔗 Shell aliases
-- `dotfiles` = `git --git-dir="$HOME/.dotfiles/" --work-tree="$HOME"`
-- `pdall` = `pd login --user grinlex archlinux`
-
-### 🧬 .zshenv Setup
-Adds `$HOME/bin` & `$HOME/.local/bin` to `$PATH` if exist.  
-Setup spicetify, jdtls, kotlin-lsp, Android SDK & Vulkan SDK if they exist.  
-See [.zshenv](./.zshenv)
-
-### 📝 Neovim Setup
-
-A modern Neovim configuration with powerful language tooling and visual polish:
-
-- 🎨 Beautiful theme: [`Carbonfox`](https://github.com/EdenEast/nightfox.nvim#carbonfox)
-- ⚙️ Plugin manager: [`lazy.nvim`](https://github.com/folke/lazy.nvim)
-
-#### 🔑 Keybindings (Leader: <kbd>Space</kbd>)
-
-| Keybind                   | Action                                                     |
-|---------------------------|------------------------------------------------------------|
-| <kbd>Space + s..</kbd>    | Window split management                                    |
-| <kbd>Ctrl + arrows</kbd>  | Change split size (mini.basics)                            |
-| <kbd>Ctrl + h/j/k/l</kbd> | Split navigation (mini.basics)                             |
-| <kbd>Space + t..</kbd>    | Tab management                                             |
-| <kbd>Space + e..</kbd>    | File explorer (nvim-tree)                                  |
-| <kbd>Space + nh</kbd>     | Clear search highlights                                    |
-| <kbd>Space + n</kbd>      | Notifications (snacks)                                     |
-| <kbd>Space + g..</kbd>    | LSP actions                                                |
-| <kbd>Space + rs</kbd>     | Restart LSP                                                |
-| <kbd>Space + d/D</kbd>    | Show diagnostics (line / buffer)                           |
-| <kbd>Space + x..</kbd>    | Open diagnostics window (trouble)                          |
-| <kbd>P</kbd>              | Toggle diagnostics window preview (trouble)                |
-| <kbd>Space + f..</kbd>    | Open search (telescope)                                    |
-| <kbd>Ctrl + h/j/k/l</kbd> | Navigate search results (telescope)                        |
-| <kbd>Alt + h/j/k/l</kbd>  | Navigate search preview (telescope)                        |
-| <kbd>Ctrl + e</kbd>       | Quote text (exact) (telescope)                             |
-| <kbd>K</kbd>              | Show hover docs                                            |
-| <kbd>Ctrl + Space</kbd>   | Show autocomplete (blink.cmp)                              |
-| <kbd>Ctrl + j/k</kbd>     | Navigate autocomplete (blink.cmp)                          |
-| <kbd>Alt + j/k</kbd>      | Scroll autocomplete docs (blink.cmp)                       |
-| <kbd>Ctrl + e</kbd>       | Cancel autocomplete (blink.cmp)                            |
-| <kbd>gc..</kbd>           | Linewise comment (Comment)                                 |
-| <kbd>gb..</kbd>           | Blockwise comment (Comment)                                |
-| <kbd>Space + h..</kbd>    | Git hunk navigation (gitsigns)                             |
-| <kbd>Space + lg</kbd>     | Launch LazyGit (lazygit)                                   |
-| <kbd>]/[ + t</kbd>        | Next / previous todo comment (todo-comments)               |
-| <kbd>zA</kbd>             | Toggle region comment fold under cursor (region-folding)   |
-| <kbd>zR</kbd>             | Open all region comment folds (region-folding)             |
-| <kbd>zM</kbd>             | Close all region comment folds (region-folding)            |
-| <kbd>Alt + h/j/k/l</kbd>  | Move selection / current line (mini.move)                  |
-| <kbd>s + a/r/d</kbd>      | Surround manipulations (mini.surround)                     |
-| <kbd>Alt + i</kbd>        | Toggle terminal (FTerm)                                    |
-
----
-
-### 📸 Neovim Preview
-
-<p align="center">
-  <img src="https://i.imgur.com/2MsHPG0.jpeg" alt="Neovim Preview 1" />
-</p>
-<p align="center">
-  <img src="https://i.imgur.com/nI7EzWr.jpeg" alt="Neovim Preview 2" />
-</p>
+- Removed minecraft server related commands
+- Clangd now using 5 jobs instead of 12
+- Added alias `pdall` = `pd login --user grinlex archlinux`
 
 ## 📦 Requirements
 
