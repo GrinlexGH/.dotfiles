@@ -69,10 +69,6 @@ To update the dotfiles later:
 dotfiles pull
 ```
 
-## 🤝 Contributing
-
-These dotfiles are tailored for my workflow, but feel free to fork, adapt, or suggest improvements. PRs and feedback are always welcome!
-
 ## 🌐 Useful links
 
 Android SDK for termux:  
