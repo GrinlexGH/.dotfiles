@@ -90,7 +90,7 @@ unsetopt completealiases
 setopt globdots
 
 # Ctrl + backspace / delete koll word
-bindkey '^H' backward-kill-word
+bindkey '^?' backward-kill-word
 bindkey '^[[3;5~' kill-word
 
 # User configuration
