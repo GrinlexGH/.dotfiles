@@ -8,7 +8,7 @@
 
 <p align="center">
   This is my dotfiles repository - collection of <strong>the most convenient</strong> configurations <strong>for me</strong>, as far as I could make, for programs in <strong>Kali linux</strong>.
-  <img src="https://i.imgur.com/1r3XDdr.png" alt="Zsh Preview" />
+  <img width="1888" height="1184" alt="Zsh preview" src="https://github.com/user-attachments/assets/0b8ecd41-0189-4739-83c6-c135c176c39e" />
 </p>
 
 ## ✨️ Differences between main branch
