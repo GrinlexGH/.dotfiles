@@ -73,6 +73,7 @@ ZSH_THEME="bira"
 plugins=(
     git
     zsh-autosuggestions # https://github.com/zsh-users/zsh-autosuggestions
+    command-not-found
 )
 
 # Don't make my already dirty HOME even dirtier 😭🙏
