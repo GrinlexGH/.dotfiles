@@ -96,7 +96,7 @@ cargo install --locked tree-sitter-cli
 ```bash
 # For the latest version of nvim
 sudo snap install nvim --classic
-sudo apt install cmake make clang-tidy g++ unzip python3-venv fzf ripgrep xclip zoxide bash-completion npm fastfetch ninja-build lazygit
+sudo apt install cmake make clang-tidy g++ unzip python3-venv fzf ripgrep xclip zoxide bash-completion npm fastfetch ninja-build lazygit cargo
 cargo install --locked tree-sitter-cli
 ```
 
