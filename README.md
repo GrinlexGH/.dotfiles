@@ -96,18 +96,8 @@ cargo install --locked tree-sitter-cli
 ```bash
 # For the latest version of nvim
 sudo snap install nvim --classic
-sudo apt install cmake make clang-tidy g++ unzip python3-venv fzf ripgrep xclip zoxide bash-completion npm fastfetch ninja-build
+sudo apt install cmake make clang-tidy g++ unzip python3-venv fzf ripgrep xclip zoxide bash-completion npm fastfetch ninja-build lazygit
 cargo install --locked tree-sitter-cli
-
-## lazy git for Ubuntu 25.04 and earlier
-LAZYGIT_VERSION=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | \grep -Po '"tag_name": *"v\K[^"]*')
-curl -Lo lazygit.tar.gz "https://github.com/jesseduffield/lazygit/releases/download/v${LAZYGIT_VERSION}/lazygit_${LAZYGIT_VERSION}_Linux_x86_64.tar.gz"
-tar xf lazygit.tar.gz lazygit
-sudo install lazygit -D -t /usr/local/bin/
-rm -rf ./lazygit ./lazygit.tar.gz
-
-## lazy git for Ubuntu 25.10 and later
-sudo apt install lazygit
 ```
 
 ## 🚀 Installation
