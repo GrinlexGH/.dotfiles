@@ -12,3 +12,4 @@ if ($null -ne (Get-Command zoxide -ErrorAction SilentlyContinue)) {
     Remove-Variable p
 }
 Remove-Variable _MINECRAFT_SERVER_DIR
+
