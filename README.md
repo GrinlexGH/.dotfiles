@@ -13,7 +13,6 @@
 
 ## ✨️ Differences between main branch
 
-- Removed minecraft server related commands
 - Clangd now using 5 jobs instead of 12
 - Added alias `pdall` = `pd login --user grinlex archlinux`
 
