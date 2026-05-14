@@ -13,6 +13,7 @@
 
 ## ✨️ Differences between main branch
 
+- Removed minecraft server related commands
 - Removed konsole & dolphin config
 - Added settings from default kali `.zshrc`
 
