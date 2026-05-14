@@ -19,10 +19,7 @@
 - Command completion via `zsh-autosuggestions`
 - Alias completion
 - Zoxide & uv setup
-
-### 🔗 Shell aliases
-- `dotfiles` = `git --git-dir="$HOME/.dotfiles/" --work-tree="$HOME"`
-- `mc-{start,stop,log,rcon}` = `$MINECRAFT_SERVER_DIR/{start,stop,log,rcon}.sh`
+- `dotfiles` alias (`git --git-dir="$HOME/.dotfiles/" --work-tree="$HOME"`)
 
 ### 🧬 .zshenv Setup
 Adds `$HOME/bin` & `$HOME/.local/bin` to `$PATH` if exist.  
