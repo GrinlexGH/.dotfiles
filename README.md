@@ -151,7 +151,7 @@ https://www.nerdfonts.com/font-downloads
 Zsh plugins:  
 https://github.com/zsh-users/zsh-autosuggestions
 
-Fix self-hosted servers when Windscribe VPN is on:
+Fix self-hosted servers when Windscribe VPN is on (add `/usr/bin/docker-proxy` to your split tunneling list):
 
 ```bash
 if ! grep -q "direct_lan" /etc/iproute2/rt_tables; then
