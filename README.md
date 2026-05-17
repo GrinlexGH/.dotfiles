@@ -195,28 +195,28 @@ case "$ACTION" in
                 GATEWAY=$(ip route show dev "$PHYS_INT" | awk '/default via/ {print $3}' | head -n1)
 
                 if [ -n "$LAN_IP" ] && [ -n "$GATEWAY" ]; then
-                    # Очищаем старые правила, если они остались
+                    # Clear old rules
                     ip rule del table $TABLE_ID 2>/dev/null
                     ip rule del priority 2000 2>/dev/null
                     ip rule del priority 2001 2>/dev/null
                     ip rule del priority 2002 2>/dev/null
                     ip route flush table $TABLE_ID 2>/dev/null
 
-                    # 1. Настраиваем таблицу 200 (маршрут напрямую через физ. интерфейс)
+                    # Setup table
                     ip route add $LAN_NET dev $PHYS_INT scope link table $TABLE_ID 2>/dev/null
                     ip route add default via $GATEWAY dev $PHYS_INT table $TABLE_ID 2>/dev/null
 
-                    # 2. Трафик ДО докера (172.16.0.0/12 покрывает все подсети) и ДО локалки пускаем через MAIN в обход VPN
+                    # TO docker0 -> main
                     ip rule add to 172.16.0.0/12 lookup main priority 2000 2>/dev/null
                     ip rule add to $LAN_NET lookup main priority 2001 2>/dev/null
 
-                    # 3. Трафик ОТ докера наружу пускаем через таблицу 200 (чтобы работал Port Forwarding)
+                    # FROM docker0 -> direct_table
                     ip rule add from 172.16.0.0/12 table $TABLE_ID priority 2002 2>/dev/null
 
-                    # 4. Трафик от самого хоста (твой старый хак)
+                    # FROM host -> direct_table
                     ip rule add from $LAN_IP table $TABLE_ID priority 16000 2>/dev/null
 
-                    # 5. Пробиваем файрвол Windscribe для Docker (разрешаем FORWARD)
+                    # Allow FORWARD to and from docker0
                     iptables -I FORWARD -i docker0 -j ACCEPT 2>/dev/null
                     iptables -I FORWARD -o docker0 -j ACCEPT 2>/dev/null
                     iptables -I FORWARD -i br-+ -j ACCEPT 2>/dev/null
@@ -227,14 +227,12 @@ case "$ACTION" in
         ;;
     down)
         if [ "$IS_VPN" = true ]; then
-            # Чистим за собой по приоритетам правил
             ip rule del table $TABLE_ID 2>/dev/null
             ip rule del priority 2000 2>/dev/null
             ip rule del priority 2001 2>/dev/null
             ip rule del priority 2002 2>/dev/null
             ip route flush table $TABLE_ID 2>/dev/null
 
-            # Чистим правила iptables
             iptables -D FORWARD -i docker0 -j ACCEPT 2>/dev/null
             iptables -D FORWARD -o docker0 -j ACCEPT 2>/dev/null
             iptables -D FORWARD -i br-+ -j ACCEPT 2>/dev/null
