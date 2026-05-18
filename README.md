@@ -243,3 +243,60 @@ EOF
 
 sudo chmod +x /etc/NetworkManager/dispatcher.d/99-windscribe-fix
 ```
+
+Ignore VPN from WSL (`networkingMode=mirrored` must be enabled in .wslconfig):
+
+```bash
+sudo nano /usr/local/bin/block-vpn-interface.sh
+
+#!/bin/bash
+TARGET_IP="<192.168.1.50 YOUR PERMANENT LOCAL IP>"
+SAFE_IFACE=""
+
+while true; do
+    found_iface=$(ip -4 addr | grep "$TARGET_IP" | awk '{print $NF}' | head -n 1)
+
+    if [ -n "$found_iface" ]; then
+        if [ "$SAFE_IFACE" != "$found_iface" ]; then
+            SAFE_IFACE="$found_iface"
+            echo "Main interface detected and whitelisted: $SAFE_IFACE"
+        fi
+    fi
+
+    if [ -n "$SAFE_IFACE" ]; then
+        for iface in /sys/class/net/eth*; do
+            [ -e "$iface" ] || continue
+
+            name=$(basename "$iface")
+
+            if [ "$name" != "$SAFE_IFACE" ]; then
+                if ip link show dev "$name" 2>/dev/null | grep -q "UP"; then
+                    echo "Blocking unauthorized interface: $name"
+                    ip link set "$name" down 2>/dev/null
+                    ip route flush dev "$name" 2>/dev/null
+                    ip addr flush dev "$name" 2>/dev/null
+                fi
+            fi
+        done
+    fi
+
+    sleep 1
+done
+
+sudo chmod +x /usr/local/bin/block-vpn-interface.sh
+sudo nano /etc/systemd/system/block-vpn.service
+
+[Unit]
+Description=Block and Neutralize WSL Mirrored eth3 VPN Interface
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/block-vpn-interface.sh
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+
+sudo systemctl daemon-reload
+sudo systemctl enable --now block-vpn.service
