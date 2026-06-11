@@ -150,7 +150,7 @@ https://www.nerdfonts.com/font-downloads
 Zsh plugins:  
 https://github.com/zsh-users/zsh-autosuggestions
 
-Fix self-hosted servers when Windscribe VPN is on (add `/usr/bin/docker-proxy` to your split tunneling list):
+Fix self-hosted servers when Koala Clash (or Windscribe with changes in comment) VPN is on (add `/usr/bin/docker-proxy` to your split tunneling list):
 
 ```bash
 if ! grep -q "direct_lan" /etc/iproute2/rt_tables; then
@@ -164,7 +164,7 @@ INTERFACE=$1
 ACTION=$2
 TABLE_ID="200"
 
-if [[ "$INTERFACE" =~ ^(tun|wg|utun|ppp) ]]; then
+if [[ "$INTERFACE" =~ ^(Meta|tun|wg|utun|ppp) ]]; then
     IS_VPN=true
 else
     IS_VPN=false
