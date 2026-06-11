@@ -175,7 +175,7 @@ case "$ACTION" in
         if [ "$IS_VPN" = true ]; then
             MAX_RETRIES=15
             for ((i=1; i<=MAX_RETRIES; i++)); do
-                if ip rule list | grep -qE "9000"; then # 32764|16383 for windscribe
+                if ip rule list | grep -qE "9000"; then
                     VPN_READY=true
                     break
                 fi
@@ -186,36 +186,29 @@ case "$ACTION" in
                 exit 0
             fi
 
-            PHYS_INT=$( ip -4 route show default | grep -vE 'tun|wg|utun|ppp|docker|br-|veth' | awk '{print $5}' | head -n1)
+            PHYS_INT=$(nmcli -t -f DEVICE,TYPE device | grep -E ':ethernet|:wireless' | cut -d: -f1 | head -n1)
 
             if [ -n "$PHYS_INT" ]; then
                 LAN_IP=$(ip -4 addr show "$PHYS_INT" | awk '/inet / {print $2}' | cut -d/ -f1)
                 LAN_NET=$(ip route show dev "$PHYS_INT" | grep -v default | grep "scope link" | awk '{print $1}' | head -n1)
-                GATEWAY=$(ip route show dev "$PHYS_INT" | awk '/default via/ {print $3}' | head -n1)
+                GATEWAY=$(nmcli -g ip4.gateway device show "$PHYS_INT")
 
                 if [ -n "$LAN_IP" ] && [ -n "$GATEWAY" ]; then
-                    # Clear old rules
                     ip rule del table $TABLE_ID 2>/dev/null
                     ip rule del priority 2000 2>/dev/null
                     ip rule del priority 2001 2>/dev/null
                     ip rule del priority 2002 2>/dev/null
+                    ip rule del priority 2003 2>/dev/null
                     ip route flush table $TABLE_ID 2>/dev/null
 
-                    # Setup table
                     ip route add $LAN_NET dev $PHYS_INT scope link table $TABLE_ID 2>/dev/null
                     ip route add default via $GATEWAY dev $PHYS_INT table $TABLE_ID 2>/dev/null
 
-                    # TO docker0 -> main
                     ip rule add to 172.16.0.0/12 lookup main priority 2000 2>/dev/null
                     ip rule add to $LAN_NET lookup main priority 2001 2>/dev/null
-
-                    # FROM docker0 -> direct_table
                     ip rule add from 172.16.0.0/12 table $TABLE_ID priority 2002 2>/dev/null
+                    ip rule add from $LAN_IP table $TABLE_ID priority 2003 2>/dev/null
 
-                    # FROM host -> direct_table
-                    ip rule add from $LAN_IP table $TABLE_ID priority 16000 2>/dev/null
-
-                    # Allow FORWARD to and from docker0
                     iptables -I FORWARD -i docker0 -j ACCEPT 2>/dev/null
                     iptables -I FORWARD -o docker0 -j ACCEPT 2>/dev/null
                     iptables -I FORWARD -i br-+ -j ACCEPT 2>/dev/null
@@ -230,6 +223,7 @@ case "$ACTION" in
             ip rule del priority 2000 2>/dev/null
             ip rule del priority 2001 2>/dev/null
             ip rule del priority 2002 2>/dev/null
+            ip rule del priority 2003 2>/dev/null
             ip route flush table $TABLE_ID 2>/dev/null
 
             iptables -D FORWARD -i docker0 -j ACCEPT 2>/dev/null
