@@ -164,7 +164,7 @@ INTERFACE=$1
 ACTION=$2
 TABLE_ID="200"
 
-if [[ "$INTERFACE" =~ ^(amn0|Meta|tun|wg|utun|ppp) ]]; then
+if [[ "$INTERFACE" =~ ^(Meta|amn0|tun|wg|utun|ppp) ]]; then
     IS_VPN=true
 else
     IS_VPN=false
@@ -173,14 +173,18 @@ fi
 case "$ACTION" in
     up)
         if [ "$IS_VPN" = true ]; then
-            MAX_RETRIES=15
-            for ((i=1; i<=MAX_RETRIES; i++)); do
-                if ip rule list | grep -qE "9000"; then
-                    VPN_READY=true
-                    break
-                fi
-                sleep 1
-            done
+            if [ "$INTERFACE" = "amn0" ]; then
+                VPN_READY=true
+            else
+                MAX_RETRIES=15
+                for ((i=1; i<=MAX_RETRIES; i++)); do
+                    if ip rule list | grep -qE "32764|16383|9000"; then
+                        VPN_READY=true
+                        break
+                    fi
+                    sleep 1
+                done
+            fi
 
             if [ "$VPN_READY" != true ]; then
                 exit 0
@@ -241,8 +245,7 @@ sudo chmod +x /etc/NetworkManager/dispatcher.d/99-vpn-fix
 Ignore VPN from WSL (`networkingMode=mirrored` must be enabled in .wslconfig):
 
 ```bash
-sudo nano /usr/local/bin/block-vpn-interface.sh
-
+sudo tee /usr/local/bin/block-vpn-interface.sh << 'EOF'
 #!/bin/bash
 TARGET_IP="<192.168.1.50 YOUR PERMANENT LOCAL IP>"
 SAFE_IFACE=""
@@ -276,10 +279,10 @@ while true; do
 
     sleep 1
 done
+EOF
 
 sudo chmod +x /usr/local/bin/block-vpn-interface.sh
-sudo nano /etc/systemd/system/block-vpn.service
-
+sudo tee /etc/systemd/system/block-vpn.service << 'EOF
 [Unit]
 Description=Block and Neutralize WSL Mirrored eth3 VPN Interface
 After=network.target
@@ -291,6 +294,7 @@ Restart=always
 
 [Install]
 WantedBy=multi-user.target
+EOF
 
 sudo systemctl daemon-reload
 sudo systemctl enable --now block-vpn.service
