@@ -175,7 +175,7 @@ case "$ACTION" in
         if [ "$IS_VPN" = true ]; then
             MAX_RETRIES=15
             for ((i=1; i<=MAX_RETRIES; i++)); do
-                if ip rule list | grep -qE "32764|16383"; then
+                if ip rule list | grep -qE "9000"; then # 32764|16383 for windscribe
                     VPN_READY=true
                     break
                 fi
