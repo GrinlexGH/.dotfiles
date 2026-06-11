@@ -150,21 +150,21 @@ https://www.nerdfonts.com/font-downloads
 Zsh plugins:  
 https://github.com/zsh-users/zsh-autosuggestions
 
-Fix self-hosted servers when Koala Clash (or Windscribe with changes in comment) VPN is on (add `/usr/bin/docker-proxy` to your split tunneling list):
+Fix self-hosted servers when VPN is on (add `/usr/bin/docker-proxy` to your split tunneling list):
 
 ```bash
 if ! grep -q "direct_lan" /etc/iproute2/rt_tables; then
   echo "200 direct_lan" | sudo tee -a /etc/iproute2/rt_tables
 fi
 
-sudo tee /etc/NetworkManager/dispatcher.d/99-windscribe-fix << 'EOF'
+sudo tee /etc/NetworkManager/dispatcher.d/99-vpn-fix << 'EOF'
 #!/bin/bash
 
 INTERFACE=$1
 ACTION=$2
 TABLE_ID="200"
 
-if [[ "$INTERFACE" =~ ^(Meta|tun|wg|utun|ppp) ]]; then
+if [[ "$INTERFACE" =~ ^(amn0|Meta|tun|wg|utun|ppp) ]]; then
     IS_VPN=true
 else
     IS_VPN=false
@@ -235,7 +235,7 @@ case "$ACTION" in
 esac
 EOF
 
-sudo chmod +x /etc/NetworkManager/dispatcher.d/99-windscribe-fix
+sudo chmod +x /etc/NetworkManager/dispatcher.d/99-vpn-fix
 ```
 
 Ignore VPN from WSL (`networkingMode=mirrored` must be enabled in .wslconfig):
