@@ -2,11 +2,9 @@ Diagnostics:
   ClangTidy:
     FastCheckFilter: None
   UnusedIncludes: None
+If:
+  PathExclude: [ .*\.h, .*\.c ]
 CompileFlags:
-  Remove:
-    - -fno-keep-inline-dllexport
-    - -fmodules-ts
-    - -fmodule-mapper=*
-    - -fdeps-format=*
+  Add: [ -std=c++23 ]
 # Completion:
   # HeaderInsertion: Never
