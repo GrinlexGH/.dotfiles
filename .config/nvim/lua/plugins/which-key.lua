@@ -7,6 +7,6 @@ return {
     event = "VeryLazy",
     opts = { win = { no_overlap = false, }, },
     keys = {
-        { "<leader>?", function() require("which-key").show({ global = false }) end, desc = "Buffer local keymaps (which-key)", },
+        { "<leader>?", function() require'which-key'.show({ global = false }) end, desc = "Buffer local keymaps (which-key.nvim)", },
     },
 }

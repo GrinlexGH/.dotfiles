@@ -1,7 +1,7 @@
 return {
     "folke/snacks.nvim",
-    priority = 1000,
     lazy = false,
+    priority = 1000,
     ---@module "snacks"
     ---@type snacks.Config
     opts = {
@@ -10,14 +10,14 @@ return {
         quickfile = { enabled = true },
         notifier = {
             enabled = true,
-            timeout = 5000,
+            timeout = 5000
         },
         scroll = {
             enabled = true,
             animate = {
-                duration = { total = 100 },
-            },
-        },
+                duration = { total = 100 }
+            }
+        }
     },
     config = function (_, opts)
         local snacks = require("snacks")
@@ -61,14 +61,14 @@ return {
                     opts = function(notif)
                         notif.icon = #progress[client.id] == 0 and " "
                             or spinner[math.floor(vim.uv.hrtime() / (1e6 * 80)) % #spinner + 1]
-                    end,
+                    end
                 })
-            end,
+            end
         })
 
         snacks.setup(opts)
     end,
     keys = {
-        { "<leader>n",  function() Snacks.notifier.show_history() end, desc = "Notification history (snacks)" },
-    },
+        { "<leader>nm",  function() Snacks.notifier.show_history() end, desc = "Notification history (snacks.nvim)" }
+    }
 }

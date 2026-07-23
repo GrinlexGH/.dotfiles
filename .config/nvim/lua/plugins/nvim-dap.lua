@@ -5,10 +5,11 @@ return {
         vim.fn.sign_define("DapBreakpoint", { text = "", texthl = "DapBreakpointColor", linehl = "", numhl = "" })
     end,
     keys = {
-        { "<S-F2>", "<cmd>DapToggleBreakpoint<cr>", desc = "Add breakpoint at line (nvim-dap)" },
-        { "<S-F5>", "<cmd>DapContinue<cr>", desc = "Continue (nvim-dap)" },
-        { "<S-F10>", "<cmd>DapStepOver<cr>", desc = "Step over (nvim-dap)" },
-        { "<S-F11>", "<cmd>DapStepInto<cr>", desc = "Step into (nvim-dap)" },
-        { "<S-F12>", "<cmd>DapStepOut<cr>", desc = "Step out (nvim-dap)" },
+        { "<F5>", function() require'dap'.continue() end, desc = "Continue / Start (nvim-dap)" },
+        { "<F9>", function() require'dap'.toggle_breakpoint() end, desc = "Toggle Breakpoint (nvim-dap)" },
+        { "<F10>", function() require'dap'.step_over() end, desc = "Step Over (nvim-dap)" },
+        { "<F11>", function() require'dap'.step_into() end, desc = "Step Into (nvim-dap)" },
+        { "<F12>", function() require'dap'.step_out() end, desc = "Step Out (nvim-dap)" },
+        { "<leader>dx", function() require'dap'.terminate() end, desc = "Terminate session (nvim-dap)" }
     }
 }

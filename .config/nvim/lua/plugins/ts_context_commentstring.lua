@@ -3,7 +3,5 @@ return {
     event = { "BufReadPost", "BufNewFile" },
     ---@module "ts_context_commentstring"
     ---@type ts_context_commentstring.Config
-    opts = {
-        enable_autocmd = false,
-    },
+    opts = { enable_autocmd = false }
 }

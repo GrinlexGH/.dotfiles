@@ -4,20 +4,16 @@ return {
     lazy = false,
     build = ":TSUpdate",
     config = function()
-        local ts = require("nvim-treesitter")
+        local ts = require'nvim-treesitter'
 
         ts.install({
             "json",
             "yaml",
-            "html",
-            "css",
-            "prisma",
             "markdown",
             "markdown_inline",
             "bash",
             "lua",
             "vim",
-            "dockerfile",
             "gitignore",
             "vimdoc",
             "c",
@@ -30,6 +26,7 @@ return {
             "pascal",
             "ruby",
             "squirrel",
+            "slang"
         })
-    end,
+    end
 }

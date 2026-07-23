@@ -1,26 +1,30 @@
 return {
     "echasnovski/mini.nvim",
+    lazy = false,
     config = function()
-        require("mini.surround").setup({
+        require'mini.surround'.setup({
             mappings = {
                 add = "<leader>gsa",
                 delete = "<leader>gsd",
-                find = "<leader>gsf",
-                find_left = "<leader>gsF",
-                highlight = "<leader>gsh",
-                replace = "<leader>gsr",
-                update_n_lines = "<leader>gsn",
+                replace = "<leader>gsr"
             }
         })
-        require("mini.move").setup()
-        require("mini.icons").setup()
-        require("mini.trailspace").setup()
-        require("mini.basics").setup({
+        require'mini.move'.setup()
+        require'mini.icons'.setup()
+        require'mini.trailspace'.setup()
+        require'mini.basics'.setup({
             mappings = {
                 windows = true,
                 move_with_alt = true,
-            },
+            }
         })
-
+        require'mini.bufremove'.setup()
     end,
+    keys = {
+        {
+            "<leader>bd",
+            function() require'mini.bufremove'.delete(0, false) end,
+            desc = "Close buffer (mini.nvim)",
+        }
+    }
 }
