@@ -39,38 +39,87 @@ A modern Neovim configuration with powerful language tooling and visual polish:
 
 | Keybind                    | Action                                                     |
 |----------------------------|------------------------------------------------------------|
-| <kbd>leader + s..</kbd>    | Window split management                                    |
 | <kbd>Ctrl + arrows</kbd>   | Change split size (mini.basics)                            |
-| <kbd>Ctrl + h/j/k/l</kbd>  | Split navigation (mini.basics)                             |
-| <kbd>leader + t..</kbd>    | Tab management                                             |
-| <kbd>leader + e..</kbd>    | File explorer (nvim-tree)                                  |
-| <kbd>leader + nh</kbd>     | Clear search highlights                                    |
-| <kbd>leader + n</kbd>      | Notifications (snacks)                                     |
-| <kbd>leader + g..</kbd>    | Code actions (native + mini.surround)                      |
-| <kbd>leader + rs</kbd>     | Restart LSP                                                |
-| <kbd>leader + d/D</kbd>    | Show diagnostics (line / buffer)                           |
-| <kbd>leader + x..</kbd>    | Open diagnostics window (trouble)                          |
-| <kbd>P</kbd>               | Toggle diagnostics window preview (trouble)                |
-| <kbd>leader + f..</kbd>    | Open search (telescope)                                    |
-| <kbd>Ctrl + h/j/k/l</kbd>  | Navigate search results (telescope)                        |
-| <kbd>Alt + h/j/k/l</kbd>   | Navigate search preview (telescope)                        |
-| <kbd>Ctrl + e</kbd>        | Quote text (exact) (telescope)                             |
-| <kbd>K</kbd>               | Show hover docs                                            |
+| <kbd>Ctrl + h/j/k/l</kbd>  | Buffer navigation (mini.basics)                            |
+| <kbd>leader + bd</kbd>     | Close buffer (mini.bufremove)                              |
+| <kbd>leader + sv</kbd>     | Split window vertically (grinlex)                          |
+| <kbd>leader + sh</kbd>     | Split window horizontally (grinlex)                        |
+| <kbd>leader + se</kbd>     | Autosize split (grinlex)                                   |
+| <kbd>leader + e</kbd>      | Toggle file explorer (neo-tree.nvim)                       |
+| <kbd>Alt + i</kbd>         | Open terminal (haunt.nvim)                                 |
+| <kbd>Shift + l/h</kbd>     | Navigate opened buffers (bufferline.nvim)                  |
+| <kbd>Alt + l/h</kbd>       | Move opened buffers (bufferline.nvim)                      |
+| <kbd>leader + bp</kbd>     | Pin current buffer (bufferline.nvim)                       |
+| <kbd>leader + bo</kbd>     | Close all buffers except current (bufferline.nvim)         |
+| <kbd>leader + bd</kbd>     | Close current buffer (mini.nvim)                           |
 | <kbd>Ctrl + Space</kbd>    | Show autocomplete (blink.cmp)                              |
+| <kbd>Ctrl + e</kbd>        | Hide autocomplete (blink.cmp)                              |
 | <kbd>Ctrl + j/k</kbd>      | Navigate autocomplete (blink.cmp)                          |
 | <kbd>Alt + j/k</kbd>       | Scroll autocomplete docs (blink.cmp)                       |
-| <kbd>Ctrl + e</kbd>        | Cancel autocomplete (blink.cmp)                            |
+| <kbd>Alt + s</kbd>         | Toggle function signature (lsp_signature.nvim)             |
+| <kbd>K</kbd>               | Show hover info (vim)                                      |
+| <kbd>leader + d</kbd>      | Line diagnostics (vim)                                     |
+| <kbd>leader + xb</kbd>     | Buffer diagnostics (telescope.nvim)                        |
+| <kbd>leader + xw</kbd>     | Workspace diagnostics (trouble.nvim)                       |
+| <kbd>leader + gD</kbd>     | Go to declaration (vim)                                    |
+| <kbd>leader + gd</kbd>     | Show definitions (telescope.nvim)                          |
+| <kbd>leader + gi</kbd>     | Show implementations (telescope.nvim)                      |
+| <kbd>leader + gR</kbd>     | Show references (telescope.nvim)                           |
+| <kbd>leader + ga</kbd>     | Code actions (vim)                                         |
+| <kbd>leader + gr</kbd>     | Smart rename (vim)                                         |
+| <kbd>leader + gf</kbd>     | Format file or range (conform.nvim)                        |
+| <kbd>leader + gl</kbd>     | Lint current file (nvim-lint)                              |
+| <kbd>leader + rs</kbd>     | Restart lsp (vim)                                          |
 | <kbd>gc..</kbd>            | Linewise comment (Comment)                                 |
 | <kbd>gb..</kbd>            | Blockwise comment (Comment)                                |
-| <kbd>leader + h..</kbd>    | Git hunk navigation (gitsigns)                             |
-| <kbd>leader + lg</kbd>     | Launch LazyGit (lazygit)                                   |
-| <kbd>]/[ + t</kbd>         | Next / previous todo comment (todo-comments)               |
-| <kbd>zA</kbd>              | Toggle region comment fold under cursor (region-folding)   |
-| <kbd>zR</kbd>              | Open all region comment folds (region-folding)             |
-| <kbd>zM</kbd>              | Close all region comment folds (region-folding)            |
+| <kbd>leader + gsa</kbd>    | Add surround (mini.surround)                               |
+| <kbd>leader + gsd</kbd>    | Delete surround (mini.surround)                            |
+| <kbd>leader + gsr</kbd>    | Replace surround (mini.surround)                           |
+| <kbd>leader + gsr</kbd>    | Replace surround (mini.surround)                           |
+| <kbd>leader + ff</kbd>     | Find files (telescope.nvim)                                |
+| <kbd>leader + fr</kbd>     | Find recent files (telescope.nvim)                         |
+| <kbd>leader + fs</kbd>     | Find string (Telescope.nvim)                               |
+| <kbd>Ctrl + h/j/k/l</kbd>  | Navigate search results (telescope.nvim)                   |
+| <kbd>Alt + h/j/k/l</kbd>   | Navigate search preview (telescope.nvim)                   |
+| <kbd>Ctrl + e</kbd>        | Quote text in search (exact) (telescope.nvim)              |
+| <kbd>leader + hs</kbd>     | Stage hunk (gitsigns.nvim)                                 |
+| <kbd>leader + hr</kbd>     | Reset hunk (gitsigns.nvim)                                 |
+| <kbd>leader + hS</kbd>     | Stage buffer (gitsigns.nvim)                               |
+| <kbd>leader + hR</kbd>     | Reset buffer (gitsigns.nvim)                               |
+| <kbd>leader + hu</kbd>     | Undo stage hunk (gitsigns.nvim)                            |
+| <kbd>leader + hp</kbd>     | Preview hunk (gitsigns.nvim)                               |
+| <kbd>leader + lg</kbd>     | Open lazy git (lazygit.nvim)                               |
+| <kbd>n</kbd>               | Next search (improved-search.nvim)                         |
+| <kbd>N</kbd>               | Previous search (improved-search.nvim)                     |
+| <kbd>!</kbd>               | Search selected/word under cursor (improved-search.nvim)   |
+| <kbd>leader + nh</kbd>     | Clear  highlights (grinlex)                                |
 | <kbd>Alt + h/j/k/l</kbd>   | Move selection / current line (mini.move)                  |
-| <kbd>s [+..]</kbd>         | Substitute (substitute)                                    |
-| <kbd>Alt + i</kbd>         | Toggle terminal (FTerm)                                    |
+| <kbd>s</kbd>               | Substitute (substitute.nvim)                               |
+| <kbd>ss</kbd>              | Substitute line (substitute.nvim)                          |
+| <kbd>S</kbd>               | Substitute to end of line (substitute.nvim)                |
+| <kbd>zA</kbd>              | Toggle folding under cursor (region-folding.nvim)          |
+| <kbd>z + j/k</kbd>         | Navigate foldings (region-folding.nvim)                    |
+| <kbd>zR</kbd>              | Open all folds (region-folding.nvim)                       |
+| <kbd>zM</kbd>              | Close all folds (region-folding.nvim)                      |
+| <kbd>leader + cv</kbd>     | Select CMake preset (cmake-tools.nvim)                     |
+| <kbd>leader + cg</kbd>     | CMake generate (cmake-tools.nvim)                          |
+| <kbd>leader + ct</kbd>     | Select CMake build target (cmake-tools.nvim)               |
+| <kbd>leader + cb</kbd>     | Build CMake target (cmake-tools.nvim)                      |
+| <kbd>leader + cT</kbd>     | Select CMake launch target (cmake-tools.nvim)              |
+| <kbd>leader + cr</kbd>     | Run CMake target (cmake-tools.nvim)                        |
+| <kbd>leader + ci</kbd>     | CMake install (cmake-tools.nvim)                           |
+| <kbd>leader + cd</kbd>     | Debug CMake target (cmake-tools.nvim)                      |
+| <kbd>leader + cc</kbd>     | CMake clean (cmake-tools.nvim)                             |
+| <kbd>leader + cx</kbd>     | Stop CMake executor (cmake-tools.nvim)                     |
+| <kbd>leader + cX</kbd>     | Stop CMake runner (cmake-tools.nvim)                       |
+| <kbd>F5</kbd>              | Continue / Start (nvim-dap)                                |
+| <kbd>F9</kbd>              | Toggle Breakpoint (nvim-dap)                               |
+| <kbd>F10</kbd>             | Step Over (nvim-dap)                                       |
+| <kbd>F11</kbd>             | Step Into (nvim-dap)                                       |
+| <kbd>F12</kbd>             | Step Out (nvim-dap)                                        |
+| <kbd>F12</kbd>             | Terminate session (nvim-dap)                               |
+| <kbd>leader + nm</kbd>     | Notifications (snacks.nvim)                                |
+| <kbd>leader + ?</kbd>      | Buffer local keymaps (which-key.nvim)                      |
 
 ---
 
