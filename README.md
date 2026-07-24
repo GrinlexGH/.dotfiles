@@ -107,13 +107,11 @@ A modern Neovim configuration with powerful language tooling and visual polish:
 | <kbd>leader + cg</kbd>     | CMake generate (cmake-tools.nvim)                          |
 | <kbd>leader + ct</kbd>     | Select CMake build target (cmake-tools.nvim)               |
 | <kbd>leader + cb</kbd>     | Build CMake target (cmake-tools.nvim)                      |
-| <kbd>leader + cT</kbd>     | Select CMake launch target (cmake-tools.nvim)              |
-| <kbd>leader + cr</kbd>     | Run CMake target (cmake-tools.nvim)                        |
 | <kbd>leader + ci</kbd>     | CMake install (cmake-tools.nvim)                           |
+| <kbd>leader + cT</kbd>     | Select CMake launch target (cmake-tools.nvim)              |
 | <kbd>leader + cd</kbd>     | Debug CMake target (cmake-tools.nvim)                      |
 | <kbd>leader + cc</kbd>     | CMake clean (cmake-tools.nvim)                             |
 | <kbd>leader + cx</kbd>     | Stop CMake executor (cmake-tools.nvim)                     |
-| <kbd>leader + cX</kbd>     | Stop CMake runner (cmake-tools.nvim)                       |
 | <kbd>F5</kbd>              | Continue / Start (nvim-dap)                                |
 | <kbd>F7</kbd>              | Stop session (nvim-dap)                                    |
 | <kbd>F9</kbd>              | Toggle Breakpoint (nvim-dap)                               |
