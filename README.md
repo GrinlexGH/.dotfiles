@@ -79,8 +79,8 @@ A modern Neovim configuration with powerful language tooling and visual polish:
 | <kbd>Alt + s</kbd>         | Toggle function signature (lsp_signature.nvim)             |
 | <kbd>K</kbd>               | Show hover info (vim)                                      |
 | <kbd>leader + d</kbd>      | Line diagnostics (vim)                                     |
-| <kbd>leader + xb</kbd>     | Buffer diagnostics (telescope.nvim)                        |
-| <kbd>leader + xw</kbd>     | Workspace diagnostics (trouble.nvim)                       |
+| <kbd>leader + fd</kbd>     | Buffer diagnostics (telescope.nvim)                        |
+| <kbd>leader + fD</kbd>     | Workspace diagnostics (trouble.nvim)                       |
 | <kbd>leader + gD</kbd>     | Go to declaration (vim)                                    |
 | <kbd>leader + gd</kbd>     | Show definitions (telescope.nvim)                          |
 | <kbd>leader + gi</kbd>     | Show implementations (telescope.nvim)                      |
