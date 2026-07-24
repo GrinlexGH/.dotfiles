@@ -40,7 +40,7 @@ A modern Neovim configuration with powerful language tooling and visual polish:
 | Keybind                    | Action                                                     |
 |----------------------------|------------------------------------------------------------|
 | <kbd>Ctrl + arrows</kbd>   | Change split size (mini.basics)                            |
-| <kbd>Ctrl + h/j/k/l</kbd>  | Buffer navigation (mini.basics)                            |
+| <kbd>Ctrl + h/j/k/l</kbd>  | Split navigation (mini.basics)                             |
 | <kbd>leader + bd</kbd>     | Close buffer (mini.bufremove)                              |
 | <kbd>leader + sv</kbd>     | Split window vertically (grinlex)                          |
 | <kbd>leader + sh</kbd>     | Split window horizontally (grinlex)                        |
@@ -52,6 +52,25 @@ A modern Neovim configuration with powerful language tooling and visual polish:
 | <kbd>leader + bp</kbd>     | Pin current buffer (bufferline.nvim)                       |
 | <kbd>leader + bo</kbd>     | Close all buffers except current (bufferline.nvim)         |
 | <kbd>leader + bd</kbd>     | Close current buffer (mini.nvim)                           |
+| <kbd>leader + nm</kbd>     | Notifications (snacks.nvim)                                |
+| <kbd>leader + ff</kbd>     | Find files (telescope.nvim)                                |
+| <kbd>leader + fr</kbd>     | Find recent files (telescope.nvim)                         |
+| <kbd>leader + fs</kbd>     | Find string (Telescope.nvim)                               |
+| <kbd>Ctrl + h/j/k/l</kbd>  | Navigate search results (telescope.nvim)                   |
+| <kbd>Alt + h/j/k/l</kbd>   | Navigate search preview (telescope.nvim)                   |
+| <kbd>Ctrl + e</kbd>        | Quote text in search (telescope.nvim)                      |
+| <kbd>n</kbd>               | Next search (improved-search.nvim)                         |
+| <kbd>N</kbd>               | Previous search (improved-search.nvim)                     |
+| <kbd>!</kbd>               | Search selected/word under cursor (improved-search.nvim)   |
+| <kbd>leader + nh</kbd>     | Clear  highlights (grinlex)                                |
+| <kbd>Alt + h/j/k/l</kbd>   | Move selection / current line (mini.move)                  |
+| <kbd>s</kbd>               | Substitute (substitute.nvim)                               |
+| <kbd>ss</kbd>              | Substitute line (substitute.nvim)                          |
+| <kbd>S</kbd>               | Substitute to end of line (substitute.nvim)                |
+| <kbd>zA</kbd>              | Toggle folding under cursor (region-folding.nvim)          |
+| <kbd>z + j/k</kbd>         | Navigate foldings (region-folding.nvim)                    |
+| <kbd>zR</kbd>              | Open all folds (region-folding.nvim)                       |
+| <kbd>zM</kbd>              | Close all folds (region-folding.nvim)                      |
 | <kbd>Ctrl + Space</kbd>    | Show autocomplete (blink.cmp)                              |
 | <kbd>Ctrl + e</kbd>        | Hide autocomplete (blink.cmp)                              |
 | <kbd>Ctrl + j/k</kbd>      | Navigate autocomplete (blink.cmp)                          |
@@ -76,12 +95,6 @@ A modern Neovim configuration with powerful language tooling and visual polish:
 | <kbd>leader + gsd</kbd>    | Delete surround (mini.surround)                            |
 | <kbd>leader + gsr</kbd>    | Replace surround (mini.surround)                           |
 | <kbd>leader + gsr</kbd>    | Replace surround (mini.surround)                           |
-| <kbd>leader + ff</kbd>     | Find files (telescope.nvim)                                |
-| <kbd>leader + fr</kbd>     | Find recent files (telescope.nvim)                         |
-| <kbd>leader + fs</kbd>     | Find string (Telescope.nvim)                               |
-| <kbd>Ctrl + h/j/k/l</kbd>  | Navigate search results (telescope.nvim)                   |
-| <kbd>Alt + h/j/k/l</kbd>   | Navigate search preview (telescope.nvim)                   |
-| <kbd>Ctrl + e</kbd>        | Quote text in search (exact) (telescope.nvim)              |
 | <kbd>leader + hs</kbd>     | Stage hunk (gitsigns.nvim)                                 |
 | <kbd>leader + hr</kbd>     | Reset hunk (gitsigns.nvim)                                 |
 | <kbd>leader + hS</kbd>     | Stage buffer (gitsigns.nvim)                               |
@@ -89,18 +102,6 @@ A modern Neovim configuration with powerful language tooling and visual polish:
 | <kbd>leader + hu</kbd>     | Undo stage hunk (gitsigns.nvim)                            |
 | <kbd>leader + hp</kbd>     | Preview hunk (gitsigns.nvim)                               |
 | <kbd>leader + lg</kbd>     | Open lazy git (lazygit.nvim)                               |
-| <kbd>n</kbd>               | Next search (improved-search.nvim)                         |
-| <kbd>N</kbd>               | Previous search (improved-search.nvim)                     |
-| <kbd>!</kbd>               | Search selected/word under cursor (improved-search.nvim)   |
-| <kbd>leader + nh</kbd>     | Clear  highlights (grinlex)                                |
-| <kbd>Alt + h/j/k/l</kbd>   | Move selection / current line (mini.move)                  |
-| <kbd>s</kbd>               | Substitute (substitute.nvim)                               |
-| <kbd>ss</kbd>              | Substitute line (substitute.nvim)                          |
-| <kbd>S</kbd>               | Substitute to end of line (substitute.nvim)                |
-| <kbd>zA</kbd>              | Toggle folding under cursor (region-folding.nvim)          |
-| <kbd>z + j/k</kbd>         | Navigate foldings (region-folding.nvim)                    |
-| <kbd>zR</kbd>              | Open all folds (region-folding.nvim)                       |
-| <kbd>zM</kbd>              | Close all folds (region-folding.nvim)                      |
 | <kbd>leader + cv</kbd>     | Select CMake preset (cmake-tools.nvim)                     |
 | <kbd>leader + cg</kbd>     | CMake generate (cmake-tools.nvim)                          |
 | <kbd>leader + ct</kbd>     | Select CMake build target (cmake-tools.nvim)               |
@@ -118,7 +119,6 @@ A modern Neovim configuration with powerful language tooling and visual polish:
 | <kbd>F10</kbd>             | Step Over (nvim-dap)                                       |
 | <kbd>F11</kbd>             | Step Into (nvim-dap)                                       |
 | <kbd>F12</kbd>             | Step Out (nvim-dap)                                        |
-| <kbd>leader + nm</kbd>     | Notifications (snacks.nvim)                                |
 | <kbd>leader + ?</kbd>      | Buffer local keymaps (which-key.nvim)                      |
 
 ---
