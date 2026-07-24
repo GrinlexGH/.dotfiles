@@ -90,8 +90,8 @@ A modern Neovim configuration with powerful language tooling and visual polish:
 | <kbd>leader + gf</kbd>     | Format file or range (conform.nvim)                        |
 | <kbd>leader + gl</kbd>     | Lint current file (nvim-lint)                              |
 | <kbd>leader + rs</kbd>     | Restart lsp (vim)                                          |
-| <kbd>gc..</kbd>            | Linewise comment (Comment)                                 |
-| <kbd>gb..</kbd>            | Blockwise comment (Comment)                                |
+| <kbd>gc[c]</kbd>           | Linewise comment (Comment)                                 |
+| <kbd>gb[c]</kbd>           | Blockwise comment (Comment)                                |
 | <kbd>leader + gsa</kbd>    | Add surround (mini.surround)                               |
 | <kbd>leader + gsd</kbd>    | Delete surround (mini.surround)                            |
 | <kbd>leader + gsr</kbd>    | Replace surround (mini.surround)                           |
