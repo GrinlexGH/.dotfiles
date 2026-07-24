@@ -46,7 +46,7 @@ A modern Neovim configuration with powerful language tooling and visual polish:
 | <kbd>leader + sh</kbd>     | Split window horizontally (grinlex)                        |
 | <kbd>leader + se</kbd>     | Autosize split (grinlex)                                   |
 | <kbd>leader + e</kbd>      | Toggle file explorer (neo-tree.nvim)                       |
-| <kbd>Alt + i</kbd>         | Open terminal (haunt.nvim)                                 |
+| <kbd>Alt + i</kbd>         | Open terminal (snacks.nvim)                                |
 | <kbd>Shift + l/h</kbd>     | Navigate opened buffers (bufferline.nvim)                  |
 | <kbd>Alt + l/h</kbd>       | Move opened buffers (bufferline.nvim)                      |
 | <kbd>leader + bp</kbd>     | Pin current buffer (bufferline.nvim)                       |
