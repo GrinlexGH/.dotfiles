@@ -1,47 +1,41 @@
--- Netrw configuration (Vim's built-in file explorer)
--- Style 3: tree view layout
-vim.cmd("let g:netrw_liststyle = 3")
+vim.g.netrw_liststyle = 3
 
 local opt = vim.opt
 
-opt.relativenumber = true -- Show relative line numbers (distance to cursor)
-opt.number = true         -- Show absolute number for current line
+opt.relativenumber = true
+opt.number = true
 
-opt.tabstop = 4       -- Visual width of a tab character
-opt.shiftwidth = 4    -- Size of auto-indent operations
-opt.expandtab = true  -- Convert tabs to spaces
-opt.autoindent = true -- Maintain current indent level on new lines
+opt.tabstop = 4
+opt.shiftwidth = 4
+opt.expandtab = true
+opt.autoindent = true
 
-opt.wrap = false -- Disable line wrapping (long lines extend beyond screen)
+opt.wrap = false
 
-opt.ignorecase = true -- Case-insensitive searching
-opt.smartcase = true  -- Case-sensitive if search contains uppercase
+opt.ignorecase = true
+opt.smartcase = true
 
-opt.cursorline = true -- Highlight current line
+opt.cursorline = true
 
-opt.termguicolors = true -- Enable true-color support
-opt.background = "dark"  -- Use dark color schemes
+opt.termguicolors = true
+opt.background = "dark"
 
-opt.signcolumn = "yes" -- Always show sign column (for diagnostics, git, etc)
+opt.signcolumn = "yes"
 
 opt.backspace = "indent,eol,start"
--- Allows deleting:
---   indent = indentation
---   eol    = line breaks (merge lines)
---   start  = characters before insertion point
 
-opt.clipboard:append("unnamedplus") -- Use system clipboard
+opt.clipboard:append("unnamedplus")
 
-opt.splitright = true -- Vertical splits open to the right
-opt.splitbelow = true -- Horizontal splits open below
+opt.splitright = true
+opt.splitbelow = true
 
-opt.list = true -- Show invisible characters
+opt.list = true
 opt.listchars = {
-    space = "·",    -- Spaces (except trailing)
-    tab = "→ ",     -- Tabs (arrow + spaces)
-    trail = "•",    -- Trailing spaces (end of line)
-    extends = "↪",  -- Line continuation marker (right)
-    precedes = "↩", -- Line continuation marker (left)
+    space = "·",
+    tab = "→ ",
+    trail = "•",
+    extends = "↪",
+    precedes = "↩"
 }
 
 -- Close all terminals before exit
@@ -57,10 +51,10 @@ vim.api.nvim_create_autocmd("ExitPre", {
 })
 
 -- Use powershell 7 on windows
-if vim.loop.os_uname().sysname == "Windows_NT" then
-    vim.opt.shell = "pwsh"
-    vim.opt.shellcmdflag =
+if vim.uv.os_uname().sysname == "Windows_NT" then
+    opt.shell = "pwsh"
+    opt.shellcmdflag =
         "-NoLogo -NoProfile -ExecutionPolicy RemoteSigned -Command"
-    vim.opt.shellquote = ""
-    vim.opt.shellxquote = ""
+    opt.shellquote = ""
+    opt.shellxquote = ""
 end

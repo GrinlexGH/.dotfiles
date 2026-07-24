@@ -6,6 +6,6 @@ return {
     opts = { focus = true, },
     cmd = "Trouble",
     keys = {
-        { "<leader>xw", "<cmd>Trouble diagnostics toggle<CR>", desc = "Open workspace diagnostics (trouble.nvim)" },
+        { "<leader>fD", "<cmd>Trouble diagnostics toggle<CR>", desc = "Open workspace diagnostics (trouble.nvim)" },
     }
 }

@@ -5,8 +5,35 @@ return {
     ---@module "snacks"
     ---@type snacks.Config
     opts = {
+        dashboard = {
+            enabled = true,
+            sections = {
+                { section = "header" },
+                { icon = " ", key = "n", desc = "New File", action = ":ene | startinsert" },
+                {
+                    section = "recent_files",
+                    icon = " ",
+                    title = "Recent Files",
+                    indent = 2,
+                    padding = 1,
+                    limit = 5
+                },
+                {
+                    icon = " ",
+                    key = "c",
+                    desc = "Config",
+                    action = function() Snacks.picker.files({ cwd = vim.fn.stdpath("config") }) end
+                },
+                { icon = "󰒲 ", key = "l", desc = "Lazy", action = ":Lazy" },
+                { icon = " ", key = "q", desc = "Quit", action = ":qa", padding = 1 },
+                { section = "startup" }
+            }
+        },
         bigfile = { enabled = true },
-        indent = { enabled = true },
+        indent = {
+            enabled = true,
+            char = "┊"
+        },
         quickfile = { enabled = true },
         notifier = {
             enabled = true,
@@ -15,7 +42,7 @@ return {
         scroll = {
             enabled = true,
             animate = {
-                duration = { total = 100 }
+                duration = { total = 50 }
             }
         }
     },
@@ -69,6 +96,7 @@ return {
         snacks.setup(opts)
     end,
     keys = {
+        { "<A-i>", function() Snacks.terminal.toggle() end, mode = { "n", "t" }, desc = "Toggle terminal (snacks.nvim)" },
         { "<leader>nm",  function() Snacks.notifier.show_history() end, desc = "Notification history (snacks.nvim)" }
     }
 }

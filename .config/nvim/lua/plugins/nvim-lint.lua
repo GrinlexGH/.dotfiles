@@ -1,5 +1,6 @@
 return {
     "mfussenegger/nvim-lint",
+    event = "LspAttach",
     config = function()
         local lint = require'lint'
 
@@ -7,6 +8,10 @@ return {
             python = { "ruff" },
             cpp = { "clangtidy" },
             c = { "clangtidy" }
+        }
+
+        require'lint'.linters.clangtidy.args = {
+            "-p", "build/", "-"
         }
 
         vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {

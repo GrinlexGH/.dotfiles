@@ -52,9 +52,7 @@ return {
                 live_grep_args = {
                     auto_quoting = true,
                     mappings = {
-                        i = {
-                            ["<C-e>"] = lga_actions.quote_prompt()
-                        }
+                        i = { ["<C-e>"] = lga_actions.quote_prompt() }
                     }
                 }
             }
@@ -65,7 +63,7 @@ return {
         telescope.load_extension("project")
     end,
     keys = {
-        { "<leader>xb", "<cmd>Telescope diagnostics bufnr=0<cr>", desc = "Buffer diagnostics (telescope.nvim)" },
+        { "<leader>fd", "<cmd>Telescope diagnostics bufnr=0<cr>", desc = "Buffer diagnostics (telescope.nvim)" },
 
         { "<leader>gd", "<cmd>Telescope lsp_definitions<cr>", desc = "Show definitions (telescope.nvim)" },
         { "<leader>gi", "<cmd>Telescope lsp_implementations<cr>", desc = "Show implementations (telescope.nvim)" },
