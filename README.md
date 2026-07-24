@@ -115,7 +115,7 @@ A modern Neovim configuration with powerful language tooling and visual polish:
 | <kbd>leader + cx</kbd>     | Stop CMake executor (cmake-tools.nvim)                     |
 | <kbd>leader + cX</kbd>     | Stop CMake runner (cmake-tools.nvim)                       |
 | <kbd>F5</kbd>              | Continue / Start (nvim-dap)                                |
-| <kbd>F7</kbd>              | Terminate session (nvim-dap)                               |
+| <kbd>F7</kbd>              | Stop session (nvim-dap)                                    |
 | <kbd>F9</kbd>              | Toggle Breakpoint (nvim-dap)                               |
 | <kbd>F10</kbd>             | Step Over (nvim-dap)                                       |
 | <kbd>F11</kbd>             | Step Into (nvim-dap)                                       |
