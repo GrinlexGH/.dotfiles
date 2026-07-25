@@ -11,7 +11,7 @@ return {
                 end,
                 pinned = true,
                 open = "Neotree show filesystem left",
-                size = { width = 30 }
+                size = { width = 38 }
             }
         },
 
@@ -29,7 +29,7 @@ return {
         },
 
         options = {
-            left = { size = 30 },
+            left = { size = 38 },
             right = { size = 38 },
             bottom = { size = 10 }
         },

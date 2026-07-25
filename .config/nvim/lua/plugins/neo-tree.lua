@@ -13,10 +13,10 @@ return {
             filtered_items = { visible = true }
         },
         window = {
-            width = 30 -- Don't forget to change it in edgy.nvim config too
+            width = 38 -- Don't forget to change it in edgy.nvim config too
         }
     },
     keys = {
-        { "<leader>e", "<Cmd>Neotree toggle reveal<CR>", desc = "File explorer (neo-tree.nvim)", },
+        { "<leader>e", "<cmd>Neotree toggle reveal<cr>", desc = "File explorer (neo-tree.nvim)" }
     }
 }
