@@ -1,6 +1,7 @@
 return {
     "saghen/blink.cmp",
     dependencies = { "saghen/blink.lib" },
+    event = { "BufReadPre", "BufNewFile" },
     build = function() require'blink.cmp'.build():pwait() end,
     ---@module "blink.cmp"
     ---@type blink.cmp.config

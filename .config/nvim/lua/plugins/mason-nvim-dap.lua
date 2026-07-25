@@ -4,5 +4,5 @@ return {
         { "mason-org/mason.nvim", opts = { } },
         "mfussenegger/nvim-dap"
     },
-    opts = { handlers = {} }
+    opts = { ensure_installed = { "python", "codelldb" }, handlers = {} }
 }

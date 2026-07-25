@@ -1,6 +1,6 @@
 return {
     "folke/edgy.nvim",
-    lazy = false,
+    event = "VeryLazy",
     opts = {
         left = {
             {
@@ -33,6 +33,7 @@ return {
             right = { size = 38 },
             bottom = { size = 10 }
         },
+
         animate = { enabled = false }
     }
 }

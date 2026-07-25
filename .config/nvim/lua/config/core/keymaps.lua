@@ -11,3 +11,7 @@ keymap.set("n", "U", "<cmd>redo<CR>", { desc = "Redo (grinlex)" })
 
 keymap.set("i", "<C-H>", "<C-W>", { desc = "Delete previous word (grinlex)" })
 keymap.set("i", "<C-Del>", "<C-o>de", { desc = "Delete word (grinlex)" })
+vim.keymap.set("i", "<C-Right>", "<C-o>e<Right>", { desc = "Move to end of word (grinlex)" })
+
+keymap.set("v", "<Tab>", ">gv", { desc = "Indent line(s) (grinlex)" })
+keymap.set("v", "<S-Tab>", "<gv", { desc = "Unindent line(s) (grinlex)" })

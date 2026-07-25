@@ -1,5 +1,3 @@
-vim.g.netrw_liststyle = 3
-
 local opt = vim.opt
 
 opt.relativenumber = true
@@ -37,6 +35,8 @@ opt.listchars = {
     extends = "↪",
     precedes = "↩"
 }
+
+opt.updatetime = 250
 
 -- Close all terminals before exit
 vim.api.nvim_create_autocmd("ExitPre", {

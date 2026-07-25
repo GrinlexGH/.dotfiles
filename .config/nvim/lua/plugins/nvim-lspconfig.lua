@@ -1,7 +1,7 @@
 return {
     "neovim/nvim-lspconfig",
     dependencies = {
-        { "antosha417/nvim-lsp-file-operations", lazy = true, opts = { }, },
+        { "antosha417/nvim-lsp-file-operations", lazy = true, opts = { } }
     },
     opts = {
         servers = {
@@ -9,21 +9,17 @@ return {
                 settings = {
                     Lua = {
                         diagnostics = {
-                            disable = { "missing-fields" }
+                            disable = { "missing-fields", "undefined-global" }
                         }
                     }
                 }
             },
             clangd = {
                 cmd = {
-                    "clangd",
-                    "--background-index",
-                    "--clang-tidy",
-                    "-j=12",
-                    "--header-insertion=never",
-                    "--compile-commands-dir=build",
-                    "--enable-config",
-                },
+                    "clangd", "--background-index", "--clang-tidy",
+                    "-j=" .. tostring(vim.uv.available_parallelism()),
+                    "--header-insertion=never", "--compile-commands-dir=build", "--enable-config"
+                }
             },
             jdtls = { },
             cmake = { },

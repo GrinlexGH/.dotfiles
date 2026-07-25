@@ -71,6 +71,6 @@ return {
 
         { "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Find files (telescope.nvim)" },
         { "<leader>fr", "<cmd>Telescope oldfiles<cr>", desc = "Find recent files (telescope.nvim)" },
-        { "<leader>fs", function() require("telescope").extensions.live_grep_args.live_grep_args() end, desc = "Find string (Telescope.nvim)" },
+        { "<leader>fs", function() require("telescope").extensions.live_grep_args.live_grep_args() end, desc = "Find string (Telescope.nvim)" }
     }
 }

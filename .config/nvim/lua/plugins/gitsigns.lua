@@ -1,5 +1,6 @@
 return {
     "lewis6991/gitsigns.nvim",
+    event = { "BufReadPre", "BufNewFile" },
     opts = {
         on_attach = function(bufnr)
             local gs = package.loaded.gitsigns
@@ -17,8 +18,10 @@ return {
             map("n", "<leader>hu", gs.undo_stage_hunk, "Undo stage hunk (gitsigns.nvim)")
 
             map("n", "<leader>hp", gs.preview_hunk, "Preview hunk (gitsigns.nvim)")
-
-            require'scrollbar.handlers.gitsigns'.setup()
         end,
     },
+    config = function(_, opts)
+        require'gitsigns'.setup(opts)
+        require'scrollbar.handlers.gitsigns'.setup()
+    end
 }
