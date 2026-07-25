@@ -64,6 +64,8 @@ A modern Neovim configuration with powerful language tooling and visual polish:
 | <kbd>!</kbd>               | Search selected/word under cursor (improved-search.nvim)   |
 | <kbd>\\h</kbd>             | Clear highlights (mini.basics)                             |
 | <kbd>Alt + h/j/k/l</kbd>   | Move selection / current line (mini.move)                  |
+| <kbd>Tab</kbd>             | Indent line(s) in visual mode (grinlex)                    |
+| <kbd>Shift + Tab</kbd>     | Unindent line(s) in visual mode (grinlex)                  |
 | <kbd>Ctrl + s</kbd>        | Save file (mini.basics)                                    |
 | <kbd>s</kbd>               | Substitute (substitute.nvim)                               |
 | <kbd>ss</kbd>              | Substitute line (substitute.nvim)                          |
