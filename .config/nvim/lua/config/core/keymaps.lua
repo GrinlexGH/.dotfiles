@@ -15,3 +15,13 @@ vim.keymap.set("i", "<C-Right>", "<C-o>e<Right>", { desc = "Move to end of word 
 
 keymap.set("v", "<Tab>", ">gv", { desc = "Indent line(s) (grinlex)" })
 keymap.set("v", "<S-Tab>", "<gv", { desc = "Unindent line(s) (grinlex)" })
+
+keymap.set("n", "<leader>q", function()
+    local qf_winid = vim.fn.getqflist({ winid = 0 }).winid
+    if qf_winid ~= 0 then
+        vim.cmd("cclose")
+    else
+        vim.cmd("copen")
+    end
+end, { desc = "Toggle Quickfix (grinlex)" })
+
