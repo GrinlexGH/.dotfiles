@@ -150,6 +150,10 @@ sudo apt install cmake make clang-tidy g++ unzip python3-venv fzf ripgrep xclip 
 cargo install --locked tree-sitter-cli
 ```
 
+```pwsh
+scoop install rustup tree-sitter cmake ninja lazygit
+```
+
 ## 🚀 Installation
 
 Using [Arch Wiki's dotfile method](https://wiki.archlinux.org/title/Dotfiles#Tracking_dotfiles_directly_with_Git):
