@@ -4,5 +4,5 @@ return {
         { "mason-org/mason.nvim", opts = { } },
         "neovim/nvim-lspconfig"
     },
-    opts = { ensure_installed = { "lua_ls", "clangd", "jdtls", "kotlin_lsp" } }
+    opts = { ensure_installed = { "lua_ls", "clangd", "jdtls", "kotlin_lsp", "ruff" } }
 }
