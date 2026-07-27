@@ -151,7 +151,7 @@ cargo install --locked tree-sitter-cli
 ```
 
 ```pwsh
-scoop install rustup tree-sitter cmake ninja lazygit
+scoop install rustup tree-sitter cmake ninja lazygit ripgrep
 ```
 
 ## 🚀 Installation
