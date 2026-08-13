@@ -375,3 +375,7 @@ EOF
 
 sudo systemctl daemon-reload
 sudo systemctl enable --now block-vpn.service
+```
+
+The cursor twitches and disappears on Windows:  
+`Try to enable HDR?`
