@@ -148,11 +148,6 @@ sudo apt install cmake make ninja-build g++ unzip python3-venv fzf ripgrep xclip
 cargo install --locked tree-sitter-cli
 ```
 
-```bash
-pkg upd && pkg upg -y && pkg i cmake make ninja clang unzip python3 fzf ripgrep termux-api zsh zoxide lazygit uv fastfetch neovim rust proot-distro
-cargo install --locked tree-sitter-cli
-```
-
 ```pwsh
 scoop install rustup tree-sitter cmake ninja lazygit ripgrep
 ```
