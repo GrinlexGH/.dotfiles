@@ -203,6 +203,13 @@ https://www.nerdfonts.com/font-downloads
 Zsh plugins:  
 https://github.com/zsh-users/zsh-autosuggestions
 
+Android SDK for termux:  
+https://github.com/lzhiyong/termux-ndk  
+https://github.com/lzhiyong/android-sdk-tools  
+or  
+https://github.com/HomuHomu833/android-sdk-custom  
+https://github.com/HomuHomu833/android-ndk-custom  
+
 Fix self-hosted servers when VPN is on (add `/usr/bin/docker-proxy` to your split tunneling list):
 
 ```bash
