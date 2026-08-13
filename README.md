@@ -139,7 +139,7 @@ A modern Neovim configuration with powerful language tooling and visual polish:
 Install with:
 
 ```bash
-sudo pacman -S cmake make clang unzip python3 fzf ripgrep zsh zoxide lazygit uv fastfetch neovim ninja python-pynvim
+sudo pacman -S cmake make clang unzip python3 fzf ripgrep zsh zoxide lazygit uv fastfetch neovim ninja python-pynvim kitty
 cargo install --locked tree-sitter-cli
 ```
 
