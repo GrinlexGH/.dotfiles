@@ -8,7 +8,7 @@
 
 <p align="center">
   This is my dotfiles repository - collection of <strong>the most convenient</strong> configurations <strong>for me</strong>, as far as I could make, for programs and Unix-like environments.
-  <img src="https://i.imgur.com/1r3XDdr.png" alt="Zsh Preview" />
+  <img src="https://i.imgur.com/VFeW4hg.png" alt="Zsh Preview" />
 </p>
 
 ## ✨ Features
@@ -27,6 +27,15 @@
 Adds `$HOME/bin` & `$HOME/.local/bin` to `$PATH` if exist.  
 Setup spicetify, jdtls, kotlin-lsp, Android SDK, Vulkan SDK and many other programs if they exist.  
 See [.zshenv](./.zshenv)
+
+### 📸 Neovim Preview
+
+<p align="center">
+  <img src="https://i.imgur.com/FjVrBF3.png" alt="Neovim Preview 1" />
+</p>
+<p align="center">
+  <img src="https://i.imgur.com/KOlqZWV.png" alt="Neovim Preview 2" />
+</p>
 
 ### 📝 Neovim Setup
 
@@ -122,17 +131,6 @@ A modern Neovim configuration with powerful language tooling and visual polish:
 | <kbd>F11</kbd>             | Step Into (nvim-dap)                                       |
 | <kbd>F12</kbd>             | Step Out (nvim-dap)                                        |
 | <kbd>leader + ?</kbd>      | Buffer local keymaps (which-key.nvim)                      |
-
----
-
-### 📸 Neovim Preview
-
-<p align="center">
-  <img src="https://i.imgur.com/aoflPRr.png" alt="Neovim Preview 1" />
-</p>
-<p align="center">
-  <img src="https://i.imgur.com/3BHb0hE.png" alt="Neovim Preview 2" />
-</p>
 
 ## 📦 Requirements
 
