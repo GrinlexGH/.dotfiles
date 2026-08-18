@@ -65,10 +65,5 @@ if [[ -z $VULKAN_SDK && -d $HOME/VulkanSDK ]]; then
     unsetopt localoptions NULL_GLOB
 fi
 
-# SSH agent
-if [[ -z "$SSH_AUTH_SOCK" ]] || ! ps -p "$SSH_AGENT_PID" &>/dev/null; then
-    type ssh-agent &>/dev/null && eval "$(ssh-agent -s)" >/dev/null
-fi
-
-# Minecraft server
-export MINECRAFT_SERVER_DIR="/run/media/shared/NVMe-NTFS/minecraft-server"
+# SSH askpass
+[[ -f /usr/bin/ksshaskpass ]] && export GIT_ASKPASS="/usr/bin/ksshaskpass"

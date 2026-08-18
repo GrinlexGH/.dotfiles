@@ -31,3 +31,6 @@ MenuBar=Disabled
 
 [PreviewSettings]
 Plugins=appimagethumbnail,gdk-pixbuf-thumbnailer,opendocumentthumbnail,kraorathumbnail,audiothumbnail,jxl,librsvg,imagethumbnail,exrthumbnail,jpegthumbnail,windowsimagethumbnail,svgthumbnail,windowsexethumbnail,comicbookthumbnail,directorythumbnail,djvuthumbnail,cursorthumbnail,fontthumbnail,ebookthumbnail
+
+[Search]
+Location=Everywhere
