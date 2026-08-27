@@ -360,7 +360,7 @@ EOF
 sudo chmod +x /usr/local/bin/block-vpn-interface.sh
 sudo tee /etc/systemd/system/block-vpn.service << 'EOF'
 [Unit]
-Description=Block and Neutralize WSL Mirrored eth3 VPN Interface
+Description=Block and Neutralize WSL Mirrored VPN Interface
 After=network.target
 
 [Service]
