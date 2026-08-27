@@ -144,7 +144,7 @@ cargo install --locked tree-sitter-cli
 ```bash
 # For the latest version of nvim
 sudo snap install nvim --classic
-sudo apt install zsh zoxide cargo tree-sitter-cli cmake ninja-build unzip
+sudo apt install zsh zoxide cargo tree-sitter-cli cmake ninja-build unzip xclip
 ```
 
 ```pwsh
