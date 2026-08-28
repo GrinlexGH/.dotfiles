@@ -221,80 +221,62 @@ sudo tee /etc/NetworkManager/dispatcher.d/99-vpn-fix << 'EOF'
 
 INTERFACE=$1
 ACTION=$2
-TABLE_ID="200"
+TABLE_ID=200
+RULE_PRIOS=(2000 2001 2002 2003)
 
-if [[ "$INTERFACE" =~ ^(Meta|amn0|tun|wg|utun|ppp) ]]; then
-    IS_VPN=true
-else
-    IS_VPN=false
-fi
+[[ "$INTERFACE" =~ ^(Meta|tun|wg|utun|ppp) ]] || exit 0
+
+cleanup() {
+    ip rule del table $TABLE_ID 2>/dev/null
+    for p in "${RULE_PRIOS[@]}"; do
+        ip rule del priority "$p" 2>/dev/null
+    done
+    ip route flush table $TABLE_ID 2>/dev/null
+
+    if ip link show docker0 &>/dev/null; then
+        iptables -D FORWARD -i docker0 -j ACCEPT 2>/dev/null
+        iptables -D FORWARD -o docker0 -j ACCEPT 2>/dev/null
+        iptables -D FORWARD -i br-+ -j ACCEPT 2>/dev/null
+        iptables -D FORWARD -o br-+ -j ACCEPT 2>/dev/null
+    fi
+}
 
 case "$ACTION" in
-    up)
-        if [ "$IS_VPN" = true ]; then
-            if [ "$INTERFACE" = "amn0" ]; then
-                VPN_READY=true
-            else
-                MAX_RETRIES=15
-                for ((i=1; i<=MAX_RETRIES; i++)); do
-                    if ip rule list | grep -qE "32764|16383|9000"; then
-                        VPN_READY=true
-                        break
-                    fi
-                    sleep 1
-                done
-            fi
+up)
+    for ((i=1; i<=15; i++)); do
+        ip route show dev "$INTERFACE" | grep -q '^default' && break
+        sleep 1
+    done
+    ip route show dev "$INTERFACE" | grep -q '^default' || exit 0
 
-            if [ "$VPN_READY" != true ]; then
-                exit 0
-            fi
+    PHYS_INT=$(nmcli -t -f DEVICE,TYPE device | grep -E ':ethernet|:wireless' | cut -d: -f1 | head -n1)
+    [ -n "$PHYS_INT" ] || exit 0
 
-            PHYS_INT=$(nmcli -t -f DEVICE,TYPE device | grep -E ':ethernet|:wireless' | cut -d: -f1 | head -n1)
+    LAN_IP=$(ip -4 addr show "$PHYS_INT" | awk '/inet / {print $2}' | cut -d/ -f1)
+    LAN_NET=$(ip route show dev "$PHYS_INT" | grep -v default | grep "scope link" | awk '{print $1}' | head -n1)
+    GATEWAY=$(nmcli -g ip4.gateway device show "$PHYS_INT")
+    [ -n "$LAN_IP" ] && [ -n "$GATEWAY" ] || exit 0
 
-            if [ -n "$PHYS_INT" ]; then
-                LAN_IP=$(ip -4 addr show "$PHYS_INT" | awk '/inet / {print $2}' | cut -d/ -f1)
-                LAN_NET=$(ip route show dev "$PHYS_INT" | grep -v default | grep "scope link" | awk '{print $1}' | head -n1)
-                GATEWAY=$(nmcli -g ip4.gateway device show "$PHYS_INT")
+    cleanup
 
-                if [ -n "$LAN_IP" ] && [ -n "$GATEWAY" ]; then
-                    ip rule del table $TABLE_ID 2>/dev/null
-                    ip rule del priority 2000 2>/dev/null
-                    ip rule del priority 2001 2>/dev/null
-                    ip rule del priority 2002 2>/dev/null
-                    ip rule del priority 2003 2>/dev/null
-                    ip route flush table $TABLE_ID 2>/dev/null
+    ip route add "$LAN_NET" dev "$PHYS_INT" scope link table $TABLE_ID 2>/dev/null
+    ip route add default via "$GATEWAY" dev "$PHYS_INT" table $TABLE_ID 2>/dev/null
 
-                    ip route add $LAN_NET dev $PHYS_INT scope link table $TABLE_ID 2>/dev/null
-                    ip route add default via $GATEWAY dev $PHYS_INT table $TABLE_ID 2>/dev/null
+    ip rule add to 172.16.0.0/12 lookup main priority 2000 2>/dev/null
+    ip rule add to "$LAN_NET" lookup main priority 2001 2>/dev/null
+    ip rule add from 172.16.0.0/12 table $TABLE_ID priority 2002 2>/dev/null
+    ip rule add from "$LAN_IP" table $TABLE_ID priority 2003 2>/dev/null
 
-                    ip rule add to 172.16.0.0/12 lookup main priority 2000 2>/dev/null
-                    ip rule add to $LAN_NET lookup main priority 2001 2>/dev/null
-                    ip rule add from 172.16.0.0/12 table $TABLE_ID priority 2002 2>/dev/null
-                    ip rule add from $LAN_IP table $TABLE_ID priority 2003 2>/dev/null
-
-                    iptables -I FORWARD -i docker0 -j ACCEPT 2>/dev/null
-                    iptables -I FORWARD -o docker0 -j ACCEPT 2>/dev/null
-                    iptables -I FORWARD -i br-+ -j ACCEPT 2>/dev/null
-                    iptables -I FORWARD -o br-+ -j ACCEPT 2>/dev/null
-                fi
-            fi
-        fi
-        ;;
-    down)
-        if [ "$IS_VPN" = true ]; then
-            ip rule del table $TABLE_ID 2>/dev/null
-            ip rule del priority 2000 2>/dev/null
-            ip rule del priority 2001 2>/dev/null
-            ip rule del priority 2002 2>/dev/null
-            ip rule del priority 2003 2>/dev/null
-            ip route flush table $TABLE_ID 2>/dev/null
-
-            iptables -D FORWARD -i docker0 -j ACCEPT 2>/dev/null
-            iptables -D FORWARD -o docker0 -j ACCEPT 2>/dev/null
-            iptables -D FORWARD -i br-+ -j ACCEPT 2>/dev/null
-            iptables -D FORWARD -o br-+ -j ACCEPT 2>/dev/null
-        fi
-        ;;
+    if ip link show docker0 &>/dev/null; then
+        iptables -I FORWARD -i docker0 -j ACCEPT 2>/dev/null
+        iptables -I FORWARD -o docker0 -j ACCEPT 2>/dev/null
+        iptables -I FORWARD -i br-+ -j ACCEPT 2>/dev/null
+        iptables -I FORWARD -o br-+ -j ACCEPT 2>/dev/null
+    fi
+    ;;
+down)
+    cleanup
+    ;;
 esac
 EOF
 
