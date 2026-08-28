@@ -224,7 +224,7 @@ ACTION=$2
 TABLE_ID=200
 RULE_PRIOS=(2000 2001 2002 2003)
 
-[[ "$INTERFACE" =~ ^(Meta|tun|wg|utun|ppp) ]] || exit 0
+[[ "$INTERFACE" =~ ^(Meta|amn0|tun|wg|utun|ppp) ]] || exit 0
 
 cleanup() {
     ip rule del table $TABLE_ID 2>/dev/null
@@ -243,13 +243,23 @@ cleanup() {
 
 case "$ACTION" in
 up)
-    for ((i=1; i<=15; i++)); do
-        ip route show dev "$INTERFACE" | grep -q '^default' && break
-        sleep 1
-    done
-    ip route show dev "$INTERFACE" | grep -q '^default' || exit 0
+    if [ "$INTERFACE" = "amn0" ]; then
+        VPN_READY=true
+    else
+        for ((i=1; i<=15; i++)); do
+            if ip rule list | grep -qE "32764|16383|9000"; then
+                VPN_READY=true
+                break
+            fi
+            sleep 1
+        done
+    fi
 
-    PHYS_INT=$(nmcli -t -f DEVICE,TYPE device | grep -E ':ethernet|:wireless' | cut -d: -f1 | head -n1)
+    if [ "$VPN_READY" != true ]; then
+        exit 0
+    fi
+
+    PHYS_INT=$(nmcli -t -f DEVICE,TYPE device | grep -E ':wifi|:ethernet|:wireless' | cut -d: -f1 | head -n1)
     [ -n "$PHYS_INT" ] || exit 0
 
     LAN_IP=$(ip -4 addr show "$PHYS_INT" | awk '/inet / {print $2}' | cut -d/ -f1)
