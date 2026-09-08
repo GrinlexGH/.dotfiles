@@ -64,6 +64,3 @@ if [[ -z $VULKAN_SDK && -d $HOME/VulkanSDK ]]; then
     unset _sdks
     unsetopt localoptions NULL_GLOB
 fi
-
-# SSH askpass
-[[ -f /usr/bin/ksshaskpass ]] && export GIT_ASKPASS="/usr/bin/ksshaskpass"

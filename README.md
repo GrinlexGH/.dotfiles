@@ -212,17 +212,18 @@ https://github.com/HomuHomu833/android-ndk-custom
 Fix self-hosted servers when VPN is on (add `/usr/bin/docker-proxy` to your split tunneling list):
 
 ```bash
-if ! grep -q "direct_lan" /etc/iproute2/rt_tables; then
-  echo "200 direct_lan" | sudo tee -a /etc/iproute2/rt_tables
-fi
-
 sudo tee /etc/NetworkManager/dispatcher.d/99-vpn-fix << 'EOF'
 #!/bin/bash
 
 INTERFACE=$1
 ACTION=$2
 TABLE_ID=200
-RULE_PRIOS=(2000 2001 2002 2003)
+RULE_PRIOS=(1500 2000 2001 2002 2003 2004 2005)
+MARK_INBOUND=0x64          # 100 decimal
+MARK_MASK=0xff
+
+SVC_TCP_PORTS="80,443,25565"
+SVC_UDP_PORTS="25565"
 
 [[ "$INTERFACE" =~ ^(Meta|amn0|tun|wg|utun|ppp) ]] || exit 0
 
@@ -239,6 +240,20 @@ cleanup() {
         iptables -D FORWARD -i br-+ -j ACCEPT 2>/dev/null
         iptables -D FORWARD -o br-+ -j ACCEPT 2>/dev/null
     fi
+
+    iptables -t mangle -D PREROUTING -i "$PHYS_INT" -p tcp -m multiport --dports "$SVC_TCP_PORTS" \
+        -m conntrack --ctstate NEW -j CONNMARK --set-mark $MARK_INBOUND 2>/dev/null
+    iptables -t mangle -D PREROUTING -i "$PHYS_INT" -p udp -m multiport --dports "$SVC_UDP_PORTS" \
+        -m conntrack --ctstate NEW -j CONNMARK --set-mark $MARK_INBOUND 2>/dev/null
+    iptables -t mangle -D PREROUTING -j CONNMARK --restore-mark --mask $MARK_MASK 2>/dev/null
+    iptables -t mangle -D OUTPUT -j CONNMARK --restore-mark --mask $MARK_MASK 2>/dev/null
+
+    for OLD_PHYS in $(nmcli -t -f DEVICE,TYPE device 2>/dev/null | grep -E ':wifi|:ethernet|:wireless' | cut -d: -f1); do
+        iptables -t mangle -D PREROUTING -i "$OLD_PHYS" -p tcp -m multiport --dports "$SVC_TCP_PORTS" \
+            -m conntrack --ctstate NEW -j CONNMARK --set-mark $MARK_INBOUND 2>/dev/null
+        iptables -t mangle -D PREROUTING -i "$OLD_PHYS" -p udp -m multiport --dports "$SVC_UDP_PORTS" \
+            -m conntrack --ctstate NEW -j CONNMARK --set-mark $MARK_INBOUND 2>/dev/null
+    done
 }
 
 case "$ACTION" in
@@ -272,10 +287,22 @@ up)
     ip route add "$LAN_NET" dev "$PHYS_INT" scope link table $TABLE_ID 2>/dev/null
     ip route add default via "$GATEWAY" dev "$PHYS_INT" table $TABLE_ID 2>/dev/null
 
-    ip rule add to 172.16.0.0/12 lookup main priority 2000 2>/dev/null
-    ip rule add to "$LAN_NET" lookup main priority 2001 2>/dev/null
-    ip rule add from 172.16.0.0/12 table $TABLE_ID priority 2002 2>/dev/null
-    ip rule add from "$LAN_IP" table $TABLE_ID priority 2003 2>/dev/null
+    ip rule add to 172.17.0.0/16 lookup main priority 2000 2>/dev/null
+    ip rule add to 172.18.0.0/16 lookup main priority 2001 2>/dev/null
+    ip rule add to "$LAN_NET" lookup main priority 2002 2>/dev/null
+    ip rule add from 172.17.0.0/16 table $TABLE_ID priority 2003 2>/dev/null
+    ip rule add from 172.18.0.0/16 table $TABLE_ID priority 2004 2>/dev/null
+    ip rule add from "$LAN_IP" table $TABLE_ID priority 2005 2>/dev/null
+
+    ip rule add fwmark $MARK_INBOUND lookup main priority 1500 2>/dev/null
+
+    iptables -t mangle -A PREROUTING -i "$PHYS_INT" -p tcp -m multiport --dports "$SVC_TCP_PORTS" \
+        -m conntrack --ctstate NEW -j CONNMARK --set-mark $MARK_INBOUND
+    iptables -t mangle -A PREROUTING -i "$PHYS_INT" -p udp -m multiport --dports "$SVC_UDP_PORTS" \
+        -m conntrack --ctstate NEW -j CONNMARK --set-mark $MARK_INBOUND
+
+    iptables -t mangle -A PREROUTING -j CONNMARK --restore-mark --mask $MARK_MASK
+    iptables -t mangle -A OUTPUT -j CONNMARK --restore-mark --mask $MARK_MASK
 
     if ip link show docker0 &>/dev/null; then
         iptables -I FORWARD -i docker0 -j ACCEPT 2>/dev/null
@@ -285,6 +312,7 @@ up)
     fi
     ;;
 down)
+    PHYS_INT=$(nmcli -t -f DEVICE,TYPE device 2>/dev/null | grep -E ':wifi|:ethernet|:wireless' | cut -d: -f1 | head -n1)
     cleanup
     ;;
 esac

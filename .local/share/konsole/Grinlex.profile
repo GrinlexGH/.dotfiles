@@ -3,8 +3,9 @@ AntiAliasFonts=true
 BoldIntense=true
 BorderWhenActive=false
 ColorScheme=Breeze
-Font=CaskaydiaCove Nerd Font Mono,12,-1,5,400,0,0,0,0,0,0,0,0,0,0,1,,0,0
+Font=CaskaydiaCove Nerd Font Mono,11,-1,5,400,0,0,0,0,0,0,0,0,0,0,1,,0,0
 UseFontBrailleChararacters=false
+UseFontLineChararacters=false
 WordMode=false
 
 [Cursor Options]

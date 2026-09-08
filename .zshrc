@@ -157,7 +157,7 @@ alias l='ls -CF'
 alias dotfiles='git --git-dir="$HOME/.dotfiles/" --work-tree="$HOME"'
 
 # Fixing ssh on kitty terminal
-[[ "$TERM" = "xterm-kitty" ]] && alias ssh="kitty +kitten ssh"
+[[ "$TERM" = "xterm-kitty" ]] && alias ssh="kitten ssh"
 
 # Done
 type fastfetch &>/dev/null && fastfetch
