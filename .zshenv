@@ -64,3 +64,6 @@ if [[ -z $VULKAN_SDK && -d $HOME/VulkanSDK ]]; then
     unset _sdks
     unsetopt localoptions NULL_GLOB
 fi
+
+# SSH Agent
+type ssh-agent &>/dev/null && eval "$(ssh-agent -s)" &>/dev/null
