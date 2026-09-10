@@ -209,7 +209,7 @@ or
 https://github.com/HomuHomu833/android-sdk-custom  
 https://github.com/HomuHomu833/android-ndk-custom  
 
-Fix self-hosted servers when VPN is on (add `/usr/bin/docker-proxy` to your split tunneling list):
+Fix self-hosted servers when VPN is on:
 
 ```bash
 sudo tee /etc/NetworkManager/dispatcher.d/99-vpn-fix << 'EOF'
@@ -320,81 +320,3 @@ EOF
 
 sudo chmod +x /etc/NetworkManager/dispatcher.d/99-vpn-fix
 ```
-
-Ignore VPN from WSL (`networkingMode=mirrored` must be enabled in .wslconfig):
-
-```bash
-sudo tee /usr/local/bin/block-vpn-interface.sh << 'EOF'
-#!/bin/bash
-TARGET_IP="<192.168.1.50 YOUR PERMANENT LOCAL IP>"
-SAFE_IFACE=""
-REAL_DNS="1.1.1.1 8.8.8.8"
-
-while true; do
-    found_iface=$(ip -4 addr | grep "$TARGET_IP" | awk '{print $NF}' | head -n 1)
-
-    if [ -n "$found_iface" ]; then
-        if [ "$SAFE_IFACE" != "$found_iface" ]; then
-            SAFE_IFACE="$found_iface"
-            echo "Main interface detected and whitelisted: $SAFE_IFACE"
-        fi
-    fi
-
-    if [ -n "$SAFE_IFACE" ]; then
-        for iface in /sys/class/net/eth*; do
-            [ -e "$iface" ] || continue
-            name=$(basename "$iface")
-
-            if [ "$name" != "$SAFE_IFACE" ]; then
-                if ip link show dev "$name" | grep -q "state UP"; then
-                    echo "Filtering unauthorized interface: $name"
-
-                    ip link set dev "$name" down
-
-                    ip route flush dev "$name" 2>/dev/null
-                    ip -4 route flush table local dev "$name" 2>/dev/null
-                    ip -4 route flush table all dev "$name" 2>/dev/null
-
-                    while IFS= read -r line; do
-                        rule=$(echo "$line" | sed -E 's/^[0-9]+:\s*//')
-                        [ -n "$rule" ] && ip rule del $rule 2>/dev/null
-                    done < <(ip rule list | grep "iif $name")
-
-                    ip route flush cache 2>/dev/null
-
-                    if ! grep -q "$(echo $REAL_DNS | cut -d' ' -f1)" /etc/resolv.conf 2>/dev/null; then
-                        {
-                            for ns in $REAL_DNS; do echo "nameserver $ns"; done
-                        } > /etc/resolv.conf
-                        echo "resolv.conf restored to real DNS"
-                    fi
-                fi
-            fi
-        done
-    fi
-
-    sleep 1
-done
-EOF
-
-sudo chmod +x /usr/local/bin/block-vpn-interface.sh
-sudo tee /etc/systemd/system/block-vpn.service << 'EOF'
-[Unit]
-Description=Block and Neutralize WSL Mirrored VPN Interface
-After=network.target
-
-[Service]
-Type=simple
-ExecStart=/usr/local/bin/block-vpn-interface.sh
-Restart=always
-
-[Install]
-WantedBy=multi-user.target
-EOF
-
-sudo systemctl daemon-reload
-sudo systemctl enable --now block-vpn.service
-```
-
-The cursor twitches and disappears on Windows:  
-`Try to enable HDR?`
