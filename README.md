@@ -221,33 +221,43 @@ RULE_PRIOS=(1500 2000 2001 2002 2003 2004 2005)
 MARK_INBOUND=0x64          # 100 decimal
 MARK_MASK=0xff
 
-SVC_TCP_PORTS="80,443,25565"
-SVC_UDP_PORTS="25565"
+# Space separated list of docker IPs. Up to 39 IPs.
+# Usually 172.17.0.0/16 172.18.0.0/16 172.19.0.0/16
+# BE CAREFUL! HAPP MAY TAKE 172.19.0.0/16 WHICH DOCKER MAY USE
+DOCKER_NETS="10.200.0.0/24 10.201.0.0/24"
 
-[[ "$INTERFACE" =~ ^(Meta|amn0|tun|wg|utun|ppp) ]] || exit 0
+SVC_TCP_PORTS="80,443,25565"
+SVC_UDP_PORTS="25565,24454"
+
+[[ "$INTERFACE" =~ ^(Meta|amn0|tun|wg|utun|ppp|happ) ]] || exit 0
+
+get_phys() {
+    nmcli -t -f DEVICE,TYPE device 2>/dev/null | grep -E ':wifi|:ethernet|:wireless' | cut -d: -f1 | head -n1
+}
+
+vpn_ready() {
+    ip rule list | grep -qE "32764|16383|9000" && return 0
+    ip route show 2>/dev/null | grep -qE "^(default|0\.0\.0\.0/1|128\.0\.0\.0/1) dev $INTERFACE( |$)" && return 0
+    return 1
+}
 
 cleanup() {
-    ip rule del table $TABLE_ID 2>/dev/null
-    for p in "${RULE_PRIOS[@]}"; do
-        ip rule del priority "$p" 2>/dev/null
+    for p in $(ip rule show | awk -F: '{gsub(/ /,"",$1)} $1==1500 || ($1>=2000 && $1<2100) {print $1}' | sort -u); do
+        while ip rule del priority "$p" 2>/dev/null; do :; done
     done
     ip route flush table $TABLE_ID 2>/dev/null
 
     if ip link show docker0 &>/dev/null; then
-        iptables -D FORWARD -i docker0 -j ACCEPT 2>/dev/null
-        iptables -D FORWARD -o docker0 -j ACCEPT 2>/dev/null
-        iptables -D FORWARD -i br-+ -j ACCEPT 2>/dev/null
-        iptables -D FORWARD -o br-+ -j ACCEPT 2>/dev/null
+        iptables -D DOCKER-USER -i docker0 -j ACCEPT 2>/dev/null
+        iptables -D DOCKER-USER -o docker0 -j ACCEPT 2>/dev/null
+        iptables -D DOCKER-USER -i br-+ -j ACCEPT 2>/dev/null
+        iptables -D DOCKER-USER -o br-+ -j ACCEPT 2>/dev/null
     fi
 
-    iptables -t mangle -D PREROUTING -i "$PHYS_INT" -p tcp -m multiport --dports "$SVC_TCP_PORTS" \
-        -m conntrack --ctstate NEW -j CONNMARK --set-mark $MARK_INBOUND 2>/dev/null
-    iptables -t mangle -D PREROUTING -i "$PHYS_INT" -p udp -m multiport --dports "$SVC_UDP_PORTS" \
-        -m conntrack --ctstate NEW -j CONNMARK --set-mark $MARK_INBOUND 2>/dev/null
     iptables -t mangle -D PREROUTING -j CONNMARK --restore-mark --mask $MARK_MASK 2>/dev/null
     iptables -t mangle -D OUTPUT -j CONNMARK --restore-mark --mask $MARK_MASK 2>/dev/null
 
-    for OLD_PHYS in $(nmcli -t -f DEVICE,TYPE device 2>/dev/null | grep -E ':wifi|:ethernet|:wireless' | cut -d: -f1); do
+    for OLD_PHYS in $PHYS_INT $(nmcli -t -f DEVICE,TYPE device 2>/dev/null | grep -E ':wifi|:ethernet|:wireless' | cut -d: -f1); do
         iptables -t mangle -D PREROUTING -i "$OLD_PHYS" -p tcp -m multiport --dports "$SVC_TCP_PORTS" \
             -m conntrack --ctstate NEW -j CONNMARK --set-mark $MARK_INBOUND 2>/dev/null
         iptables -t mangle -D PREROUTING -i "$OLD_PHYS" -p udp -m multiport --dports "$SVC_UDP_PORTS" \
@@ -257,23 +267,17 @@ cleanup() {
 
 case "$ACTION" in
 up)
-    if [ "$INTERFACE" = "amn0" ]; then
-        VPN_READY=true
-    else
-        for ((i=1; i<=15; i++)); do
-            if ip rule list | grep -qE "32764|16383|9000"; then
-                VPN_READY=true
-                break
-            fi
-            sleep 1
-        done
-    fi
+    VPN_READY=false
+    for ((i=1; i<=15; i++)); do
+        if vpn_ready; then
+            VPN_READY=true
+            break
+        fi
+        sleep 1
+    done
+    [ "$VPN_READY" = true ] || exit 0
 
-    if [ "$VPN_READY" != true ]; then
-        exit 0
-    fi
-
-    PHYS_INT=$(nmcli -t -f DEVICE,TYPE device | grep -E ':wifi|:ethernet|:wireless' | cut -d: -f1 | head -n1)
+    PHYS_INT=$(get_phys)
     [ -n "$PHYS_INT" ] || exit 0
 
     LAN_IP=$(ip -4 addr show "$PHYS_INT" | awk '/inet / {print $2}' | cut -d/ -f1)
@@ -283,17 +287,23 @@ up)
 
     cleanup
 
+    sysctl -qw "net.ipv4.conf.${PHYS_INT}.rp_filter=2" 2>/dev/null
+
     ip route add "$LAN_NET" dev "$PHYS_INT" scope link table $TABLE_ID 2>/dev/null
     ip route add default via "$GATEWAY" dev "$PHYS_INT" table $TABLE_ID 2>/dev/null
 
-    ip rule add to 172.17.0.0/16 lookup main priority 2000 2>/dev/null
-    ip rule add to 172.18.0.0/16 lookup main priority 2001 2>/dev/null
-    ip rule add to "$LAN_NET" lookup main priority 2002 2>/dev/null
-    ip rule add from 172.17.0.0/16 table $TABLE_ID priority 2003 2>/dev/null
-    ip rule add from 172.18.0.0/16 table $TABLE_ID priority 2004 2>/dev/null
-    ip rule add from "$LAN_IP" table $TABLE_ID priority 2005 2>/dev/null
+    ip rule add to "$LAN_NET" lookup main priority 2000 2>/dev/null
+    ip rule add from "$LAN_IP" table $TABLE_ID priority 2050 2>/dev/null
 
-    ip rule add fwmark $MARK_INBOUND lookup main priority 1500 2>/dev/null
+    n=1
+    for net in $DOCKER_NETS; do
+        [ $n -ge 40 ] && break
+        ip rule add to "$net" lookup main priority $((2000 + n)) 2>/dev/null
+        ip rule add from "$net" table $TABLE_ID priority $((2050 + n)) 2>/dev/null
+        n=$((n + 1))
+    done
+
+    ip rule add fwmark $MARK_INBOUND lookup $TABLE_ID priority 2049 2>/dev/null
 
     iptables -t mangle -A PREROUTING -i "$PHYS_INT" -p tcp -m multiport --dports "$SVC_TCP_PORTS" \
         -m conntrack --ctstate NEW -j CONNMARK --set-mark $MARK_INBOUND
@@ -304,14 +314,14 @@ up)
     iptables -t mangle -A OUTPUT -j CONNMARK --restore-mark --mask $MARK_MASK
 
     if ip link show docker0 &>/dev/null; then
-        iptables -I FORWARD -i docker0 -j ACCEPT 2>/dev/null
-        iptables -I FORWARD -o docker0 -j ACCEPT 2>/dev/null
-        iptables -I FORWARD -i br-+ -j ACCEPT 2>/dev/null
-        iptables -I FORWARD -o br-+ -j ACCEPT 2>/dev/null
+        iptables -I DOCKER-USER -i docker0 -j ACCEPT 2>/dev/null
+        iptables -I DOCKER-USER -o docker0 -j ACCEPT 2>/dev/null
+        iptables -I DOCKER-USER -i br-+ -j ACCEPT 2>/dev/null
+        iptables -I DOCKER-USER -o br-+ -j ACCEPT 2>/dev/null
     fi
     ;;
 down)
-    PHYS_INT=$(nmcli -t -f DEVICE,TYPE device 2>/dev/null | grep -E ':wifi|:ethernet|:wireless' | cut -d: -f1 | head -n1)
+    PHYS_INT=$(get_phys)
     cleanup
     ;;
 esac
