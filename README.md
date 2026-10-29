@@ -299,7 +299,7 @@ up)
     for net in $DOCKER_NETS; do
         [ $n -ge 40 ] && break
         ip rule add to "$net" lookup main priority $((2000 + n)) 2>/dev/null
-        ip rule add from "$net" table $TABLE_ID priority $((2050 + n)) 2>/dev/null
+        ip rule add from "$net" table main priority $((2050 + n)) 2>/dev/null
         n=$((n + 1))
     done
 
