@@ -248,20 +248,20 @@ cleanup() {
     ip route flush table $TABLE_ID 2>/dev/null
 
     if ip link show docker0 &>/dev/null; then
-        iptables -D DOCKER-USER -i docker0 -j ACCEPT 2>/dev/null
-        iptables -D DOCKER-USER -o docker0 -j ACCEPT 2>/dev/null
-        iptables -D DOCKER-USER -i br-+ -j ACCEPT 2>/dev/null
-        iptables -D DOCKER-USER -o br-+ -j ACCEPT 2>/dev/null
+        iptables -D DOCKER-USER -i docker0 -j ACCEPT -m comment --comment "grinlex_docker_split" 2>/dev/null
+        iptables -D DOCKER-USER -o docker0 -j ACCEPT -m comment --comment "grinlex_docker_split" 2>/dev/null
+        iptables -D DOCKER-USER -i br-+ -j ACCEPT -m comment --comment "grinlex_docker_split" 2>/dev/null
+        iptables -D DOCKER-USER -o br-+ -j ACCEPT -m comment --comment "grinlex_docker_split" 2>/dev/null
     fi
 
-    iptables -t mangle -D PREROUTING -j CONNMARK --restore-mark --mask $MARK_MASK 2>/dev/null
-    iptables -t mangle -D OUTPUT -j CONNMARK --restore-mark --mask $MARK_MASK 2>/dev/null
+    iptables -t mangle -D PREROUTING -j CONNMARK --restore-mark --mask $MARK_MASK -m comment --comment "grinlex_docker_split" 2>/dev/null
+    iptables -t mangle -D OUTPUT -j CONNMARK --restore-mark --mask $MARK_MASK -m comment --comment "grinlex_docker_split" 2>/dev/null
 
     for OLD_PHYS in $PHYS_INT $(nmcli -t -f DEVICE,TYPE device 2>/dev/null | grep -E ':wifi|:ethernet|:wireless' | cut -d: -f1); do
         iptables -t mangle -D PREROUTING -i "$OLD_PHYS" -p tcp -m multiport --dports "$SVC_TCP_PORTS" \
-            -m conntrack --ctstate NEW -j CONNMARK --set-mark $MARK_INBOUND 2>/dev/null
+            -m conntrack --ctstate NEW -j CONNMARK --set-mark $MARK_INBOUND -m comment --comment "grinlex_docker_split" 2>/dev/null
         iptables -t mangle -D PREROUTING -i "$OLD_PHYS" -p udp -m multiport --dports "$SVC_UDP_PORTS" \
-            -m conntrack --ctstate NEW -j CONNMARK --set-mark $MARK_INBOUND 2>/dev/null
+            -m conntrack --ctstate NEW -j CONNMARK --set-mark $MARK_INBOUND -m comment --comment "grinlex_docker_split" 2>/dev/null
     done
 }
 
@@ -306,18 +306,18 @@ up)
     ip rule add fwmark $MARK_INBOUND lookup $TABLE_ID priority 2049 2>/dev/null
 
     iptables -t mangle -A PREROUTING -i "$PHYS_INT" -p tcp -m multiport --dports "$SVC_TCP_PORTS" \
-        -m conntrack --ctstate NEW -j CONNMARK --set-mark $MARK_INBOUND
+        -m conntrack --ctstate NEW -j CONNMARK --set-mark $MARK_INBOUND -m comment --comment "grinlex_docker_split"
     iptables -t mangle -A PREROUTING -i "$PHYS_INT" -p udp -m multiport --dports "$SVC_UDP_PORTS" \
-        -m conntrack --ctstate NEW -j CONNMARK --set-mark $MARK_INBOUND
+        -m conntrack --ctstate NEW -j CONNMARK --set-mark $MARK_INBOUND -m comment --comment "grinlex_docker_split"
 
-    iptables -t mangle -A PREROUTING -j CONNMARK --restore-mark --mask $MARK_MASK
-    iptables -t mangle -A OUTPUT -j CONNMARK --restore-mark --mask $MARK_MASK
+    iptables -t mangle -A PREROUTING -j CONNMARK --restore-mark --mask $MARK_MASK -m comment --comment "grinlex_docker_split"
+    iptables -t mangle -A OUTPUT -j CONNMARK --restore-mark --mask $MARK_MASK -m comment --comment "grinlex_docker_split"
 
     if ip link show docker0 &>/dev/null; then
-        iptables -I DOCKER-USER -i docker0 -j ACCEPT 2>/dev/null
-        iptables -I DOCKER-USER -o docker0 -j ACCEPT 2>/dev/null
-        iptables -I DOCKER-USER -i br-+ -j ACCEPT 2>/dev/null
-        iptables -I DOCKER-USER -o br-+ -j ACCEPT 2>/dev/null
+        iptables -I DOCKER-USER -i docker0 -j ACCEPT -m comment --comment "grinlex_docker_split"
+        iptables -I DOCKER-USER -o docker0 -j ACCEPT -m comment --comment "grinlex_docker_split"
+        iptables -I DOCKER-USER -i br-+ -j ACCEPT -m comment --comment "grinlex_docker_split"
+        iptables -I DOCKER-USER -o br-+ -j ACCEPT -m comment --comment "grinlex_docker_split"
     fi
     ;;
 down)
