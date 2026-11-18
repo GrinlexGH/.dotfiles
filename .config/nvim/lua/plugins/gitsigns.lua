@@ -19,9 +19,5 @@ return {
 
             map("n", "<leader>hp", gs.preview_hunk, "Preview hunk (gitsigns.nvim)")
         end,
-    },
-    config = function(_, opts)
-        require'gitsigns'.setup(opts)
-        require'scrollbar.handlers.gitsigns'.setup()
-    end
+    }
 }
