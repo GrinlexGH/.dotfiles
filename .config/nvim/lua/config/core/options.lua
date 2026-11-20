@@ -40,6 +40,9 @@ opt.updatetime = 250
 
 vim.o.sessionoptions="blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
 
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
 -- Close all terminals before exit
 vim.api.nvim_create_autocmd("ExitPre", {
     pattern = "*",

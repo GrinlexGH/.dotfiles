@@ -5,7 +5,7 @@ return {
         "MunifTanjim/nui.nvim",
         "nvim-tree/nvim-web-devicons"
     },
-    event = "VeryLazy",
+    lazy = false,
     ---@module 'neo-tree'
     ---@type neotree.Config
     opts = {
