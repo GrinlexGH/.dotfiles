@@ -2,5 +2,15 @@ Diagnostics:
   ClangTidy:
     FastCheckFilter: None
   UnusedIncludes: None
+  MissingIncludes: None
 Completion:
   HeaderInsertion: Never
+---
+If:
+  PathMatch: .*/labwork[^/]+/.*
+
+Diagnostics:
+  MissingIncludes: Strict
+  UnusedIncludes: Strict
+  ClangTidy:
+    FastCheckFilter: None

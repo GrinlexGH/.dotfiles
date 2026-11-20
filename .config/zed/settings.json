@@ -9,7 +9,7 @@
 {
   "icon_theme": "VSCode Icons for Zed (Dark)",
   "debugger": {
-    "stepping_granularity": "statement"
+    "stepping_granularity": "statement",
   },
   "project_panel": {
     "dock": "left",
@@ -46,7 +46,7 @@
   "lsp": {
     "clangd": {
       "binary": {
-        "arguments": ["-compile-commands-dir=build/Debug"],
+        "arguments": ["--compile-commands-dir=build/Debug", "--clang-tidy"],
       },
     },
   },
